@@ -8,6 +8,9 @@ define([
     var scenes = {},
         currentScene;
 
+    var totalCount = 0;
+    var badCount = 0;
+
     function draw() {
       console.log('draw game');
 
@@ -16,6 +19,15 @@ define([
 
     function update(elapsed) {
       console.log('update game, fps: ' + 1000/elapsed);
+
+      totalCount = totalCount + 1;
+
+      if (1000/elapsed < 30) {
+        badCount = badCount + 1;
+        console.error(badCount*100/totalCount + '% bad framerate, now down to: ' + 1000/elapsed);
+      } else if (1000/elapsed < 45) {
+        console.warn('framerate down to: ' + 1000/elapsed);
+      }
 
       currentScene.update(elapsed, this);
       _.each(currentScene.entities, function (currentEntity) {
