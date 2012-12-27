@@ -29,7 +29,7 @@ define([
       var currentCanvas = createCanvas('current'),
           currentContext = contextOf(currentCanvas);
 
-      _.each(scene.entities(), function (currentEntity) {
+      _.each(scene.entities, function (currentEntity) {
         rendererFor(currentEntity)(currentContext, currentEntity);
       });
 

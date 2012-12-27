@@ -1,8 +1,10 @@
 define([
     './renderers/canvas',
-    './scenes/main_menu'
+    './scenes/main_menu',
+    './modifiers/movement',
+    './modifiers/gravity'
   ], 
-  function (renderer, mainMenu) {
+  function (renderer, mainMenu, movement, gravity) {
     var scenes = {},
         currentScene;
 
@@ -16,6 +18,11 @@ define([
       console.log('update game, fps: ' + 1000/elapsed);
 
       currentScene.update(elapsed, this);
+      _.each(currentScene.entities, function (currentEntity) {
+        gravity.applyTo(currentEntity, elapsed);
+        movement.applyTo(currentEntity, elapsed);
+        currentEntity.update && currentEntity.update(elapsed);
+      });
     }
 
     function handleInput() {
