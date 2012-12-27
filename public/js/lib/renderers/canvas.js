@@ -6,14 +6,21 @@ define([
         backgroundCanvas,
         foregroundCanvas,
         backgroundContext,
-        foregroundContext;
+        foregroundContext,
+        renderers = {};
 
     function createCanvas(id) {
-      return $('<canvas>', { "id": id, "width": width, "height": height } )[0];
+      return $('<canvas>', { "id": id } )[0];
     }
 
     function contextOf(canvas) {
-      return canvas.getContext('2d');
+      var context = canvas.getContext('2d');
+      $(canvas).attr({ "width": width, "height": height });
+      return context;
+    }
+
+    function rendererFor(entity) {
+      return renderers[entity.type];
     }
 
     function render(scene) {
@@ -22,18 +29,39 @@ define([
       var currentCanvas = createCanvas('current'),
           currentContext = contextOf(currentCanvas);
 
-      _.each(scene.entities(), function (entity) {
-        currentContext.fillStyle = "red";
-        currentContext.fillRect(
-          entity.x,
-          entity.y,
-          entity.width,
-          entity.height
-        );
+      _.each(scene.entities(), function (currentEntity) {
+        rendererFor(currentEntity)(currentContext, currentEntity);
       });
 
       foregroundContext.clearRect(0, 0, width, height);
       foregroundContext.drawImage(currentCanvas, 0, 0);
+    }
+
+    function setupRenderers() {
+      renderers.square = function (context, entity) {
+        context.fillStyle = 'red';
+        context.fillRect(entity.x, entity.y, entity.width, entity.height);
+      };
+
+      renderers.circle = function (context, entity) {
+        context.fillStyle = 'blue';
+        context.beginPath();
+        context.arc(entity.x, entity.y, entity.radius, 0 , 2 * Math.PI, true);
+        context.closePath();
+        context.fill();
+      };
+
+      renderers.triangle = function (context, entity) {
+        context.fillStyle = 'green';
+        context.beginPath();
+        context.save();
+        context.translate(entity.x, entity.y);
+        context.moveTo(0, 0);
+        context.lineTo(0, entity.height);
+        context.lineTo(entity.width, 0);
+        context.restore();
+        context.fill();
+      };
     }
 
     function resize() {
@@ -44,9 +72,6 @@ define([
     }
 
     function reset() {
-      $(backgroundCanvas).attr({ "width": width, "height": height });
-      $(foregroundCanvas).attr({ "width": width, "height": height });
-
       backgroundContext = contextOf(backgroundCanvas);
       foregroundContext = contextOf(foregroundCanvas);
     }
@@ -61,6 +86,8 @@ define([
 
       resize();
       $(window).resize(resize);
+
+      setupRenderers();
 
       callback();
     }
