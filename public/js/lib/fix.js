@@ -1,4 +1,4 @@
-define(function () {
+(function () {
   var lastTime = 0;
   var vendors = ['ms', 'moz', 'webkit', 'o'];
 
@@ -23,4 +23,4 @@ define(function () {
   if (!window.cancelAnimationFrame) {
     window.cancelAnimationFrame = function(id) { clearTimeout(id); };
   }
-});
+})();
