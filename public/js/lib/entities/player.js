@@ -7,7 +7,11 @@ define(function () {
       velocityX: 10,
       velocityY: 0,
       isMovable: true,
-      type: 'shot'
+      type: 'shot',
+      update: function (elapsed) {
+        this.velocityY += (0.3 * (Math.random() * elapsed));
+        this.velocityY -= (0.3 * (Math.random() * elapsed));
+      }
     });
   }
 
