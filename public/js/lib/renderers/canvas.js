@@ -7,6 +7,8 @@ define([
         foregroundCanvas,
         backgroundContext,
         foregroundContext,
+        dummyCanvas,
+        dummyContext,
         renderers = {};
 
     function createCanvas(id) {
@@ -26,8 +28,10 @@ define([
     function render(scene) {
       console.log('render: ' + scene);
 
-      var currentCanvas = createCanvas('current'),
-          currentContext = contextOf(currentCanvas);
+      var currentCanvas = dummyCanvas,
+          currentContext = dummyContext;
+
+      dummyContext.clearRect(0, 0, width, height);
 
       _.each(scene.entities, function (currentEntity) {
         rendererFor(currentEntity)(currentContext, currentEntity);
@@ -74,6 +78,7 @@ define([
     function reset() {
       backgroundContext = contextOf(backgroundCanvas);
       foregroundContext = contextOf(foregroundCanvas);
+      dummyContext = contextOf(dummyCanvas);
     }
 
     function init(callback) {
@@ -81,6 +86,7 @@ define([
 
       backgroundCanvas = createCanvas('background');
       foregroundCanvas = createCanvas('foreground');
+      dummyCanvas = createCanvas('dummy');
 
       $('body').append(backgroundCanvas).append(foregroundCanvas);
 
