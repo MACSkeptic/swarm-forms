@@ -1,11 +1,9 @@
 define([
+    '../entities/player'
   ],
-  function () {
+  function (player) {
     var entities = [
-      { "x": 10, "y": 20, "width": 30, "height": 40, "type": 'square' },
-      { "x": 510, "y": 320, "width": 90, "height": 140, "type": 'triangle' },
-      { "x": 100, "y": 200, "radius": 60, "type": 'circle', 
-        "velocityX": 4, "velocityY": 0, "isAffectedByGravity": true }
+      player({ x: 50, y: 100 })
     ];
 
     function init(callback) {
@@ -16,6 +14,10 @@ define([
 
     function update(elapsed) {
       console.log('update scene');
+
+      if (Math.random() > 0.8) {
+        entities[0].shootRight();
+      }
     }
 
     return {

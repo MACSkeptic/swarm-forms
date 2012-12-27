@@ -35,6 +35,10 @@ define([
 
       _.each(scene.entities, function (currentEntity) {
         rendererFor(currentEntity)(currentContext, currentEntity);
+
+        _.each(currentEntity.children || [], function (currentChild) {
+          rendererFor(currentChild)(currentContext, currentChild, currentEntity);
+        });
       });
 
       foregroundContext.clearRect(0, 0, width, height);
@@ -42,6 +46,32 @@ define([
     }
 
     function setupRenderers() {
+      renderers.player = function (context, entity) {
+        var halfWidth = 10, halfHeight = 10;
+
+        context.save();
+        context.translate(-halfWidth + entity.x, -halfHeight + entity.y);
+
+        context.fillStyle = 'orange';
+        context.fillRect(0, 0, halfWidth*2, halfHeight*2);
+
+        context.restore();
+
+        context.fillStyle = 'yellow';
+        context.beginPath();
+        context.arc(entity.x, entity.y, halfWidth/2, 0 , 2 * Math.PI, true);
+        context.closePath();
+        context.fill();
+      };
+
+      renderers.shot = function (context, entity, parentEntity) {
+        context.fillStyle = 'pink';
+        context.beginPath();
+        context.arc(entity.x, entity.y, 5, 0 , 2 * Math.PI, true);
+        context.closePath();
+        context.fill();
+      };
+
       renderers.square = function (context, entity) {
         context.fillStyle = 'red';
         context.fillRect(entity.x, entity.y, entity.width, entity.height);
@@ -79,6 +109,9 @@ define([
       backgroundContext = contextOf(backgroundCanvas);
       foregroundContext = contextOf(foregroundCanvas);
       dummyContext = contextOf(dummyCanvas);
+
+      backgroundContext.fillStyle = "black";
+      backgroundContext.fillRect(0, 0, width, height);
     }
 
     function init(callback) {
