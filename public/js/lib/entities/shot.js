@@ -1,11 +1,8 @@
 define(function () {
 
   function collisionWithSquare(square) {
-    if (square.name == 'a') {
-      this.velocityY *= -1;
-    } else {
-      this.velocityX *= -1;
-    }
+    this.velocityX *= -1 + Math.random()/100;
+    this.velocityY *= -1 + Math.random()/100;
   }
 
   function create(specs) {

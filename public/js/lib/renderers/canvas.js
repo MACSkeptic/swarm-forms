@@ -47,7 +47,7 @@ define([
 
     function setupRenderers() {
       renderers.player = function (context, entity) {
-        var halfWidth = 10, halfHeight = 10;
+        var halfWidth = entity.width/2, halfHeight = entity.height/2;
 
         context.save();
         context.translate(-halfWidth + entity.x, -halfHeight + entity.y);

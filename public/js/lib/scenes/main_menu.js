@@ -9,7 +9,6 @@ define([
         y: 300,
         width: 200,
         height: 200,
-        name: 'a',
         type: 'square'
       },
       {
@@ -17,7 +16,6 @@ define([
         y: 000,
         width: 200,
         height: 200,
-        name: 'b',
         type: 'square'
       }
     ];
