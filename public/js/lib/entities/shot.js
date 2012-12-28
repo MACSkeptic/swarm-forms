@@ -21,7 +21,7 @@ define(function () {
     shot.update = specs.update;
 
     shot.collidesWith = {
-      square: _.bind(collisionWithSquare, shot)
+      square: collisionWithSquare
     };
 
     return shot;
