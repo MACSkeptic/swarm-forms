@@ -1,5 +1,13 @@
 define(function () {
 
+  function collisionWithSquare(square) {
+    if (square.name == 'a') {
+      this.velocityY *= -1;
+    } else {
+      this.velocityX *= -1;
+    }
+  }
+
   function create(specs) {
     var shot = {};
 
@@ -11,6 +19,10 @@ define(function () {
     shot.isMovable = true;
     shot.type = 'shot';
     shot.update = specs.update;
+
+    shot.collidesWith = {
+      square: _.bind(collisionWithSquare, shot)
+    };
 
     return shot;
   }

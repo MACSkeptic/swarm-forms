@@ -3,7 +3,23 @@ define([
   ],
   function (player) {
     var entities = [
-      player({ x: 50, y: 100 })
+      player({ x: 50, y: 100 }),
+      {
+        x: 300,
+        y: 300,
+        width: 200,
+        height: 200,
+        name: 'a',
+        type: 'square'
+      },
+      {
+        x: 800,
+        y: 000,
+        width: 200,
+        height: 200,
+        name: 'b',
+        type: 'square'
+      }
     ];
 
     function init(callback) {
