@@ -95,7 +95,30 @@ define([
 
       renderers.square = function (context, entity) {
         context.fillStyle = 'red';
+        context.strokeStyle = 'red';
+        entity.step = entity.step || 0;
+        entity.delta = entity.delta || 0.1;
+        entity.step = entity.step + entity.delta;
+
+        if (entity.step > 5) {
+          entity.delta = -0.1;
+        }
+
+        if (entity.step <= 1) {
+          entity.delta = 0.1;
+        }
+
+
+        context.fillStyle = 'purple';
         context.fillRect(entity.x, entity.y, entity.width, entity.height);
+
+        context.save();
+        context.fillStyle = 'red';
+        context.translate(entity.x + entity.width/2, entity.y + entity.height/2);
+        context.scale(1/entity.step, 1/entity.step);
+        context.rotate(Math.PI/2/entity.step);
+        context.fillRect(-entity.width/2, -entity.height/2, entity.width, entity.height);
+        context.restore();
       };
 
       renderers.circle = function (context, entity) {
