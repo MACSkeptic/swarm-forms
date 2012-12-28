@@ -33,6 +33,8 @@ define([
 
       dummyContext.clearRect(0, 0, width, height);
 
+      dummyContext.lineWidth = 3;
+
       _.each(scene.entities, function (currentEntity) {
         if (currentEntity.disposed) { return; }
 
@@ -54,26 +56,41 @@ define([
         var halfWidth = entity.width/2, halfHeight = entity.height/2;
 
         context.save();
-        context.translate(-halfWidth + entity.x, -halfHeight + entity.y);
 
-        context.fillStyle = 'orange';
-        context.fillRect(0, 0, halfWidth*2, halfHeight*2);
+        context.translate(entity.x, entity.y);
 
+        context.strokeStyle = 'orange';
+
+        context.save();
+        context.rotate(entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.restore();
+
+        context.save();
+        context.rotate(-entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
         context.restore();
 
         context.fillStyle = 'yellow';
         context.beginPath();
-        context.arc(entity.x, entity.y, halfWidth/2, 0 , 2 * Math.PI, true);
+        context.arc(0, 0, halfWidth/2, 0 , 2 * Math.PI, true);
         context.closePath();
         context.fill();
+
+        context.restore();
       };
 
       renderers.shot = function (context, entity, parentEntity) {
-        context.fillStyle = 'pink';
+        context.fillStyle = 'cyan';
+        context.strokeStyle = 'cyan';
         context.beginPath();
         context.arc(entity.x, entity.y, entity.radius, 0 , 2 * Math.PI, true);
         context.closePath();
-        context.fill();
+        if (Math.random() >= 0.5) {
+          context.fill();
+        } else {
+          context.stroke();
+        }
       };
 
       renderers.square = function (context, entity) {

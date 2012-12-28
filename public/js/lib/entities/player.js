@@ -42,6 +42,14 @@ define(['./shot'], function (shot) {
     );
   }
 
+  function update(elapsed) {
+    this.rotation += elapsed/200;
+
+    if (this.rotation > Math.PI * 2) {
+      this.rotation = 0;
+    }
+  }
+
   function create(specs) {
     var player = {};
 
@@ -54,10 +62,12 @@ define(['./shot'], function (shot) {
     player.isMovable = true;
     player.type = 'player';
     player.children = [];
+    player.rotation = 0;
 
     player.shootRight = shootRight;
     player.shootLeft = shootLeft;
     player.shootDown = shootDown;
+    player.update = specs.update || update;
 
     return player;
   }
