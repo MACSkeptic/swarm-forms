@@ -2,9 +2,10 @@ define([
     './renderers/canvas',
     './scenes/main_menu',
     './modifiers/movement',
-    './modifiers/gravity'
+    './modifiers/gravity',
+    './modifiers/collision'
   ], 
-  function (renderer, mainMenu, movement, gravity) {
+  function (renderer, mainMenu, movement, gravity, collision) {
     var scenes = {},
         currentScene;
 
@@ -28,6 +29,14 @@ define([
           gravity.applyTo(currentChild, elapsed, currentEntity);
           movement.applyTo(currentChild, elapsed, currentEntity);
           currentChild.update && currentChild.update(elapsed, currentEntity);
+
+          _.each(currentScene.entities, function (targetEntity) {
+            collision.applyTo(currentChild, targetEntity);
+          });
+        });
+
+        _.each(currentScene.entities, function (targetEntity) {
+          collision.applyTo(currentEntity, targetEntity);
         });
       });
     }
@@ -46,10 +55,12 @@ define([
 
     function init(callback) {
       console.log('init game');
-
-      renderer.init(function () {
-        addScene(mainMenu, true);
-        mainMenu.init(callback);
+      
+      collision.init(function () {
+        renderer.init(function () {
+          addScene(mainMenu, true);
+          mainMenu.init(callback);
+        });
       });
     }
 
