@@ -2,14 +2,16 @@ define(function () {
   var detectors = {};
 
   function canCollide(entityA, entityB) {
-    return !(entityA === entityB) && (entityA.collidesWith || {})[entityB.type];
+    return !(entityA === entityB) && 
+      !entityA.disposed && !entityB.disposed &&
+      (entityA.collidesWith || {})[entityB.type];
   }
 
   function collided(entityA, entityB) {
     var params = {};
     params[entityA.type] = entityA;
     params[entityB.type] = entityB;
-    return detector(entityA, entityB)(params);
+    return detector(entityA, entityB)(params, entityA, entityB);
   }
 
   function applyTo(entityA, entityB) {
@@ -67,6 +69,13 @@ define(function () {
     return false;
   }
 
+  function shotAndShot(ignore, shotA, shotB) {
+    return (
+      Math.pow(shotA.x - shotB.x, 2) +
+      Math.pow(shotA.y - shotB.y, 2)
+    ) <= Math.pow(shotA.radius + shotB.radius, 2);
+  }
+
   function setupDetectors() {
     detectors.player = {};
     detectors.shot = {};
@@ -78,6 +87,8 @@ define(function () {
 
     detectors.square.shot = shotAndSquare;
     detectors.shot.square = shotAndSquare;
+
+    detectors.shot.shot = shotAndShot;
 
     detectors.shot.boundaries = shotOutOfBounds;
     detectors.boundaries.shot = shotOutOfBounds;

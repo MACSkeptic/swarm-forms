@@ -34,8 +34,14 @@ define([
           movement.applyTo(currentChild, elapsed, currentEntity);
           currentChild.update && currentChild.update(elapsed, currentEntity);
 
-          _.each(currentScene.entities, function (targetEntity) {
+          _.each(currentScene.entities || [], function (targetEntity) {
+            if (targetEntity === currentEntity) { return; }
+
             collision.applyTo(currentChild, targetEntity);
+
+            _.each(targetEntity.children || [], function (targetChild) {
+              collision.applyTo(currentChild, targetChild);
+            });
           });
         });
 

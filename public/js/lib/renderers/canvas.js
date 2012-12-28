@@ -71,7 +71,7 @@ define([
       renderers.shot = function (context, entity, parentEntity) {
         context.fillStyle = 'pink';
         context.beginPath();
-        context.arc(entity.x, entity.y, 5, 0 , 2 * Math.PI, true);
+        context.arc(entity.x, entity.y, entity.radius, 0 , 2 * Math.PI, true);
         context.closePath();
         context.fill();
       };
