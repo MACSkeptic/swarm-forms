@@ -21,11 +21,15 @@ define([
       currentScene.update(elapsed, this);
 
       _.each(currentScene.entities, function (currentEntity) {
+        if (currentEntity.disposed) { return; }
+
         gravity.applyTo(currentEntity, elapsed);
         movement.applyTo(currentEntity, elapsed);
         currentEntity.update && currentEntity.update(elapsed);
 
         _.each(currentEntity.children || [], function (currentChild) {
+          if (currentChild.disposed) { return; }
+
           gravity.applyTo(currentChild, elapsed, currentEntity);
           movement.applyTo(currentChild, elapsed, currentEntity);
           currentChild.update && currentChild.update(elapsed, currentEntity);
@@ -38,6 +42,14 @@ define([
         _.each(currentScene.entities, function (targetEntity) {
           collision.applyTo(currentEntity, targetEntity);
         });
+
+        currentEntity.children = _.filter(currentEntity.children || [], function (child) {
+          return !child.disposed;
+        });
+      });
+
+      currentScene.entities = _.filter(currentScene.entities || [], function (entity) {
+        return !entity.disposed;
       });
     }
 

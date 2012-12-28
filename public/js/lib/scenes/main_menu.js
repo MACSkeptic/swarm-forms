@@ -1,7 +1,8 @@
 define([
-    '../entities/player'
+    '../entities/player',
+    '../entities/boundaries'
   ],
-  function (player) {
+  function (player, boundaries) {
     var entities = [
       player({ x: 50, y: 100 }),
       {
@@ -17,7 +18,8 @@ define([
         width: 200,
         height: 200,
         type: 'square'
-      }
+      },
+      boundaries()
     ];
 
     function init(callback) {

@@ -34,9 +34,13 @@ define([
       dummyContext.clearRect(0, 0, width, height);
 
       _.each(scene.entities, function (currentEntity) {
+        if (currentEntity.disposed) { return; }
+
         rendererFor(currentEntity)(currentContext, currentEntity);
 
         _.each(currentEntity.children || [], function (currentChild) {
+          if (currentChild.disposed) { return; }
+
           rendererFor(currentChild)(currentContext, currentChild, currentEntity);
         });
       });
@@ -95,6 +99,10 @@ define([
         context.lineTo(entity.width, 0);
         context.restore();
         context.fill();
+      };
+
+      renderers.boundaries = function (context, entity) {
+        return;
       };
     }
 

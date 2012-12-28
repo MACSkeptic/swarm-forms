@@ -5,6 +5,8 @@ define(function () {
     this.velocityY *= -1 + Math.random()/100;
   }
 
+  function outOfBounds() { this.disposed = true; }
+
   function create(specs) {
     var shot = {};
 
@@ -18,7 +20,8 @@ define(function () {
     shot.update = specs.update;
 
     shot.collidesWith = {
-      square: collisionWithSquare
+      square: collisionWithSquare,
+      boundaries: outOfBounds
     };
 
     return shot;

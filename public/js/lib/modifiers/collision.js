@@ -2,7 +2,7 @@ define(function () {
   var detectors = {};
 
   function canCollide(entityA, entityB) {
-    return (entityA.collidesWith || {})[entityB.type];
+    return !(entityA === entityB) && (entityA.collidesWith || {})[entityB.type];
   }
 
   function collided(entityA, entityB) {
@@ -56,6 +56,13 @@ define(function () {
     ) <= Math.pow(entities.shot.radius, 2);
   }
 
+  function shotOutOfBounds(entities) {
+    return (entities.shot.x - entities.shot.radius) < entities.boundaries.minX ||
+      (entities.shot.x + entities.shot.radius) > entities.boundaries.maxX ||
+      (entities.shot.y - entities.shot.radius) < entities.boundaries.minY ||
+      (entities.shot.y + entities.shot.radius) > entities.boundaries.maxY;
+  }
+
   function playerAndShot(entities) {
     return false;
   }
@@ -64,12 +71,16 @@ define(function () {
     detectors.player = {};
     detectors.shot = {};
     detectors.square = {};
+    detectors.boundaries = {};
 
     detectors.player.shot = playerAndShot;
     detectors.shot.player = playerAndShot;
 
     detectors.square.shot = shotAndSquare;
     detectors.shot.square = shotAndSquare;
+
+    detectors.shot.boundaries = shotOutOfBounds;
+    detectors.boundaries.shot = shotOutOfBounds;
   }
 
   function init(callback) {
