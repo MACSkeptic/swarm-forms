@@ -3,9 +3,10 @@ define([
     './scenes/main_menu',
     './modifiers/movement',
     './modifiers/gravity',
-    './modifiers/collision'
-  ], 
-  function (renderer, mainMenu, movement, gravity, collision) {
+    './modifiers/collision',
+    './input'
+  ],
+  function (renderer, mainMenu, movement, gravity, collision, input) {
     var scenes = {},
         currentScene;
 
@@ -17,7 +18,7 @@ define([
 
     function update(elapsed) {
       console.log('update game, fps: ' + 1000/elapsed);
-
+      handleInput();
       currentScene.update(elapsed, this);
 
       _.each(currentScene.entities, function (currentEntity) {
@@ -61,6 +62,47 @@ define([
 
     function handleInput() {
       console.log('handle input game');
+        if(input.keyPressed('a')){
+          currentScene.entities[0].velocityX=-1;
+          currentScene.entities[0].velocityY=0;
+        }
+        if(input.keyPressed('s')){
+          currentScene.entities[0].velocityX=0;
+          currentScene.entities[0].velocityY=1;
+        }
+        if(input.keyPressed('d')){
+          currentScene.entities[0].velocityX=1;
+          currentScene.entities[0].velocityY=0;
+        }
+        if(input.keyPressed('w')){
+          currentScene.entities[0].velocityX=0;
+          currentScene.entities[0].velocityY=-1;
+        }
+        if(input.keyPressed('q')){
+          currentScene.entities[0].velocityX=0;
+          currentScene.entities[0].velocityY=0;
+        }
+
+        if(input.keyPressed('left')){
+          currentScene.entities[1].velocityX=-1;
+          currentScene.entities[1].velocityY=0;
+        }
+        if(input.keyPressed('down')){
+          currentScene.entities[1].velocityX=0;
+          currentScene.entities[1].velocityY=1;
+        }
+        if(input.keyPressed('right')){
+          currentScene.entities[1].velocityX=1;
+          currentScene.entities[1].velocityY=0;
+        }
+        if(input.keyPressed('up')){
+          currentScene.entities[1].velocityX=0;
+          currentScene.entities[1].velocityY=-1;
+        }
+        if(input.keyPressed('forwardslash')){
+          currentScene.entities[1].velocityX=0;
+          currentScene.entities[1].velocityY=0;
+        }
     }
 
     function addScene(scene, current) {

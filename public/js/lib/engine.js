@@ -26,6 +26,7 @@ define([
 
   function handleInput() {
     console.log('handle input engine');
+    game.handleInput();
   }
 
   function loop(currentTime) {
