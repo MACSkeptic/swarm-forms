@@ -41,14 +41,19 @@ define(function () {
   }
 
   function shotAndSquare(entities) {
-    var squareMinimumX = entities.square.x - entities.square.width/2,
-        squareMinimumY = entities.square.y - entities.square.height/2,
-        squareMaximumX = entities.square.x + entities.square.width/2,
-        squareMaximumY = entities.square.y + entities.square.height/2;
+    var cdx = Math.abs(entities.shot.x - entities.square.x - entities.square.width/2),
+        cdy = Math.abs(entities.shot.y - entities.square.y - entities.square.height/2);
 
-    return entities.shot.x >= squareMinimumX && entities.shot.x <= squareMaximumX &&
-      entities.shot.y >= squareMinimumY && entities.shot.y <= squareMaximumY;
+    if (cdx > (entities.square.width/2 + entities.shot.radius)) { return false; }
+    if (cdy > (entities.square.height/2 + entities.shot.radius)) { return false; }
 
+    if (cdx <= (entities.square.width/2)) { return true; } 
+    if (cdy <= (entities.square.height/2)) { return true; }
+
+    return (
+      Math.pow(cdx - entities.square.width/2, 2) +
+      Math.pow(cdy - entities.square.height/2, 2)
+    ) <= Math.pow(entities.shot.radius, 2);
   }
 
   function playerAndShot(entities) {
