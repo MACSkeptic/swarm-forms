@@ -14,6 +14,34 @@ define(['./shot'], function (shot) {
     );
   }
 
+  function shootLeft() {
+    this.children.push(
+      shot({
+        x: this.x,
+        y: this.y,
+        velocityX: -10,
+        update: function (elapsed) {
+          this.velocityY += (0.3 * (Math.random() * elapsed));
+          this.velocityY -= (0.3 * (Math.random() * elapsed));
+        }
+      })
+    );
+  }
+
+  function shootDown() {
+    this.children.push(
+      shot({
+        x: this.x,
+        y: this.y,
+        velocityY: 10,
+        update: function (elapsed) {
+          this.velocityX += (0.3 * (Math.random() * elapsed));
+          this.velocityX -= (0.3 * (Math.random() * elapsed));
+        }
+      })
+    );
+  }
+
   function create(specs) {
     var player = {};
 
@@ -28,6 +56,8 @@ define(['./shot'], function (shot) {
     player.children = [];
 
     player.shootRight = shootRight;
+    player.shootLeft = shootLeft;
+    player.shootDown = shootDown;
 
     return player;
   }
