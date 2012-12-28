@@ -15,6 +15,13 @@ define([
         type: 'square'
       },
       {
+        x: 200,
+        y: 550,
+        width: 100,
+        height: 100,
+        type: 'square'
+      },
+      {
         x: 800,
         y: 100,
         width: 100,
@@ -40,15 +47,15 @@ define([
     function update(elapsed) {
       console.log('update scene');
 
-      if (Math.random() > 0.8) {
+      if (Math.random() > 0.9) {
         entities[0].shootRight();
       }
 
-      if (Math.random() > 0.8) {
+      if (Math.random() > 0.9) {
         entities[1].shootLeft();
       }
 
-      if (Math.random() > 0.8) {
+      if (Math.random() > 0.9) {
         entities[2].shootDown();
       }
     }
