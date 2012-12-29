@@ -1,19 +1,28 @@
 define(['./shot'], function (shot) {
 
   function shootRight(params) {
-    this.children.push( shot( { x: this.x, y: this.y, velocityX: 10, } ) );
+    this.children.push( shotWithInertia(10, 0, this) );
   }
 
   function shootLeft(params) {
-    this.children.push( shot( { x: this.x, y: this.y, velocityX: -10, } ) );
+    this.children.push( shotWithInertia(-10, 0, this) );
   }
 
   function shootDown(params) {
-    this.children.push( shot( { x: this.x, y: this.y, velocityY: 10, } ) );
+    this.children.push( shotWithInertia(0, 10, this) );
   }
 
   function shootUp(params) {
-    this.children.push( shot( { x: this.x, y: this.y, velocityY: -10, } ) );
+    this.children.push( shotWithInertia(0, -10, this) );
+  }
+
+  function shotWithInertia(velocityX, velocityY, that) {
+    return shot({
+      x: that.x,
+      y: that.y,
+      velocityX: velocityX + that.velocityX,
+      velocityY: velocityY + that.velocityY
+    });
   }
 
   function update(params) {
