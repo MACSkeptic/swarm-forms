@@ -93,12 +93,12 @@ define([
         var gradient = context.createRadialGradient(
             entity.x, 
             entity.y,
-            0, 
+            entity.radius/2, 
             entity.x,
             entity.y,
-            entity.radius);
+            entity.radius  - (entity.radius * entity.animationStep/100));
         gradient.addColorStop(0, '#ff0');
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0.3)');
+        gradient.addColorStop(1, 'transparent');
         context.fillStyle = gradient;
         context.beginPath();
         context.arc(entity.x, entity.y, entity.radius, 0, 2 * Math.PI, true);
