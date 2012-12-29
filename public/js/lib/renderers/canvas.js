@@ -167,6 +167,17 @@ define([
 
       };
 
+      renderers.helpText = function (context, entity, scene) {
+        var x = scene.width/2, y = scene.height - 35;
+
+        context.font = '25pt Monaco, Consolas, Monospaced';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillStyle = '#0f9';
+        context.fillText(entity.text, x, y);
+
+      };
+
       renderers.circle = function (context, entity) {
         context.fillStyle = 'blue';
         context.beginPath();

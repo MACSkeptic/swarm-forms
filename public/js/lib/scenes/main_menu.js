@@ -6,7 +6,8 @@ define([
     { type: 'menuBackground' },
     { type: 'menuTitle', text: 'swarm cubes' },
     { type: 'menuItem', text: 'demo', selected: false, index: 0 },
-    { type: 'menuItem', text: 'game', selected: true, index: 1 }
+    { type: 'menuItem', text: 'game', selected: true, index: 1 },
+    { type: 'helpText', text: 'up/down, then enter' }
   ];
 
   function init(callback) {

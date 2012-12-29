@@ -15,6 +15,7 @@ define([
       entities.push(room());
       entities.push(player({ x: 100, y: 100 }));
       entities.push(triggerToNextRoom({ x: 320, y: 200 }));
+      entities.push({ type: 'helpText', text: 'wasd to move, arrows to shoot' });
 
       callback();
     }
