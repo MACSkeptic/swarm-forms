@@ -34,13 +34,13 @@ define([
       dummyContext.clearRect(0, 0, currentCanvas.width, currentCanvas.height);
 
       dummyContext.lineWidth = 3;
-      
+
       dummyContext.save();
       var widthRatio = 0;
       var heightRatio = 0;
-      
-      heightRatio = currentCanvas.height/scene.height
-      widthRatio = currentCanvas.width/scene.width    
+
+      heightRatio = currentCanvas.height/scene.height;
+      widthRatio = currentCanvas.width/scene.width;
       dummyContext.scale(widthRatio, heightRatio);
 
       _.each(scene.entities, function (currentEntity) {
@@ -53,10 +53,10 @@ define([
 
           rendererFor(currentChild)(currentContext, currentChild, currentEntity);
         });
-      });      
+      });
 
       foregroundContext.clearRect(0, 0, currentCanvas.width, currentCanvas.height);
-      dummyContext.restore();      
+      dummyContext.restore();
       foregroundContext.drawImage(currentCanvas, 0, 0);
     }
 
@@ -102,12 +102,16 @@ define([
 
       renderers.triggerToNextRoom = function (context, entity) {
         var gradient = context.createRadialGradient(
-            entity.x, 
-            entity.y,
-            entity.radius/2, 
-            entity.x,
-            entity.y,
-            entity.radius  - (entity.radius * entity.animationStep/100));
+          entity.x,
+          entity.y,
+          entity.radius/2,
+          entity.x,
+          entity.y,
+          Math.max(
+            entity.radius/2,
+            entity.radius - (entity.radius * entity.animationStep/100)
+          ) || entity.radius/2
+        );
         gradient.addColorStop(0, '#ff0');
         gradient.addColorStop(1, 'transparent');
         context.fillStyle = gradient;
@@ -140,7 +144,6 @@ define([
         if (entity.step <= 1) {
           entity.delta = 0.1;
         }
-
 
         context.fillStyle = 'purple';
         context.fillRect(entity.x, entity.y, entity.width, entity.height);
@@ -269,7 +272,7 @@ define([
     }
 
     function init(callback) {
-      
+
       console.log('init renderer');
       backgroundCanvas = createCanvas('background');
       foregroundCanvas = createCanvas('foreground');
