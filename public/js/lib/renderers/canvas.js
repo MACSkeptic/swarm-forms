@@ -182,6 +182,7 @@ define([
 
       renderers.hole = function (context, entity) {
         context.save();
+        context.scale(width/640, height/360);
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
         context.fillStyle = 'black';
         context.fillRect(-entity.width/2, -entity.height/2, entity.width, entity.height);
@@ -190,6 +191,7 @@ define([
 
       renderers.rock = function (context, entity) {
         context.save();
+        context.scale(width/640, height/360);
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
         context.fillStyle = 'brown';
         context.strokeStyle = 'red';
