@@ -1,9 +1,7 @@
 define([
   ],
   function () {
-    var width,
-        height,
-        backgroundCanvas,
+    var backgroundCanvas,
         foregroundCanvas,
         backgroundContext,
         foregroundContext,
@@ -17,7 +15,7 @@ define([
 
     function contextOf(canvas) {
       var context = canvas.getContext('2d');
-      $(canvas).attr({ "width": width, "height": height });
+      $(canvas).attr({ "width": window.innerWidth, "height": window.innerHeight });
       return context;
     }
 
@@ -144,7 +142,7 @@ define([
       };
 
       renderers.menuItem = function (context, entity, scene) {
-        var x = width/2, y = 150 + 50 * entity.index;
+        var x = scene.width/2, y = 150 + 50 * entity.index;
 
         if (entity.selected) {
           context.fillStyle = 'black';
@@ -222,9 +220,6 @@ define([
     }
 
     function resize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-
       reset();
     }
 
@@ -234,7 +229,7 @@ define([
       dummyContext = contextOf(dummyCanvas);
 
       backgroundContext.fillStyle = "black";
-      backgroundContext.fillRect(0, 0, width, height);
+      backgroundContext.fillRect(0, 0,  window.innerWidth, window.innerHeight);
     }
 
     function init(callback) {
