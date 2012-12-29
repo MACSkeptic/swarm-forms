@@ -5,8 +5,8 @@ define([
   var entities = [
     { type: 'menuBackground' },
     { type: 'menuTitle', text: 'swarm cubes' },
-    { type: 'menuItem', text: 'demo', selected: true, index: 0 },
-    { type: 'menuItem', text: 'game', selected: false, index: 1 }
+    { type: 'menuItem', text: 'demo', selected: false, index: 0 },
+    { type: 'menuItem', text: 'game', selected: true, index: 1 }
   ];
 
   function init(callback) {

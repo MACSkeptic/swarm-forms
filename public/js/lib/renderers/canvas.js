@@ -179,6 +179,34 @@ define([
         context.fillStyle = gradient;
         context.fillRect(0, 0, width, height);
       };
+
+      renderers.hole = function (context, entity) {
+        context.save();
+        context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
+        context.fillStyle = 'black';
+        context.fillRect(-entity.width/2, -entity.height/2, entity.width, entity.height);
+        context.restore();
+      };
+
+      renderers.rock = function (context, entity) {
+        context.save();
+        context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
+        context.fillStyle = 'brown';
+        context.strokeStyle = 'red';
+        context.fillRect(-entity.width/2, -entity.height/2, entity.width, entity.height);
+        context.strokeRect(-entity.width/2, -entity.height/2, entity.width, entity.height);
+
+        context.beginPath();
+        context.moveTo(-entity.width/2, -entity.height/2);
+        context.bezierCurveTo(
+          -entity.width/3, 0,
+          entity.width/3, entity.height/7,
+          entity.width/2, entity.height/2);
+        context.closePath();
+        context.stroke();
+
+        context.restore();
+      };
     }
 
     function resize() {
