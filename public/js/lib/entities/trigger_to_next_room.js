@@ -7,7 +7,7 @@ define(function () {
   function update(params) {
     if (this.triggered) {
       this.disposed = true;
-      params.game.changeCurrentSceneTo(this.next);
+      params.game.addScene(this.next, true);
     }
   }
 
