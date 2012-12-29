@@ -11,10 +11,11 @@ define([
     callback();
   }
 
-  function update(elapsed) {
+  function update(params) {
   }
 
-  function handleInput(input, elapsed, game) {
+  function handleInput(params) {
+    var input = params.input, elapsed = params.elapsed, game = params.game;
     if(input.keyPressed('esc')){
       game.changeCurrentSceneByName('main-menu');
       return;
@@ -29,6 +30,5 @@ define([
     "width": 640,
     "height": 360,
     "name": 'first-room'
-
   };
 });

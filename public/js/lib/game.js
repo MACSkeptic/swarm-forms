@@ -19,23 +19,23 @@ define([
     function update(elapsed) {
       console.log('update game, fps: ' + 1000/elapsed);
 
-      handleInput(input, elapsed, this);
+      handleInput({ input: input, elapsed: elapsed, game: this });
 
-      currentScene.update && currentScene.update(elapsed, this);
+      currentScene.update && currentScene.update({ elapsed: elapsed, game: this });
 
       _.each(currentScene.entities, function (currentEntity) {
         if (currentEntity.disposed) { return; }
 
         gravity.applyTo(currentEntity, elapsed);
         movement.applyTo(currentEntity, elapsed);
-        currentEntity.update && currentEntity.update(elapsed);
+        currentEntity.update && currentEntity.update({ elapsed: elapsed, game: this });
 
         _.each(currentEntity.children || [], function (currentChild) {
           if (currentChild.disposed) { return; }
 
           gravity.applyTo(currentChild, elapsed, currentEntity);
           movement.applyTo(currentChild, elapsed, currentEntity);
-          currentChild.update && currentChild.update(elapsed, currentEntity);
+          currentChild.update && currentChild.update({ elapsed: elapsed, game: this, currentEntity: currentEntity });
 
           _.each(currentScene.entities || [], function (targetEntity) {
             if (targetEntity === currentEntity) { return; }

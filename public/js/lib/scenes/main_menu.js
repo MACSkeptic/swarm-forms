@@ -13,7 +13,8 @@ define([
     callback();
   }
 
-  function handleInput(input, elapsed, game) {
+  function handleInput(params) {
+    var input = params.input, elapsed = params.elapsed, game = params.game;
     if (input.keyPressed('down')) {
       entities[2].selected = false;
       entities[3].selected = true;

@@ -20,7 +20,8 @@ define([
       callback();
     }
 
-    function handleInput(input, elapsed, game) {
+    function handleInput(params) {
+      var input = params.input, elapsed = params.elapsed, game = params.game;
       if(input.keyPressed('esc')){
         game.changeCurrentSceneByName('main-menu');
         return;
@@ -70,19 +71,19 @@ define([
       
     }
 
-    function update(elapsed) {
+    function update(params) {
       console.log('update scene');
 
       if (Math.random() > 0.9) {
-        entities[0].shootRight();
+        entities[0].shootRight(params);
       }
 
       if (Math.random() > 0.9) {
-        entities[1].shootLeft();
+        entities[1].shootLeft(params);
       }
 
       if (Math.random() > 0.9) {
-        entities[2].shootDown();
+        entities[2].shootDown(params);
       }
     }
 
