@@ -90,7 +90,16 @@ define([
       };
 
       renderers.triggerToNextRoom = function (context, entity) {
-        context.fillStyle = '#ff0';
+        var gradient = context.createRadialGradient(
+            entity.x, 
+            entity.y,
+            0, 
+            entity.x,
+            entity.y,
+            entity.radius);
+        gradient.addColorStop(0, '#ff0');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0.3)');
+        context.fillStyle = gradient;
         context.beginPath();
         context.arc(entity.x, entity.y, entity.radius, 0, 2 * Math.PI, true);
         context.closePath();
