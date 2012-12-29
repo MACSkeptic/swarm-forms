@@ -1,6 +1,6 @@
 define(function () {
-  
-var keys = [];
+
+  var keys = [];
 
   keys[8] = "backspace";
   keys[9] = "tab";
@@ -50,7 +50,7 @@ var keys = [];
   var functionKeys = ["f1","f2","f3","f4","f5","f6","f7","f8","f9"];
   var numberKeys = ["0","1","2","3","4","5","6","7","8","9"];
   var letterKeys = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]; 
-  
+
   var keysPressed = {};
 
   function handleKeyUp(e) {
@@ -64,31 +64,31 @@ var keys = [];
     var keyName = keys[event.keyCode];
     keysPressed[keyName] = true;
   }
-  
+
   function registerEvents(){
     window.addEventListener("keydown", handleKeyDown)
-    window.addEventListener("keyup", handleKeyUp)  
+      window.addEventListener("keyup", handleKeyUp)  
   }
-  
+
   function defineSpecialKeyNames(){
-	var i = 0;
+    var i = 0;
     for(i = 0; numberKeys[i]; i++){
-	  keys[48+i] = numberKeys[i];
-	}
+      keys[48+i] = numberKeys[i];
+    }
     for(i = 0; letterKeys[i]; i++){
-	  keys[65+i] = letterKeys[i];
-	}
+      keys[65+i] = letterKeys[i];
+    }
     for(i = 0; numpadKeys[i]; i++){ 
-	  keys[96+i] = numpadKeys[i];
-	}
+      keys[96+i] = numpadKeys[i];
+    }
     for(i = 0; functionKeys[i]; i++){
-	  keys[112+i] = functionKeys[i];
-	}	
+      keys[112+i] = functionKeys[i];
+    } 
   }  
 
   function initialize(){
     defineSpecialKeyNames();
-    registerEvents();	
+    registerEvents(); 
   }
 
   function keyPressed(key){
@@ -97,7 +97,7 @@ var keys = [];
 
   function create() {
     var inputHandler = {};
-	initialize();
+    initialize();
     inputHandler.keyPressed = keyPressed;
     return inputHandler;
   }

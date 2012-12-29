@@ -121,6 +121,35 @@ define([
         context.restore();
       };
 
+      renderers.menuBackground = function (context, entity) {
+        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        context.fillRect(0, 0, width, height);
+      };
+
+      renderers.menuTitle = function (context, entity) {
+        context.font = '40pt Monaco, Consolas, Monospaced';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillStyle = 'yellow';
+        context.fillText(entity.text, width/2, 50);
+      };
+
+      renderers.menuItem = function (context, entity) {
+        var x = width/2, y = 150 + 50 * entity.index;
+
+        if (entity.selected) {
+          context.fillStyle = 'black';
+          context.fillRect(0, y - 25, width, 50);
+        }
+
+        context.font = '30pt Monaco, Consolas, Monospaced';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillStyle = 'cyan';
+        context.fillText(entity.text, x, y);
+
+      };
+
       renderers.circle = function (context, entity) {
         context.fillStyle = 'blue';
         context.beginPath();

@@ -1,70 +1,39 @@
 define([
-    '../entities/player',
-    '../entities/boundaries'
-  ],
-  function (player, boundaries) {
-    var entities = [
-      player({ x: 50, y: 300 }),
-      player({ x: 1100, y: 350 }),
-      player({ x: 500, y: 50 }),
-      {
-        x: 300,
-        y: 000,
-        width: 100,
-        height: 100,
-        type: 'square'
-      },
-      {
-        x: 200,
-        y: 550,
-        width: 100,
-        height: 100,
-        type: 'square'
-      },
-      {
-        x: 800,
-        y: 100,
-        width: 100,
-        height: 100,
-        type: 'square'
-      },
-      {
-        x: 800,
-        y: 500,
-        width: 100,
-        height: 100,
-        type: 'square'
-      },
-      boundaries()
-    ];
+    './demo'
+  ], function (demo) {
+  var entities = [
+    { type: 'menuBackground' },
+    { type: 'menuTitle', text: 'swarm cubes' },
+    { type: 'menuItem', text: 'demo', selected: true, index: 0 },
+    { type: 'menuItem', text: 'game', selected: false, index: 1 }
+  ];
 
-    function init(callback) {
-      console.log('init main menu');
-
-      callback();
-    }
-
-    function update(elapsed) {
-      console.log('update scene');
-
-      if (Math.random() > 0.9) {
-        entities[0].shootRight();
-      }
-
-      if (Math.random() > 0.9) {
-        entities[1].shootLeft();
-      }
-
-      if (Math.random() > 0.9) {
-        entities[2].shootDown();
-      }
-    }
-
-    return {
-      "init": init,
-      "update": update,
-      "entities": entities,
-      "name": 'main menu'
-    };
+  function init(callback) {
+    callback();
   }
-);
+
+  function handleInput(input, elapsed, game) {
+    if (input.keyPressed('down')) {
+      entities[2].selected = false;
+      entities[3].selected = true;
+    }
+
+    if (input.keyPressed('up')) {
+      entities[2].selected = true;
+      entities[3].selected = false;
+    }
+
+    if (input.keyPressed('enter')) {
+      if (entities[2].selected) {
+        demo.init(function () { game.changeCurrentSceneTo(demo); });
+      } else {
+      }
+    }
+  }
+
+  return {
+    "init": init,
+    "entities": entities,
+    "handleInput": handleInput
+  };
+});
