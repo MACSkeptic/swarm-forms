@@ -1,19 +1,31 @@
 define(['./shot'], function (shot) {
 
   function shootRight(params) {
-    this.children.push( shotWithInertia(10, 0, this) );
+    if (!this.canShoot()) { return; }
+    this.children.push( shotWithInertia(5, 0, this) );
+    this.timeSinceLastShot = 0;
   }
 
   function shootLeft(params) {
-    this.children.push( shotWithInertia(-10, 0, this) );
+    if (!this.canShoot()) { return; }
+    this.children.push( shotWithInertia(-5, 0, this) );
+    this.timeSinceLastShot = 0;
   }
 
   function shootDown(params) {
-    this.children.push( shotWithInertia(0, 10, this) );
+    if (!this.canShoot()) { return; }
+    this.children.push( shotWithInertia(0, 5, this) );
+    this.timeSinceLastShot = 0;
   }
 
   function shootUp(params) {
-    this.children.push( shotWithInertia(0, -10, this) );
+    if (!this.canShoot()) { return; }
+    this.children.push( shotWithInertia(0, -5, this) );
+    this.timeSinceLastShot = 0;
+  }
+
+  function canShoot() {
+    return this.timeSinceLastShot > this.timeRequiredBetweenShots;
   }
 
   function shotWithInertia(velocityX, velocityY, that) {
@@ -31,6 +43,14 @@ define(['./shot'], function (shot) {
     if (this.rotation > Math.PI * 2) {
       this.rotation = 0;
     }
+
+    this.timeSinceLastShot += params.elapsed;
+
+    if (this.timeSinceLastShot > 100000) { this.timeSinceLastShot = 100000; }
+  }
+
+  function percentageToShootAgain() {
+    return Math.min(1, this.timeSinceLastShot / this.timeRequiredBetweenShots);
   }
 
   function create(specs) {
@@ -42,6 +62,8 @@ define(['./shot'], function (shot) {
     player.height = 30;
     player.velocityX = 0;
     player.velocityY = 0;
+    player.timeSinceLastShot = 100000;
+    player.timeRequiredBetweenShots = 250;
     player.isMovable = true;
     player.type = 'player';
     player.children = [];
@@ -52,6 +74,8 @@ define(['./shot'], function (shot) {
     player.shootDown = shootDown;
     player.shootUp = shootUp;
     player.update = update;
+    player.canShoot = canShoot;
+    player.percentageToShootAgain = percentageToShootAgain;
 
     return _.extend(player, specs || {});
   }

@@ -80,13 +80,24 @@ define([
         context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
         context.restore();
 
-        context.fillStyle = 'yellow';
+        context.fillStyle = 'cyan';
+        context.lineWidth = 1;
+        context.strokeStyle = 'yellow';
+        context.beginPath();
+        context.save();
+        context.scale(entity.percentageToShootAgain(), entity.percentageToShootAgain());
+        context.arc(0, 0, halfWidth/2, 0 , 2 * Math.PI, true);
+        context.restore();
+        context.closePath();
+        context.fill();
         context.beginPath();
         context.arc(0, 0, halfWidth/2, 0 , 2 * Math.PI, true);
         context.closePath();
-        context.fill();
+        context.stroke();
 
         context.restore();
+
+        context.lineWidth = 3;
       };
 
       renderers.triggerToNextRoom = function (context, entity) {
@@ -112,11 +123,7 @@ define([
         context.beginPath();
         context.arc(entity.x, entity.y, entity.radius, 0 , 2 * Math.PI, true);
         context.closePath();
-        if (Math.random() >= 0.5) {
-          context.fill();
-        } else {
-          context.stroke();
-        }
+        context.fill();
       };
 
       renderers.square = function (context, entity) {
