@@ -91,6 +91,8 @@ define([
       "update": update,
       "entities": entities,
       "handleInput": handleInput,
+      "width":1280,
+      "height":720,
       "name": 'demo'
     };
   }

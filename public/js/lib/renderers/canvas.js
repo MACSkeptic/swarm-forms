@@ -31,23 +31,32 @@ define([
       var currentCanvas = dummyCanvas,
           currentContext = dummyContext;
 
-      dummyContext.clearRect(0, 0, width, height);
+      dummyContext.clearRect(0, 0, currentCanvas.width, currentCanvas.height);
 
       dummyContext.lineWidth = 3;
+      
+      dummyContext.save();
+      var widthRatio = 0;
+      var heightRatio = 0;
+      
+      heightRatio = currentCanvas.height/scene.height
+      widthRatio = currentCanvas.width/scene.width    
+      dummyContext.scale(widthRatio, heightRatio);
 
       _.each(scene.entities, function (currentEntity) {
         if (currentEntity.disposed) { return; }
 
-        rendererFor(currentEntity)(currentContext, currentEntity);
+        rendererFor(currentEntity)(currentContext, currentEntity, scene);
 
         _.each(currentEntity.children || [], function (currentChild) {
           if (currentChild.disposed) { return; }
 
           rendererFor(currentChild)(currentContext, currentChild, currentEntity);
         });
-      });
+      });      
 
-      foregroundContext.clearRect(0, 0, width, height);
+      foregroundContext.clearRect(0, 0, currentCanvas.width, currentCanvas.height);
+      dummyContext.restore();      
       foregroundContext.drawImage(currentCanvas, 0, 0);
     }
 
@@ -121,25 +130,25 @@ define([
         context.restore();
       };
 
-      renderers.menuBackground = function (context, entity) {
+      renderers.menuBackground = function (context, entity, scene) {
         context.fillStyle = 'rgba(255, 255, 255, 0.2)';
-        context.fillRect(0, 0, width, height);
+        context.fillRect(0, 0, scene.width, scene.height);
       };
 
-      renderers.menuTitle = function (context, entity) {
+      renderers.menuTitle = function (context, entity, scene) {
         context.font = '40pt Monaco, Consolas, Monospaced';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
         context.fillStyle = 'yellow';
-        context.fillText(entity.text, width/2, 50);
+        context.fillText(entity.text, scene.width/2, 50);
       };
 
-      renderers.menuItem = function (context, entity) {
+      renderers.menuItem = function (context, entity, scene) {
         var x = width/2, y = 150 + 50 * entity.index;
 
         if (entity.selected) {
           context.fillStyle = 'black';
-          context.fillRect(0, y - 25, width, 50);
+          context.fillRect(0, y - 25, scene.width, 50);
         }
 
         context.font = '30pt Monaco, Consolas, Monospaced';
@@ -172,17 +181,17 @@ define([
 
       renderers.boundaries = function (context, entity) { return; };
 
-      renderers.room = function (context, entity) {
-        var gradient = context.createRadialGradient(width/2, height/2, 0, width/2, height/2, 500);
+      renderers.room = function (context, entity, scene) {
+        var gradient = context.createRadialGradient(scene.width/2, scene.height/2, 0, scene.width/2, scene.height/2, 500);
         gradient.addColorStop(0, '#eee');
         gradient.addColorStop(1, '#888');
         context.fillStyle = gradient;
-        context.fillRect(0, 0, width, height);
+        context.fillRect(0, 0, scene.width, scene.height);
       };
 
-      renderers.hole = function (context, entity) {
+      renderers.hole = function (context, entity, scene) {
         context.save();
-        context.scale(width/640, height/360);
+        context.scale(scene.width/640, scene.height/360);
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
         context.fillStyle = 'black';
         context.fillRect(0, 0, entity.width, entity.height);
@@ -191,9 +200,9 @@ define([
         context.restore();
       };
 
-      renderers.rock = function (context, entity) {
+      renderers.rock = function (context, entity, scene) {
         context.save();
-        context.scale(width/640, height/360);
+        //context.scale(scene.width/640, scene.height/360);
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
         context.fillStyle = 'brown';
         context.strokeStyle = 'red';
@@ -229,8 +238,8 @@ define([
     }
 
     function init(callback) {
+      
       console.log('init renderer');
-
       backgroundCanvas = createCanvas('background');
       foregroundCanvas = createCanvas('foreground');
       dummyCanvas = createCanvas('dummy');

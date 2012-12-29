@@ -26,6 +26,9 @@ define([
     "update": update,
     "entities": entities,
     "handleInput": handleInput,
+    "width": 640,
+    "height": 360,
     "name": 'first-room'
+
   };
 });

@@ -37,6 +37,8 @@ define([
     "name": 'main-menu',
     "init": init,
     "entities": entities,
-    "handleInput": handleInput
+    "handleInput": handleInput,
+      "width":1280,
+      "height":720
   };
 });
