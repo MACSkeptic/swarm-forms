@@ -42,6 +42,20 @@ define(['./shot'], function (shot) {
     );
   }
 
+  function shootUp(params) {
+    this.children.push(
+      shot({
+        x: this.x,
+        y: this.y,
+        velocityY: -10,
+        update: function () {
+          this.velocityX += (0.3 * (Math.random() * params.elapsed));
+          this.velocityX -= (0.3 * (Math.random() * params.elapsed));
+        }
+      })
+    );
+  }
+
   function update(params) {
     this.rotation += params.elapsed/200;
 
@@ -67,6 +81,7 @@ define(['./shot'], function (shot) {
     player.shootRight = shootRight;
     player.shootLeft = shootLeft;
     player.shootDown = shootDown;
+    player.shootUp = shootUp;
     player.update = update;
 
     return _.extend(player, specs || {});
