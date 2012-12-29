@@ -76,11 +76,16 @@ define(function () {
     ) <= Math.pow(shotA.radius + shotB.radius, 2);
   }
 
+  function playerAndTriggerToNextRoom(entities) {
+    return Math.abs(entities.player.x - 320) < 30 && Math.abs(entities.player.y - 200) < 30;
+  }
+
   function setupDetectors() {
     detectors.player = {};
     detectors.shot = {};
     detectors.square = {};
     detectors.boundaries = {};
+    detectors.triggerToNextRoom = {};
 
     detectors.player.shot = playerAndShot;
     detectors.shot.player = playerAndShot;
@@ -92,6 +97,9 @@ define(function () {
 
     detectors.shot.boundaries = shotOutOfBounds;
     detectors.boundaries.shot = shotOutOfBounds;
+
+    detectors.triggerToNextRoom.player = playerAndTriggerToNextRoom;
+    detectors.player.triggerToNextRoom = playerAndTriggerToNextRoom;
   }
 
   function init(callback) {

@@ -7,7 +7,7 @@ define(function () {
   function update(params) {
     if (this.triggered) {
       this.disposed = true;
-      params.game.addScene(this.next, true);
+      params.currentScene.next(params.game);
     }
   }
 
@@ -18,6 +18,7 @@ define(function () {
     triggerToNextRoom.x = 0;
     triggerToNextRoom.y = 0;
     triggerToNextRoom.radius = 50;
+    triggerToNextRoom.update = update;
     triggerToNextRoom.collidesWith = { player: triggered };
 
     return _.extend(triggerToNextRoom, specs || {});

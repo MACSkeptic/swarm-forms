@@ -20,7 +20,9 @@ define([
     }
 
     function rendererFor(entity) {
-      return renderers[entity.type];
+      return renderers[entity.type] || function () {
+        console.error('could not find renderer for: ' + entity.type);
+      };
     }
 
     function render(scene) {
@@ -85,6 +87,14 @@ define([
         context.fill();
 
         context.restore();
+      };
+
+      renderers.triggerToNextRoom = function (context, entity) {
+        context.fillStyle = '#ff0';
+        context.beginPath();
+        context.arc(entity.x, entity.y, entity.radius, 0, 2 * Math.PI, true);
+        context.closePath();
+        context.fill();
       };
 
       renderers.shot = function (context, entity, parentEntity) {

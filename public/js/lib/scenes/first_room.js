@@ -1,8 +1,10 @@
 define([
   '../entities/room',
-  '../entities/boundaries'
-], function (room, boundaries) {
-  var entities = [];
+  '../entities/boundaries',
+  './current_room'
+], function (room, boundaries, currentRoom) {
+  var entities = [],
+      currentRoom = currentRoom;
 
   function init(callback) {
     entities.push(boundaries({ maxX: 640, maxY: 360 }));
@@ -18,6 +20,11 @@ define([
     var input = params.input, elapsed = params.elapsed, game = params.game;
     if(input.keyPressed('esc')){
       game.changeCurrentSceneByName('main-menu');
+      return;
+    }
+
+    if(input.keyPressed('space')) {
+      currentRoom.init(function () { game.addScene(currentRoom, true); });
       return;
     }
   }

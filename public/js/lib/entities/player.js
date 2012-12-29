@@ -53,8 +53,8 @@ define(['./shot'], function (shot) {
   function create(specs) {
     var player = {};
 
-    player.x = specs.x || 0;
-    player.y = specs.y || 0;
+    player.x = 0;
+    player.y = 0;
     player.width = 30;
     player.height = 30;
     player.velocityX = 0;
@@ -67,9 +67,9 @@ define(['./shot'], function (shot) {
     player.shootRight = shootRight;
     player.shootLeft = shootLeft;
     player.shootDown = shootDown;
-    player.update = specs.update || update;
+    player.update = update;
 
-    return player;
+    return _.extend(player, specs || {});
   }
 
   return create;
