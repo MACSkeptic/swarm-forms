@@ -170,8 +170,14 @@ define([
         context.fill();
       };
 
-      renderers.boundaries = function (context, entity) {
-        return;
+      renderers.boundaries = function (context, entity) { return; };
+
+      renderers.room = function (context, entity) {
+        var gradient = context.createRadialGradient(width/2, height/2, 0, width/2, height/2, 500);
+        gradient.addColorStop(0, '#eee');
+        gradient.addColorStop(1, '#888');
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, width, height);
       };
     }
 

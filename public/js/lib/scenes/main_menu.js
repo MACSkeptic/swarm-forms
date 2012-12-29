@@ -1,6 +1,7 @@
 define([
-    './demo'
-  ], function (demo) {
+    './demo',
+    './first_room'
+  ], function (demo, firstRoom) {
   var entities = [
     { type: 'menuBackground' },
     { type: 'menuTitle', text: 'swarm cubes' },
@@ -27,6 +28,7 @@ define([
       if (entities[2].selected) {
         demo.init(function () { game.addScene(demo, true); });
       } else {
+        firstRoom.init(function () { game.addScene(firstRoom, true); });
       }
     }
   }
