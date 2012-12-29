@@ -82,7 +82,7 @@ define([
 
         context.fillStyle = 'cyan';
         context.lineWidth = 1;
-        context.strokeStyle = 'yellow';
+        context.strokeStyle = '#abcdef';
         context.beginPath();
         context.save();
         context.scale(entity.percentageToShootAgain(), entity.percentageToShootAgain());
@@ -217,9 +217,10 @@ define([
       renderers.boundaries = function (context, entity) { return; };
 
       renderers.room = function (context, entity, scene) {
-        var gradient = context.createRadialGradient(scene.width/2, scene.height/2, 0, scene.width/2, scene.height/2, 500);
-        gradient.addColorStop(0, '#eee');
-        gradient.addColorStop(1, '#888');
+        var gradient = context.createRadialGradient(
+            scene.width/2, scene.height/2, 0, scene.width/2, scene.height/2, 500);
+        gradient.addColorStop(0, '#888');
+        gradient.addColorStop(1, '#222');
         context.fillStyle = gradient;
         context.fillRect(0, 0, scene.width, scene.height);
       };
