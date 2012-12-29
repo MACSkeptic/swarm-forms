@@ -1,59 +1,19 @@
 define(['./shot'], function (shot) {
 
   function shootRight(params) {
-    this.children.push(
-      shot({
-        x: this.x,
-        y: this.y,
-        velocityX: 10,
-        update: function () {
-          this.velocityY += (0.3 * (Math.random() * params.elapsed));
-          this.velocityY -= (0.3 * (Math.random() * params.elapsed));
-        }
-      })
-    );
+    this.children.push( shot( { x: this.x, y: this.y, velocityX: 10, } ) );
   }
 
   function shootLeft(params) {
-    this.children.push(
-      shot({
-        x: this.x,
-        y: this.y,
-        velocityX: -10,
-        update: function () {
-          this.velocityY += (0.3 * (Math.random() * params.elapsed));
-          this.velocityY -= (0.3 * (Math.random() * params.elapsed));
-        }
-      })
-    );
+    this.children.push( shot( { x: this.x, y: this.y, velocityX: -10, } ) );
   }
 
   function shootDown(params) {
-    this.children.push(
-      shot({
-        x: this.x,
-        y: this.y,
-        velocityY: 10,
-        update: function () {
-          this.velocityX += (0.3 * (Math.random() * params.elapsed));
-          this.velocityX -= (0.3 * (Math.random() * params.elapsed));
-        }
-      })
-    );
+    this.children.push( shot( { x: this.x, y: this.y, velocityY: 10, } ) );
   }
 
   function shootUp(params) {
-    this.children.push(
-      shot({
-        x: this.x,
-        y: this.y,
-        velocityY: -10,
-        update: function () {
-          this.velocityX += (0.3 * (Math.random() * params.elapsed));
-          this.velocityX -= (0.3 * (Math.random() * params.elapsed));
-        }
-      })
-    );
+    this.children.push( shot( { x: this.x, y: this.y, velocityY: -10, } ) );
   }
 
   function update(params) {

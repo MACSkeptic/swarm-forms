@@ -43,19 +43,32 @@ define(function () {
   }
 
   function shotAndSquare(entities) {
-    var cdx = Math.abs(entities.shot.x - entities.square.x - entities.square.width/2),
-        cdy = Math.abs(entities.shot.y - entities.square.y - entities.square.height/2);
+    return sphereAndRectangle(entities.shot, entities.square);
+  }
 
-    if (cdx > (entities.square.width/2 + entities.shot.radius)) { return false; }
-    if (cdy > (entities.square.height/2 + entities.shot.radius)) { return false; }
+  function shotAndRock(entities) {
+    var square = {};
+    square.x = entities.rock.x - entities.rock.width/2;
+    square.y = entities.rock.y - entities.rock.height/2;
+    square.width = entities.rock.width;
+    square.height = entities.rock.height;
+    return sphereAndRectangle(entities.shot, square);
+  }
 
-    if (cdx <= (entities.square.width/2)) { return true; } 
-    if (cdy <= (entities.square.height/2)) { return true; }
+  function sphereAndRectangle(sphere, rectange) {
+    var cdx = Math.abs(sphere.x - rectange.x - rectange.width/2),
+        cdy = Math.abs(sphere.y - rectange.y - rectange.height/2);
+
+    if (cdx > (rectange.width/2 + sphere.radius)) { return false; }
+    if (cdy > (rectange.height/2 + sphere.radius)) { return false; }
+
+    if (cdx <= (rectange.width/2)) { return true; } 
+    if (cdy <= (rectange.height/2)) { return true; }
 
     return (
-      Math.pow(cdx - entities.square.width/2, 2) +
-      Math.pow(cdy - entities.square.height/2, 2)
-    ) <= Math.pow(entities.shot.radius, 2);
+      Math.pow(cdx - rectange.width/2, 2) +
+      Math.pow(cdy - rectange.height/2, 2)
+    ) <= Math.pow(sphere.radius, 2);
   }
 
   function shotOutOfBounds(entities) {
@@ -86,6 +99,7 @@ define(function () {
     detectors.square = {};
     detectors.boundaries = {};
     detectors.triggerToNextRoom = {};
+    detectors.rock = {};
 
     detectors.player.shot = playerAndShot;
     detectors.shot.player = playerAndShot;
@@ -100,6 +114,9 @@ define(function () {
 
     detectors.triggerToNextRoom.player = playerAndTriggerToNextRoom;
     detectors.player.triggerToNextRoom = playerAndTriggerToNextRoom;
+
+    detectors.shot.rock = shotAndRock;
+    detectors.rock.shot = shotAndRock;
   }
 
   function init(callback) {

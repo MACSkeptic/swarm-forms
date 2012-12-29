@@ -219,7 +219,6 @@ define([
 
       renderers.hole = function (context, entity, scene) {
         context.save();
-        context.scale(scene.width/640, scene.height/360);
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
         context.fillStyle = 'black';
         context.fillRect(0, 0, entity.width, entity.height);
@@ -230,7 +229,6 @@ define([
 
       renderers.rock = function (context, entity, scene) {
         context.save();
-        //context.scale(scene.width/640, scene.height/360);
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
         context.fillStyle = 'brown';
         context.strokeStyle = 'red';

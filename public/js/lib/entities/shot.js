@@ -12,6 +12,7 @@ define(function () {
   }
 
   function outOfBounds() { this.disposed = true; }
+  function disintegrate() { this.disposed = true; }
 
   function create(specs) {
     var shot = {};
@@ -28,7 +29,8 @@ define(function () {
     shot.collidesWith = {
       square: collisionWithSquare,
       boundaries: outOfBounds,
-      shot: createSuperShot
+      shot: createSuperShot,
+      rock: disintegrate
     };
 
     return shot;
