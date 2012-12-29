@@ -45,6 +45,11 @@ define([
     }
 
     function handleInput(input, elapsed, game) {
+      if(input.keyPressed('esc')){
+        game.changeCurrentSceneByName('main-menu');
+        return;
+      }
+
       if(input.keyPressed('a')){
         entities[0].velocityX=-1;
         entities[0].velocityY=0;

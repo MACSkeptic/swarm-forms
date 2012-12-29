@@ -25,13 +25,14 @@ define([
 
     if (input.keyPressed('enter')) {
       if (entities[2].selected) {
-        demo.init(function () { game.changeCurrentSceneTo(demo); });
+        demo.init(function () { game.addScene(demo, true); });
       } else {
       }
     }
   }
 
   return {
+    "name": 'main-menu',
     "init": init,
     "entities": entities,
     "handleInput": handleInput

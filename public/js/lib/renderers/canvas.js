@@ -122,7 +122,7 @@ define([
       };
 
       renderers.menuBackground = function (context, entity) {
-        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        context.fillStyle = 'rgba(255, 255, 255, 0.2)';
         context.fillRect(0, 0, width, height);
       };
 

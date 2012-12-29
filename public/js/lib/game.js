@@ -75,6 +75,7 @@ define([
     }
 
     function changeCurrentSceneTo(scene) { currentScene = scene; }
+    function changeCurrentSceneByName(name) { currentScene = scenes[name]; }
 
     function init(callback) {
       console.log('init game');
@@ -92,7 +93,9 @@ define([
       "draw": draw,
       "update": update,
       "handleInput": handleInput,
-      "changeCurrentSceneTo": changeCurrentSceneTo
+      "changeCurrentSceneTo": changeCurrentSceneTo,
+      "changeCurrentSceneByName": changeCurrentSceneByName,
+      "addScene": addScene
     };
   }
 );
