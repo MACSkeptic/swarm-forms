@@ -1,4 +1,8 @@
-define(['../behaviours/shoots', '../behaviours/rectangle'], function (shoots, rectangle) {
+define(function (require) {
+  var behaviours = require('../behaviours'),
+      shoots     = behaviours.shoots,
+      rectangle  = behaviours.rectangle;
+
   function update(params) {
     this.rotation += params.elapsed/200;
 

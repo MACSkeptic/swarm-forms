@@ -1,11 +1,11 @@
-define([
-  '../entities/room',
-  '../entities/boundaries',
-  '../entities/trigger_to_next_room',
-  '../entities/player'
-], function (room, boundaries, triggerToNextRoom, player) {
-
-  var currentRoom = {}
+define(function (require) {
+  var entities          = require('../entities'),
+      room              = entities.room,
+      boundaries        = entities.boundaries,
+      triggerToNextRoom = entities.triggerToNextRoom,
+      player            = entities.player,
+      turret            = entities.enemies.turret,
+      currentRoom       = {};
 
   currentRoom.create = function (specs) {
     var entities = [];
@@ -72,7 +72,7 @@ define([
       "handleInput": handleInput,
       "width": 640,
       "height": 360,
-      "next": function (game) { 
+      "next": function (game) {
         var next = currentRoom.create();
         next.init(function () { game.addScene(next, true); });
       },
