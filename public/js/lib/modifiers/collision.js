@@ -50,7 +50,7 @@ define(function () {
         rightA  = entityA.maxX(),
         rightB  = entityB.maxX(),
         topA    = entityA.minY(),
-        topB    = entityA.minY();
+        topB    = entityB.minY();
 
     return !(leftA > rightB || leftB > rightA || topA > bottomB || topB > bottomA);
   }
@@ -106,7 +106,7 @@ define(function () {
   }
 
   function playerAndRock(entities) {
-    return false;
+    return rectangleAndRectangle(entities.player, entities.rock);
   }
 
   function setupDetectors() {

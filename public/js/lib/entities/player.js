@@ -28,11 +28,17 @@ define(['../behaviours/shoots', '../behaviours/rectangle'], function (shoots, re
     return Math.min(1, this.timeSinceLastShot / this.timeRequiredBetweenShots);
   }
 
+  function undoLastMovement() {
+    this.x = this.previousX;
+    this.y = this.previousY;
+  }
+
   function create(specs) {
     return shoots(_.extend(rectangle({
       width: 30       , height: 30     ,
       isMovable: true , type: 'player' ,
-      rotation: 0     , update: update
+      rotation: 0     , update: update ,
+      collidesWith: { rock: undoLastMovement }
     }), specs || {}));
   }
 
