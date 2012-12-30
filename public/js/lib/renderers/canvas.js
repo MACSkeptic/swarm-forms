@@ -236,27 +236,31 @@ define([
       renderers.hole = function (context, entity, scene) {
         context.save();
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
-        context.fillStyle = 'black';
+        context.fillStyle = '#111';
         context.fillRect(0, 0, entity.width, entity.height);
-        context.strokeStyle = '#222';
-        context.strokeRect(0, 0, entity.width, entity.height);
+        context.fillStyle = '#222';
+        context.fillRect(entity.width * 0.1, entity.height * 0.1, entity.width * 0.9, entity.height * 0.9);
         context.restore();
       };
 
       renderers.rock = function (context, entity, scene) {
         context.save();
+
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
-        context.fillStyle = 'brown';
-        context.strokeStyle = 'red';
+        context.fillStyle = '#4A2429';
         context.fillRect(0, 0, entity.width, entity.height);
-        context.strokeRect(0, 0, entity.width, entity.height);
+
+        context.strokeStyle = '#5C3E42';
+        context.beginPath();
+        context.moveTo(entity.width/5, entity.height/5);
+        context.lineTo(entity.width * 0.8, entity.height * 0.8);
+        context.closePath();
+        context.stroke();
 
         context.beginPath();
-        context.moveTo(0, 0);
-        context.bezierCurveTo(
-          entity.width/7, 0,
-          entity.width/3, entity.height/7,
-          entity.width, entity.height);
+        context.moveTo(entity.width * 0.8, entity.height/5);
+        context.lineTo(entity.width/5, entity.height * 0.8);
+        context.closePath();
         context.stroke();
 
         context.restore();
