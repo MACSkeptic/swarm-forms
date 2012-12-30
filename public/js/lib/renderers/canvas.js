@@ -122,8 +122,13 @@ define([
       };
 
       renderers.shot = function (context, entity, parentEntity) {
-        context.fillStyle = 'cyan';
-        context.strokeStyle = 'cyan';
+        if (entity.enemy) {
+          context.fillStyle = 'red';
+          context.strokeStyle = 'red';
+        } else { 
+          context.fillStyle = 'cyan';
+          context.strokeStyle = 'cyan';
+        }
         context.beginPath();
         context.arc(entity.x, entity.y, entity.radius, 0 , 2 * Math.PI, true);
         context.closePath();
@@ -259,21 +264,24 @@ define([
 
       renderers.tower = function (context, entity, scene){
         context.save();
-        context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
-        context.fillStyle = 'black';
-        context.strokeStyle = 'pink';
-        context.fillRect(0, 0, entity.width, entity.height);
-        context.strokeRect(0, 0, entity.width, entity.height);
-
+        context.translate(entity.x, entity.y);
+        context.strokeStyle = 'purple';
+        context.fillStyle = 'red';
+        context.lineWidth = 3;
         context.beginPath();
-        context.moveTo(0, 0);
-        context.bezierCurveTo(
-          entity.width/7, 0,
-          entity.width/3, entity.height/7,
-          entity.width, entity.height);
-        context.stroke();
-
+        context.save();
+        context.scale(entity.percentageToShootAgain(), entity.percentageToShootAgain());
+        context.arc(0, 0, entity.radius, 0 , 2 * Math.PI, true);
         context.restore();
+        context.closePath();
+        context.fill();
+        context.beginPath();
+        context.arc(0, 0, entity.radius, 0 , 2 * Math.PI, true);
+        context.closePath();
+        context.stroke();
+        context.restore();
+
+        context.lineWidth = 3;
       };
 
       renderers.areaTrigger = function (context, entity, scene){

@@ -42,7 +42,8 @@ define(['../entities/shot'], function (shot) {
     return shot({
       x: (this.x || 0), y: (this.y || 0),
       velocityX: velocityX + (this.velocityX || 0),
-      velocityY: velocityY + (this.velocityY || 0)
+      velocityY: velocityY + (this.velocityY || 0),
+      enemy: this.enemy
     });
   }
 

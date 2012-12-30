@@ -37,7 +37,7 @@ define(function () {
       tower: disintegrate
     };
 
-    return shot;
+    return _.extend(shot, specs || {});
   }
 
   return create;
