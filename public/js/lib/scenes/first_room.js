@@ -12,7 +12,7 @@ define([
   function init(callback) {
     entities.push(boundaries({ maxX: 640, maxY: 360 }));
     entities.push(room());
-    entities.push({ type: 'helpText', text: 'press space' });
+    entities.push({ type: 'helpText', text: 'space or t' });
 
     callback();
   }
