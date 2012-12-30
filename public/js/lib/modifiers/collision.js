@@ -42,6 +42,28 @@ define(function () {
       };
   }
 
+  function rectangleAndRectangle(entityA, entityB) {
+    var x1 = entityA.x;
+    var x2 = entityB.x;
+
+    var y1 = entityA.y;
+    var y2 = entityB.y;
+
+    var size1 = entityA.width/2;
+    var size2 = entityB.width/2;
+
+    var bottom1, bottom2, left1, left2, right1, right2, top1, top2;
+    left1 = x1 - size1;
+    right1 = x1 + size1;
+    top1 = y1 - size1;
+    bottom1 = y1 + size1;
+    left2 = x2 - size2;
+    right2 = x2 + size2;
+    top2 = y2 - size2;
+    bottom2 = y2 + size2;
+    return !(left1 > right2 || left2 > right1 || top1 > bottom2 || top2 > bottom1);
+  }
+
   function shotAndSquare(entities) {
     return sphereAndRectangle(entities.shot, entities.square);
   }
@@ -93,6 +115,19 @@ define(function () {
     return Math.abs(entities.player.x - 320) < 30 && Math.abs(entities.player.y - 200) < 30;
   }
 
+  function areaTriggerAndPlayer(entities){
+    return rectangleAndRectangle(entities.areaTrigger,entities.player);
+  }
+
+  function shotAndTower(entities){
+     var square = {};
+    square.x = entities.tower.x - entities.tower.width/2;
+    square.y = entities.tower.y - entities.tower.height/2;
+    square.width = entities.tower.width;
+    square.height = entities.tower.height;
+    return sphereAndRectangle(entities.shot, square);
+  }
+
   function setupDetectors() {
     detectors.player = {};
     detectors.shot = {};
@@ -100,6 +135,8 @@ define(function () {
     detectors.boundaries = {};
     detectors.triggerToNextRoom = {};
     detectors.rock = {};
+    detectors.areaTrigger = {};
+    detectors.tower = {};
 
     detectors.player.shot = playerAndShot;
     detectors.shot.player = playerAndShot;
@@ -117,6 +154,12 @@ define(function () {
 
     detectors.shot.rock = shotAndRock;
     detectors.rock.shot = shotAndRock;
+    
+    detectors.areaTrigger.player = areaTriggerAndPlayer;
+    detectors.player.areaTrigger = areaTriggerAndPlayer;
+
+    detectors.shot.tower = shotAndTower;
+    detectors.tower.shot = shotAndTower;
   }
 
   function init(callback) {

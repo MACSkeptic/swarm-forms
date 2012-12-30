@@ -256,6 +256,46 @@ define([
 
         context.restore();
       };
+
+      renderers.tower = function (context, entity, scene){
+         context.save();
+        context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
+        context.fillStyle = 'black';
+        context.strokeStyle = 'pink';
+        context.fillRect(0, 0, entity.width, entity.height);
+        context.strokeRect(0, 0, entity.width, entity.height);
+
+        context.beginPath();
+        context.moveTo(0, 0);
+        context.bezierCurveTo(
+          entity.width/7, 0,
+          entity.width/3, entity.height/7,
+          entity.width, entity.height);
+        context.stroke();
+
+        context.restore();
+      };
+      
+      renderers.areaTrigger = function (context, entity, scene){
+        var halfWidth = entity.width/2, halfHeight = entity.height/2;
+
+        context.save();
+
+        context.translate(entity.x, entity.y);
+
+        context.strokeStyle = 'white';
+
+        context.save();
+
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.restore();
+
+        context.save();
+        context.rotate(-entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.restore();
+        context.restore();
+      };
     }
 
     function resize() {

@@ -30,7 +30,8 @@ define(function () {
       square: collisionWithSquare,
       boundaries: outOfBounds,
       shot: createSuperShot,
-      rock: disintegrate
+      rock: disintegrate,
+      tower: disintegrate      
     };
 
     return shot;

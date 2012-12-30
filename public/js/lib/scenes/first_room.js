@@ -1,10 +1,13 @@
 define([
   '../entities/room',
   '../entities/boundaries',
-  './current_room'
-], function (room, boundaries, currentRoom) {
+  './current_room',
+  './trapped_room'
+
+], function (room, boundaries, currentRoom, trappedRoom) {
   var entities = [],
-      currentRoom = currentRoom;
+      currentRoom = currentRoom,
+      trappedRoom = trappedRoom;
 
   function init(callback) {
     entities.push(boundaries({ maxX: 640, maxY: 360 }));
@@ -26,6 +29,11 @@ define([
 
     if(input.keyPressed('space')) {
       currentRoom.init(function () { game.addScene(currentRoom, true); });
+      return;
+    }
+
+    if(input.keyPressed('t')) {
+      trappedRoom.init(function () { game.addScene(trappedRoom, true); });
       return;
     }
   }
