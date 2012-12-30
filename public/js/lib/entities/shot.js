@@ -6,9 +6,12 @@ define(function () {
   }
 
   function createSuperShot(shot) {
-    shot.radius += shot.radius;
-    this.collidesWith.shot = undefined;
-    this.dispose;
+    shot.radius += this.radius;
+    shot.velocityX += this.velocityX;
+    shot.velocityY += this.velocityY;
+
+    delete this.collidesWith.shot;
+    this.disposed = true;
   }
 
   function outOfBounds() { this.disposed = true; }
@@ -31,7 +34,7 @@ define(function () {
       boundaries: outOfBounds,
       shot: createSuperShot,
       rock: disintegrate,
-      tower: disintegrate      
+      tower: disintegrate
     };
 
     return shot;
