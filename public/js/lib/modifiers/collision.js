@@ -113,6 +113,13 @@ define(function () {
     return rectangleAndRectangle(entities.player, entities.hole);
   }
 
+  function playerAndBoundaries(entities) {
+    return entities.player.minX() < entities.boundaries.minX ||
+      entities.player.maxX() > entities.boundaries.maxX ||
+      entities.player.minY() < entities.boundaries.minY ||
+      entities.player.maxY() > entities.boundaries.maxY;
+  }
+
   function setupDetectors() {
     addDetector('tower'      , 'shot'              , shotAndTower               );
     addDetector('shot'       , 'shot'              , shotAndShot                );
@@ -123,6 +130,7 @@ define(function () {
     addDetector('player'     , 'triggerToNextRoom' , playerAndTriggerToNextRoom );
     addDetector('player'     , 'rock'              , playerAndRock              );
     addDetector('player'     , 'hole'              , playerAndHole              );
+    addDetector('player'     , 'boundaries'        , playerAndBoundaries        );
   }
 
   function addDetector(entityA, entityB, algorithm) {

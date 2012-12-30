@@ -39,7 +39,11 @@ define(['../behaviours/shoots', '../behaviours/rectangle'], function (shoots, re
       width: 30       , height: 30     ,
       isMovable: true , type: 'player' ,
       rotation: 0     , update: update ,
-      collidesWith: { rock: undoLastMovement, hole: undoLastMovement }
+      collidesWith: {
+        rock: undoLastMovement,
+        hole: undoLastMovement,
+        boundaries: undoLastMovement
+      }
     }), specs || {}));
   }
 
