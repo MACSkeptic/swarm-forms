@@ -258,7 +258,7 @@ define([
       };
 
       renderers.tower = function (context, entity, scene){
-         context.save();
+        context.save();
         context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
         context.fillStyle = 'black';
         context.strokeStyle = 'pink';
@@ -275,7 +275,7 @@ define([
 
         context.restore();
       };
-      
+
       renderers.areaTrigger = function (context, entity, scene){
         var halfWidth = entity.width/2, halfHeight = entity.height/2;
 
