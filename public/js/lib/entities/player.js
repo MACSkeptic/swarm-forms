@@ -1,4 +1,4 @@
-define(['../behaviours/shoots'], function (shoots) {
+define(['../behaviours/shoots', '../behaviours/rectangle'], function (shoots, rectangle) {
   function update(params) {
     this.rotation += params.elapsed/200;
 
@@ -29,15 +29,11 @@ define(['../behaviours/shoots'], function (shoots) {
   }
 
   function create(specs) {
-    return shoots(_.extend({
-      x: 0            , y: 0         , 
-      width: 30       , height: 30   , 
-      velocityX: 0    , velocityY: 0 , 
-      isMovable: true , 
-      type: 'player'  , 
-      rotation: 0     , 
-      update: update
-    }, specs || {}));
+    return shoots(_.extend(rectangle({
+      width: 30       , height: 30     ,
+      isMovable: true , type: 'player' ,
+      rotation: 0     , update: update
+    }), specs || {}));
   }
 
   return create;

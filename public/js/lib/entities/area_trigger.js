@@ -1,23 +1,11 @@
-define(function () {
+define(['../behaviours/rectangle'], function (rectangle) {
 
-  function triggered(){
-    this.callback();
-  }
-  
-  function create(area, callback) {
-    var areaTrigger = {};        
+  function triggered() { this.whenTriggered && this.whenTriggered(); }
 
-    areaTrigger.type = 'areaTrigger';
-    areaTrigger.x = 0;
-    areaTrigger.y = 0;
-    areaTrigger.width = 20;
-    areaTrigger.height = 20;
-    _.extend(areaTrigger,area);
-    areaTrigger.callback = callback;
-    areaTrigger.triggered = _.bind(triggered, areaTrigger);
-    areaTrigger.collidesWith = { player: triggered };
-
-    return areaTrigger;
+  function create(specs) {
+    return _.extend(rectangle({
+      type: 'areaTrigger', width: 20, height: 20, collidesWith: { player: triggered }
+    }), specs || {});
   }
 
   return create;

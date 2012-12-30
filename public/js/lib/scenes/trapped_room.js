@@ -19,7 +19,7 @@ define([
       
       var towerTrap = tower({ x: 640/2, y: 360/2});
       
-      var area = areaTrigger({ x: 200, y: 200 }, _.bind(towerTrap.shootRight, towerTrap));
+      var area = areaTrigger({ x: 200, y: 200, whenTriggered: _.bind(towerTrap.shootRight, towerTrap) });
       entities.push(towerTrap);
       entities.push(area);
       callback();

@@ -16,7 +16,9 @@ define(function () {
   }
 
   function create(specs) {
-    return _.extend({ x: 0, y: 0, radius: 50 }, specs || {});
+    return _.extend({ x: 0, y: 0, radius: 50,
+      maxX: maxX, minX: minX, maxY: maxY, minY: minY
+    }, specs || {});
   }
 
   return create;

@@ -43,44 +43,35 @@ define(function () {
   }
 
   function rectangleAndRectangle(entityA, entityB) {
-    var x1 = entityA.x;
-    var x2 = entityB.x;
+    var bottomA = entityA.maxY(),
+        bottomB = entityB.maxY(),
+        leftA   = entityA.minX(),
+        leftB   = entityB.minX(),
+        rightA  = entityA.maxX(),
+        rightB  = entityB.maxX(),
+        topA    = entityA.minY(),
+        topB    = entityA.minY();
 
-    var y1 = entityA.y;
-    var y2 = entityB.y;
-
-    var size1 = entityA.width/2;
-    var size2 = entityB.width/2;
-
-    var bottom1, bottom2, left1, left2, right1, right2, top1, top2;
-    left1 = x1 - size1;
-    right1 = x1 + size1;
-    top1 = y1 - size1;
-    bottom1 = y1 + size1;
-    left2 = x2 - size2;
-    right2 = x2 + size2;
-    top2 = y2 - size2;
-    bottom2 = y2 + size2;
-    return !(left1 > right2 || left2 > right1 || top1 > bottom2 || top2 > bottom1);
+    return !(leftA > rightB || leftB > rightA || topA > bottomB || topB > bottomA);
   }
 
   function shotAndRock(entities) {
     return circleAndRectangle(entities.shot, entities.rock);
   }
 
-  function circleAndRectangle(circle, rectange) {
-    var cdx = Math.abs(circle.x - rectange.x),
-        cdy = Math.abs(circle.y - rectange.y);
+  function circleAndRectangle(circle, rectangle) {
+    var cdx = Math.abs(circle.x - rectangle.x),
+        cdy = Math.abs(circle.y - rectangle.y);
 
-    if (cdx > (rectange.width/2 + circle.radius)) { return false; }
-    if (cdy > (rectange.height/2 + circle.radius)) { return false; }
+    if (cdx > (rectangle.width/2 + circle.radius)) { return false; }
+    if (cdy > (rectangle.height/2 + circle.radius)) { return false; }
 
-    if (cdx <= (rectange.width/2)) { return true; }
-    if (cdy <= (rectange.height/2)) { return true; }
+    if (cdx <= (rectangle.width/2)) { return true; }
+    if (cdy <= (rectangle.height/2)) { return true; }
 
     return (
-      Math.pow(cdx - rectange.width/2, 2) +
-      Math.pow(cdy - rectange.height/2, 2)
+      Math.pow(cdx - rectangle.width/2, 2) +
+      Math.pow(cdy - rectangle.height/2, 2)
     ) <= Math.pow(circle.radius, 2);
   }
 
