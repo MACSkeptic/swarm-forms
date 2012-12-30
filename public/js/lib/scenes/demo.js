@@ -1,16 +1,17 @@
 define([
     '../entities/player',
-    '../entities/boundaries'
+    '../entities/boundaries',
+    '../entities/rock'
   ],
-  function (player, boundaries) {
+  function (player, boundaries, rock) {
     var entities = [
       player({ x: 50, y: 300 }),
       player({ x: 1100, y: 350 }),
       player({ x: 500, y: 50 }),
-      { x: 300, y: 000, width: 100, height: 100, type: 'rock' },
-      { x: 200, y: 550, width: 100, height: 100, type: 'rock' },
-      { x: 800, y: 100, width: 100, height: 100, type: 'rock' },
-      { x: 800, y: 500, width: 100, height: 100, type: 'rock' },
+      rock({ x: 300, y: 100, width: 100, height: 100 }),
+      rock({ x: 200, y: 550, width: 100, height: 100 }),
+      rock({ x: 800, y: 100, width: 100, height: 100 }),
+      rock({ x: 800, y: 500, width: 100, height: 100 }),
       boundaries()
     ];
 
