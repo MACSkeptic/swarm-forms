@@ -1,15 +1,8 @@
-define(function () {
-
+define(['../behaviours/rectangle'], function (rectangle) {
   function create(specs) {
-    var rock = {};
-
-    rock.type = 'rock';
-    rock.x = 0;
-    rock.y = 0;
-    rock.width = 20;
-    rock.height = 20;
-
-    return _.extend(rock, specs || {});
+    return rectangle(_.extend({
+      width: 20, height: 20, type: 'rock'
+    }, specs || {}));
   }
 
   return create;
