@@ -2,7 +2,7 @@ define(function () {
   var detectors = {};
 
   function canCollide(entityA, entityB) {
-    return !(entityA === entityB) && 
+    return !(entityA === entityB) &&
       !entityA.disposed && !entityB.disposed &&
       (entityA.collidesWith || {})[entityB.type];
   }
@@ -30,7 +30,7 @@ define(function () {
     var detectorA = detectors[entityA.type],
         detectorB = detectors[entityB.type];
 
-    return (detectorA && detectorA[entityB.type]) || 
+    return (detectorA && detectorA[entityB.type]) ||
       (detectorB && detectorB[entityA.type]) ||
       function () {
         console.error(
@@ -84,7 +84,7 @@ define(function () {
     if (cdx > (rectange.width/2 + sphere.radius)) { return false; }
     if (cdy > (rectange.height/2 + sphere.radius)) { return false; }
 
-    if (cdx <= (rectange.width/2)) { return true; } 
+    if (cdx <= (rectange.width/2)) { return true; }
     if (cdy <= (rectange.height/2)) { return true; }
 
     return (
@@ -120,7 +120,7 @@ define(function () {
   }
 
   function shotAndTower(entities){
-     var square = {};
+    var square = {};
     square.x = entities.tower.x - entities.tower.width/2;
     square.y = entities.tower.y - entities.tower.height/2;
     square.width = entities.tower.width;
@@ -128,38 +128,28 @@ define(function () {
     return sphereAndRectangle(entities.shot, square);
   }
 
+  function playerAndRock(entities) {
+    return false;
+  }
+
   function setupDetectors() {
-    detectors.player = {};
-    detectors.shot = {};
-    detectors.square = {};
-    detectors.boundaries = {};
-    detectors.triggerToNextRoom = {};
-    detectors.rock = {};
-    detectors.areaTrigger = {};
-    detectors.tower = {};
+    addDetector('tower'      , 'shot'              , shotAndTower               );
+    addDetector('shot'       , 'shot'              , shotAndShot                );
+    addDetector('shot'       , 'rock'              , shotAndRock                );
+    addDetector('shot'       , 'square'            , shotAndSquare              );
+    addDetector('boundaries' , 'shot'              , shotOutOfBounds            );
+    addDetector('player'     , 'shot'              , playerAndShot              );
+    addDetector('player'     , 'areaTrigger'       , areaTriggerAndPlayer       );
+    addDetector('player'     , 'triggerToNextRoom' , playerAndTriggerToNextRoom );
+    addDetector('player'     , 'rock'              , playerAndRock              );
+  }
 
-    detectors.player.shot = playerAndShot;
-    detectors.shot.player = playerAndShot;
+  function addDetector(entityA, entityB, algorithm) {
+    detectors[entityA] = detectors[entityA] || {};
+    detectors[entityB] = detectors[entityB] || {};
 
-    detectors.square.shot = shotAndSquare;
-    detectors.shot.square = shotAndSquare;
-
-    detectors.shot.shot = shotAndShot;
-
-    detectors.shot.boundaries = shotOutOfBounds;
-    detectors.boundaries.shot = shotOutOfBounds;
-
-    detectors.triggerToNextRoom.player = playerAndTriggerToNextRoom;
-    detectors.player.triggerToNextRoom = playerAndTriggerToNextRoom;
-
-    detectors.shot.rock = shotAndRock;
-    detectors.rock.shot = shotAndRock;
-    
-    detectors.areaTrigger.player = areaTriggerAndPlayer;
-    detectors.player.areaTrigger = areaTriggerAndPlayer;
-
-    detectors.shot.tower = shotAndTower;
-    detectors.tower.shot = shotAndTower;
+    detectors[entityA][entityB] = algorithm;
+    detectors[entityB][entityA] = algorithm;
   }
 
   function init(callback) {
