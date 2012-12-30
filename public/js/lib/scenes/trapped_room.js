@@ -17,9 +17,9 @@ define([
       entities.push(room());
       entities.push(player({ x: 100, y: 100 }));
       
-      var towerTrap = tower({x:640/2,y:360/2});
+      var towerTrap = tower({ x: 640/2, y: 360/2});
       
-      var area = areaTrigger({x:200,y:200},towerTrap.shootRight);
+      var area = areaTrigger({ x: 200, y: 200 }, _.bind(towerTrap.shootRight, towerTrap));
       entities.push(towerTrap);
       entities.push(area);
       callback();
