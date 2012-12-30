@@ -266,6 +266,28 @@ define([
         context.restore();
       };
 
+      renderers.turret = function (context, entity, scene){
+        context.save();
+        context.translate(entity.x, entity.y);
+        context.strokeStyle = 'purple';
+        context.fillStyle = 'red';
+        context.lineWidth = 3;
+        context.beginPath();
+        context.save();
+        context.scale(entity.percentageToShootAgain(), entity.percentageToShootAgain());
+        context.arc(0, 0, entity.radius, 0 , 2 * Math.PI, true);
+        context.restore();
+        context.closePath();
+        context.fill();
+        context.beginPath();
+        context.arc(0, 0, entity.radius, 0 , 2 * Math.PI, true);
+        context.closePath();
+        context.stroke();
+        context.restore();
+
+        context.lineWidth = 3;
+      };
+
       renderers.tower = function (context, entity, scene){
         context.save();
         context.translate(entity.x, entity.y);

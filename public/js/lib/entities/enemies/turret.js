@@ -4,7 +4,12 @@ define(function(require) {
 
 
   function create(specs) {
-    return shoots(circle(specs));
+    return _.extend(
+      shoots(),
+      circle({ radius: 10 }),
+      { type: 'turret' },
+      specs || {}
+    );
   }
 
   return create;

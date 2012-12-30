@@ -16,6 +16,7 @@ define(function (require) {
       entities.push(player({ x: 75, y: 75 }));
       entities.push(triggerToNextRoom({ x: 320, y: 200 }));
       entities.push({ type: 'helpText', text: 'wasd to move, arrows to shoot' });
+      entities.push(turret({ x: 220, y: 220 }));
 
       callback();
     }
