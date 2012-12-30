@@ -7,10 +7,10 @@ define([
       player({ x: 50, y: 300 }),
       player({ x: 1100, y: 350 }),
       player({ x: 500, y: 50 }),
-      { x: 300, y: 000, width: 100, height: 100, type: 'square' },
-      { x: 200, y: 550, width: 100, height: 100, type: 'square' },
-      { x: 800, y: 100, width: 100, height: 100, type: 'square' },
-      { x: 800, y: 500, width: 100, height: 100, type: 'square' },
+      { x: 300, y: 000, width: 100, height: 100, type: 'rock' },
+      { x: 200, y: 550, width: 100, height: 100, type: 'rock' },
+      { x: 800, y: 100, width: 100, height: 100, type: 'rock' },
+      { x: 800, y: 500, width: 100, height: 100, type: 'rock' },
       boundaries()
     ];
 

@@ -1,10 +1,5 @@
 define(function () {
 
-  function collisionWithSquare(square) {
-    this.velocityX *= -1 + Math.random()/100;
-    this.velocityY *= -1 + Math.random()/100;
-  }
-
   function createSuperShot(shot) {
     shot.radius += this.radius;
     shot.velocityX += this.velocityX;
@@ -30,7 +25,6 @@ define(function () {
     shot.update = specs.update;
 
     shot.collidesWith = {
-      square: collisionWithSquare,
       boundaries: outOfBounds,
       shot: createSuperShot,
       rock: disintegrate,

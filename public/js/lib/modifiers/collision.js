@@ -64,25 +64,16 @@ define(function () {
     return !(left1 > right2 || left2 > right1 || top1 > bottom2 || top2 > bottom1);
   }
 
-  function shotAndSquare(entities) {
-    return sphereAndRectangle(entities.shot, entities.square);
-  }
-
   function shotAndRock(entities) {
-    var square = {};
-    square.x = entities.rock.x - entities.rock.width/2;
-    square.y = entities.rock.y - entities.rock.height/2;
-    square.width = entities.rock.width;
-    square.height = entities.rock.height;
-    return sphereAndRectangle(entities.shot, square);
+    return circleAndRectangle(entities.shot, entities.rock);
   }
 
-  function sphereAndRectangle(sphere, rectange) {
-    var cdx = Math.abs(sphere.x - rectange.x - rectange.width/2),
-        cdy = Math.abs(sphere.y - rectange.y - rectange.height/2);
+  function circleAndRectangle(circle, rectange) {
+    var cdx = Math.abs(circle.x - rectange.x),
+        cdy = Math.abs(circle.y - rectange.y);
 
-    if (cdx > (rectange.width/2 + sphere.radius)) { return false; }
-    if (cdy > (rectange.height/2 + sphere.radius)) { return false; }
+    if (cdx > (rectange.width/2 + circle.radius)) { return false; }
+    if (cdy > (rectange.height/2 + circle.radius)) { return false; }
 
     if (cdx <= (rectange.width/2)) { return true; }
     if (cdy <= (rectange.height/2)) { return true; }
@@ -90,7 +81,7 @@ define(function () {
     return (
       Math.pow(cdx - rectange.width/2, 2) +
       Math.pow(cdy - rectange.height/2, 2)
-    ) <= Math.pow(sphere.radius, 2);
+    ) <= Math.pow(circle.radius, 2);
   }
 
   function shotOutOfBounds(entities) {
@@ -116,16 +107,11 @@ define(function () {
   }
 
   function areaTriggerAndPlayer(entities){
-    return rectangleAndRectangle(entities.areaTrigger,entities.player);
+    return rectangleAndRectangle(entities.areaTrigger, entities.player);
   }
 
   function shotAndTower(entities){
-    var square = {};
-    square.x = entities.tower.x - entities.tower.width/2;
-    square.y = entities.tower.y - entities.tower.height/2;
-    square.width = entities.tower.width;
-    square.height = entities.tower.height;
-    return sphereAndRectangle(entities.shot, square);
+    return circleAndRectangle(entities.shot, entities.tower);
   }
 
   function playerAndRock(entities) {
@@ -136,7 +122,6 @@ define(function () {
     addDetector('tower'      , 'shot'              , shotAndTower               );
     addDetector('shot'       , 'shot'              , shotAndShot                );
     addDetector('shot'       , 'rock'              , shotAndRock                );
-    addDetector('shot'       , 'square'            , shotAndSquare              );
     addDetector('boundaries' , 'shot'              , shotOutOfBounds            );
     addDetector('player'     , 'shot'              , playerAndShot              );
     addDetector('player'     , 'areaTrigger'       , areaTriggerAndPlayer       );
