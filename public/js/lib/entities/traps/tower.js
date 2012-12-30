@@ -10,8 +10,8 @@ define(['../../behaviours/shoots'], function (shoots) {
     tower.radius = 15;
     tower.velocityX = 0;
     tower.velocityY = 0;
-    tower.shotSpeed = 10;
-    tower.timeRequiredBetweenShots = 100;
+    tower.shotVelocity = 2;
+    tower.timeRequiredBetweenShots = 500;
     tower.isMovable = false;
     tower.type = 'tower';
     tower.enemy = true;
