@@ -1,4 +1,4 @@
-define(['../behaviours/circle'], function (circle) {
+define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves) {
 
   function createSuperShot(shot) {
     shot.radius += this.radius;
@@ -13,15 +13,19 @@ define(['../behaviours/circle'], function (circle) {
   function vanish() { this.disposed = true; }
 
   function create(specs) {
-    return _.extend(circle({
-      radius: 4, isMovable: true, type: 'shot',
-      collidesWith: {
-        boundaries: outOfBounds,
-        shot: createSuperShot,
-        rock: vanish,
-        tower: vanish
-      }
-    }), specs || {});
+    return _.extend(
+      circle({ radius: 4 }),
+      moves(),
+      {
+        type: 'shot',
+        collidesWith: {
+          boundaries: outOfBounds,
+          shot: createSuperShot,
+          rock: vanish,
+          tower: vanish
+        }
+      }, specs || {}
+    );
   }
 
   return create;

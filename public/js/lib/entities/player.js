@@ -1,6 +1,7 @@
 define(function (require) {
   var behaviours = require('../behaviours'),
       shoots     = behaviours.shoots,
+      moves      = behaviours.moves,
       rectangle  = behaviours.rectangle;
 
   function update(params) {
@@ -41,8 +42,8 @@ define(function (require) {
   function create(specs) {
     return _.extend(
       rectangle({ width: 30, height: 30 }),
+      moves(),
       {
-        isMovable: true,
         type: 'player',
         rotation: 0,
         collidesWith: {

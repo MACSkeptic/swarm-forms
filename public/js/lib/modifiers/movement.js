@@ -3,7 +3,7 @@ define([
   function () {
 
     function applyTo(entity, elapsed, propertyName) {
-      if (!entity.isMovable && !entity.isAffectedByGravity) { return; }
+      if (!entity.movable) { return; }
 
       entity.previousX = entity.x;
       entity.previousY = entity.y;
