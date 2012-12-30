@@ -29,6 +29,7 @@ define(['../behaviours/shoots', '../behaviours/rectangle'], function (shoots, re
   }
 
   function undoLastMovement() {
+    if (this.previousX === undefined || this.previousY === undefined) { return; }
     this.x = this.previousX;
     this.y = this.previousY;
   }
@@ -38,7 +39,7 @@ define(['../behaviours/shoots', '../behaviours/rectangle'], function (shoots, re
       width: 30       , height: 30     ,
       isMovable: true , type: 'player' ,
       rotation: 0     , update: update ,
-      collidesWith: { rock: undoLastMovement }
+      collidesWith: { rock: undoLastMovement, hole: undoLastMovement }
     }), specs || {}));
   }
 

@@ -1,15 +1,7 @@
-define(function () {
+define(['../behaviours/rectangle'], function (rectangle) {
 
   function create(specs) {
-    var hole = {};
-
-    hole.type = 'hole';
-    hole.x = 0;
-    hole.y = 0;
-    hole.width = 40;
-    hole.height = 40;
-
-    return _.extend(hole, specs || {});
+    return rectangle(_.extend({ type: 'hole', width: 40, height: 40}, specs || {}));
   }
 
   return create;

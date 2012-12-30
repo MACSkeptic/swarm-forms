@@ -109,6 +109,10 @@ define(function () {
     return rectangleAndRectangle(entities.player, entities.rock);
   }
 
+  function playerAndHole(entities) {
+    return rectangleAndRectangle(entities.player, entities.hole);
+  }
+
   function setupDetectors() {
     addDetector('tower'      , 'shot'              , shotAndTower               );
     addDetector('shot'       , 'shot'              , shotAndShot                );
@@ -118,6 +122,7 @@ define(function () {
     addDetector('player'     , 'areaTrigger'       , areaTriggerAndPlayer       );
     addDetector('player'     , 'triggerToNextRoom' , playerAndTriggerToNextRoom );
     addDetector('player'     , 'rock'              , playerAndRock              );
+    addDetector('player'     , 'hole'              , playerAndHole              );
   }
 
   function addDetector(entityA, entityB, algorithm) {

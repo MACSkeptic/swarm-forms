@@ -13,7 +13,7 @@ define([
     function init(callback) {
       entities.push(boundaries({ maxX: 640, maxY: 360 }));
       entities.push(room());
-      entities.push(player({ x: 100, y: 100 }));
+      entities.push(player({ x: 75, y: 75 }));
       entities.push(triggerToNextRoom({ x: 320, y: 200 }));
       entities.push({ type: 'helpText', text: 'wasd to move, arrows to shoot' });
 
