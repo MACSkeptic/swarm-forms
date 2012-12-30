@@ -39,16 +39,21 @@ define(function (require) {
   }
 
   function create(specs) {
-    return shoots(_.extend(rectangle({
-      width: 30       , height: 30     ,
-      isMovable: true , type: 'player' ,
-      rotation: 0     , update: update ,
-      collidesWith: {
-        rock: undoLastMovement,
-        hole: undoLastMovement,
-        boundaries: undoLastMovement
-      }
-    }), specs || {}));
+    return _.extend(
+      rectangle({ width: 30, height: 30 }),
+      {
+        isMovable: true,
+        type: 'player',
+        rotation: 0,
+        collidesWith: {
+          rock: undoLastMovement,
+          hole: undoLastMovement,
+          boundaries: undoLastMovement
+        }
+      },
+      shoots({ update: update }),
+      specs || {}
+    );
   }
 
   return create;
