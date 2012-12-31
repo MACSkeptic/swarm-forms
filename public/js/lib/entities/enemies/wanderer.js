@@ -32,7 +32,7 @@ var behaviours = require('../../behaviours'),
     _.extend(this,directions[newDirection]);
   }
 
-  function undoLastMovement() { this.undoLastMovement(); }
+  function undoLastMovement(other, algorithm) { this.undoLastMovement(other, algorithm); }
 
   function create(specs) {
     return _.extend(
