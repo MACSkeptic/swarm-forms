@@ -2,21 +2,31 @@ define(function(require) {
   var behaviours = require('../../behaviours'),
       rectangle = behaviours.rectangle,
       moves = behaviours.moves,
-      geometry = require('../../utils/geometry');
-
+      geometry = require('../../utils/geometry'),
+      findTarget = require('../../utils/find_target');
 
   function update(params) {
-    if (params.currentScene.player) {
-      var vector = geometry.createVector2dFromPointAndModule(
-        params.currentScene.player(),
-        this,
-        this.chaseVelocity
-      );
-      this.velocityX = vector.x;
-      this.velocityY = vector.y;
-    }
+    chase.apply(this, [
+      findTarget.ofType('player', [
+        [params.currentScene.player],
+        params.currentScene.players,
+        params.currentScene.entities
+      ])
+    ]);
   }
 
+  function chase(target) {
+    if (!target) { return; }
+
+    alterVelocityByVector.apply(this, [
+      geometry.createVector2dFromPointAndModule(target, this, this.chaseVelocity)
+    ]);
+  }
+
+  function alterVelocityByVector(vector) {
+    this.velocityX = vector.x;
+    this.velocityY = vector.y;
+  }
 
   function create(specs) {
     return _.extend(

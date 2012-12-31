@@ -1,15 +1,21 @@
 define(function(require) {
   var behaviours = require('../../behaviours'),
       circle = behaviours.circle,
-      shoots = behaviours.shoots;
-
+      shoots = behaviours.shoots,
+      findTarget = require('../../utils/find_target');
 
   function update(params) {
-    if (params.currentScene.player) {
-      this.shootAt(params.currentScene.player(), params);
-    }
+    targetAndShoot(findTarget.ofType('player', [
+      [params.currentScene.player],
+      params.currentScene.players,
+      params.currentScene.entities
+    ]), this, params);
   }
 
+  function targetAndShoot(target, origin, params) {
+    if (!target) { return; }
+    origin.shootAt(target, params);
+  }
 
   function create(specs) {
     return _.extend(
