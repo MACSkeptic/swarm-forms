@@ -335,6 +335,27 @@ define([
         context.restore();
         context.restore();
       };
+
+      renderers.wanderer = function (context, entity, scene){
+        var halfWidth = entity.width/2, halfHeight = entity.height/2;
+
+        context.save();
+
+        context.translate(entity.x, entity.y);
+
+        context.strokeStyle = 'rgba(150,150,255,0.9)';
+
+        context.save();
+
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.restore();
+
+        context.save();
+        context.rotate(-entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.restore();
+        context.restore();
+      };
     }
 
     function resize() {

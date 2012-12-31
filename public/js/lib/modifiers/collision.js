@@ -120,6 +120,21 @@ define(function () {
       entities.player.maxY() > entities.boundaries.maxY;
   }
 
+  function wandererAndRock(entities) {
+    return rectangleAndRectangle(entities.wanderer, entities.rock);
+  }
+
+  function wandererAndHole(entities) {
+    return rectangleAndRectangle(entities.wanderer, entities.hole);
+  }
+
+  function wandererAndBoundaries(entities) {
+    return entities.wanderer.minX() < entities.boundaries.minX ||
+      entities.wanderer.maxX() > entities.boundaries.maxX ||
+      entities.wanderer.minY() < entities.boundaries.minY ||
+      entities.wanderer.maxY() > entities.boundaries.maxY;
+  }
+
   function setupDetectors() {
     addDetector('tower'      , 'shot'              , shotAndTower               );
     addDetector('shot'       , 'shot'              , shotAndShot                );
@@ -130,7 +145,11 @@ define(function () {
     addDetector('player'     , 'triggerToNextRoom' , playerAndTriggerToNextRoom );
     addDetector('player'     , 'rock'              , playerAndRock              );
     addDetector('player'     , 'hole'              , playerAndHole              );
-    addDetector('player'     , 'boundaries'        , playerAndBoundaries        );
+    addDetector('player'     , 'boundaries'        , playerAndBoundaries        );    
+    addDetector('wanderer'     , 'shot'              , playerAndShot            );
+    addDetector('wanderer'     , 'rock'              , wandererAndRock            );
+    addDetector('wanderer'     , 'hole'              , wandererAndHole            );
+    addDetector('wanderer'     , 'boundaries'        , wandererAndBoundaries      );    
   }
 
   function addDetector(entityA, entityB, algorithm) {
