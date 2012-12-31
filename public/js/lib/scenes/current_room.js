@@ -5,6 +5,7 @@ define(function (require) {
       triggerToNextRoom = entities.triggerToNextRoom,
       player            = entities.player,
       turret            = entities.enemies.turret,
+      chaser            = entities.enemies.chaser,
       currentRoom       = {};
 
   currentRoom.create = function (specs) {
@@ -17,6 +18,7 @@ define(function (require) {
       entities.push(triggerToNextRoom({ x: 320, y: 200 }));
       entities.push({ type: 'helpText', text: 'wasd to move, arrows to shoot' });
       entities.push(turret({ x: 220, y: 220 }));
+      entities.push(chaser({ x: 320, y: 320 }));
 
       callback();
     }

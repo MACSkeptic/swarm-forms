@@ -266,7 +266,12 @@ define([
         context.restore();
       };
 
-      renderers.turret = function (context, entity, scene){
+      renderers.chaser = function (context, entity, scene) {
+        context.fillStyle = 'magenta';
+        context.fillRect(entity.minX(), entity.minY(), entity.width, entity.height);
+      };
+
+      renderers.turret = function (context, entity, scene) {
         context.save();
         context.translate(entity.x, entity.y);
         context.strokeStyle = 'purple';
@@ -288,7 +293,7 @@ define([
         context.lineWidth = 3;
       };
 
-      renderers.tower = function (context, entity, scene){
+      renderers.tower = function (context, entity, scene) {
         context.save();
         context.translate(entity.x, entity.y);
         context.strokeStyle = 'purple';
@@ -310,7 +315,7 @@ define([
         context.lineWidth = 3;
       };
 
-      renderers.areaTrigger = function (context, entity, scene){
+      renderers.areaTrigger = function (context, entity, scene) {
         var halfWidth = entity.width/2, halfHeight = entity.height/2;
 
         context.save();

@@ -1,5 +1,6 @@
 define(function (require) {
   return {
-    turret: require('./enemies/turret')
+    turret: require('./enemies/turret'),
+    chaser: require('./enemies/chaser')
   };
 });
