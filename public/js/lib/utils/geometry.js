@@ -1,8 +1,8 @@
 define(function () {    
 
-  function createVector2dFromPointAndModule(x, y, module) {
+  function createVector2dFromPointAndModule(target, origin, module) {
     var speedVector = $V([module, 0, 0]);
-    var destinationVector = $V([x, y, 0]);
+    var destinationVector = $V([target.x, target.y, 0]).subtract($V([origin.x, origin.x, 0]));
     var normalLine = Line.create([0, 0, 0], [0, 0, 1]);
     var angle = speedVector.angleFrom(destinationVector);
     var turnDirection = speedVector.cross(destinationVector);

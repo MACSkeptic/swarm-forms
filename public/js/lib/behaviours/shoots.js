@@ -22,7 +22,7 @@ define(['../entities/shot', '../utils/geometry'], function (shot, geometry) {
   }
 
   function shootAt(target, params) {
-    var vector = geometry.createVector2dFromPointAndModule(target.x, target.y, this.shotVelocity);
+    var vector = geometry.createVector2dFromPointAndModule(target, this, this.shotVelocity);
     shootWithVelocity.apply(this, [vector.x, vector.y]);
   }
 
