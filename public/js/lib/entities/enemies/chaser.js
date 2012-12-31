@@ -7,7 +7,7 @@ define(function(require) {
 
   function update(params) {
     chase.apply(this, [
-      findTarget.ofType('player', [
+      findTarget.ofType('player').amongst([
         [params.currentScene.player],
         params.currentScene.players,
         params.currentScene.entities

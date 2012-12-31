@@ -5,7 +5,7 @@ define(function(require) {
       findTarget = require('../../utils/find_target');
 
   function update(params) {
-    targetAndShoot(findTarget.ofType('player', [
+    targetAndShoot(findTarget.ofType('player').amongst([
       [params.currentScene.player],
       params.currentScene.players,
       params.currentScene.entities

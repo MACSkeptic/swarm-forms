@@ -7,18 +7,22 @@ define(function () {
     return function (element) { return element && element.type == type; };
   }
 
-  function findTargetOfType(type, lists) {
+  function findTargetOfType(lists) {
     var targetList;
 
     _.find(lists || [], function (list) {
-      targetList = _.filter(list || [], isOfType(type));
+      targetList = _.filter(list || [], isOfType(this.type));
       return targetList && targetList.length > 0 && targetList;
-    });
+    }, this);
 
     return targetList && randomElementOf(targetList);
   }
 
+  function sexyFind(type) {
+    return { "amongst": findTargetOfType, "type": type };
+  }
+
   return {
-    ofType: findTargetOfType
+    ofType: sexyFind
   };
 });
