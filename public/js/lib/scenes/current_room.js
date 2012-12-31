@@ -23,50 +23,9 @@ define(function (require) {
       callback();
     }
 
-    function update(params) {
-    }
+    function update(params) {}
 
-    function handleInput(params) {
-      var input = params.input, elapsed = params.elapsed, game = params.game;
-      if(input.keyPressed('esc')){
-        game.changeCurrentSceneByName('main-menu');
-        return;
-      }
-
-      if(!input.keyPressed('a') && !input.keyPressed('d')) {
-        entities[2].velocityX = 0;
-      }
-
-      if(!input.keyPressed('w') && !input.keyPressed('s')) {
-        entities[2].velocityY = 0;
-      }
-
-      if(input.keyPressed('a')){
-        entities[2].velocityX = -2;
-      }
-      if(input.keyPressed('s')){
-        entities[2].velocityY = 2;
-      }
-      if(input.keyPressed('d')){
-        entities[2].velocityX = 2;
-      }
-      if(input.keyPressed('w')){
-        entities[2].velocityY = -2;
-      }
-
-      if(input.keyPressed('left')){
-        entities[2].shootLeft(params);
-      }
-      if(input.keyPressed('right')){
-        entities[2].shootRight(params);
-      }
-      if(input.keyPressed('up')){
-        entities[2].shootUp(params);
-      }
-      if(input.keyPressed('down')){
-        entities[2].shootDown(params);
-      }
-    }
+    function handleInput(params) { entities[2].handleInput(params); }
 
     return _.extend({
       "init": init,

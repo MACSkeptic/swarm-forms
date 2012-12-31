@@ -22,10 +22,6 @@ define([
 
   function handleInput(params) {
     var input = params.input, elapsed = params.elapsed, game = params.game;
-    if(input.keyPressed('esc')){
-      game.changeCurrentSceneByName('main-menu');
-      return;
-    }
 
     if(input.keyPressed('space')) {
       currentRoom.init(function () { game.addScene(currentRoom, true); });

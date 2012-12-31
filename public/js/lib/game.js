@@ -64,10 +64,12 @@ define([
       });
     }
 
-    function handleInput(input, elapsed, game) {
+    function handleInput(params) {
       console.log('handle input game');
 
-      currentScene.handleInput && currentScene.handleInput(input, elapsed, game);
+      if (params.input.keyPressed('esc')) { return params.game.changeCurrentSceneByName('main-menu'); }
+
+      currentScene.handleInput && currentScene.handleInput(params);
     }
 
     function addScene(scene, current) {

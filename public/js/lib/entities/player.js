@@ -33,15 +33,38 @@ define(function (require) {
     return Math.min(1, this.timeSinceLastShot / this.timeRequiredBetweenShots);
   }
 
+  function handleMovement(params) {
+    if(!params.input.keyPressed('a') && !params.input.keyPressed('d')) { this.velocityX = 0; }
+    if(!params.input.keyPressed('w') && !params.input.keyPressed('s')) { this.velocityY = 0; }
+
+    if(params.input.keyPressed('a')) { this.velocityX = -this.velocity; }
+    if(params.input.keyPressed('s')) { this.velocityY = this.velocity;  }
+    if(params.input.keyPressed('d')) { this.velocityX = this.velocity;  }
+    if(params.input.keyPressed('w')) { this.velocityY = -this.velocity; }
+  }
+
+  function handleShooting(params) {
+    if(params.input.keyPressed('left'))  { this.shootLeft(params);  }
+    if(params.input.keyPressed('right')) { this.shootRight(params); }
+    if(params.input.keyPressed('up'))    { this.shootUp(params);    }
+    if(params.input.keyPressed('down'))  { this.shootDown(params);  }
+  }
+
+  function handleInput(params) {
+    handleMovement.apply(this, [params]);
+    handleShooting.apply(this, [params]);
+  }
+
   function undoLastMovement(other, algorithm) { this.undoLastMovement(other, algorithm); }
 
   function create(specs) {
     return _.extend(
       rectangle({ width: 30, height: 30 }),
-      moves(),
+      moves({ velocity: 2 }),
       {
         type: 'player',
         rotation: 0,
+        handleInput: handleInput,
         collidesWith: {
           rock: undoLastMovement,
           hole: undoLastMovement,

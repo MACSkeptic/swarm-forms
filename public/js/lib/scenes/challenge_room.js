@@ -13,11 +13,9 @@ define(function (require) {
     callback();
   }
 
-  function update(params) {
-  }
+  function update(params) {}
 
-  function handleInput(params) {
-  }
+  function handleInput(params) { entities[2].handleInput(params); }
 
   return {
     "init": init,
