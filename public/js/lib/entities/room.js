@@ -46,13 +46,15 @@ define([
 
     room.children = [];
 
-    _.each(pickRandomHoleLayout(), function (currentHole) {
-      room.children.push(currentHole);
-    });
+    if ((specs || {}).addRandomStuff) {
+      _.each(pickRandomHoleLayout(), function (currentHole) {
+        room.children.push(currentHole);
+      });
 
-    _.each(pickRandomRockLayout(), function (currentRock) {
-      room.children.push(currentRock);
-    });
+      _.each(pickRandomRockLayout(), function (currentRock) {
+        room.children.push(currentRock);
+      });
+    }
 
     return _.extend(room, specs || {});
   }

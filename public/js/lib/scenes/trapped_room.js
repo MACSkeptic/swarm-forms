@@ -16,7 +16,7 @@ define([
 
     function init(callback) {
       entities.push(boundaries({ maxX: 640, maxY: 360 }));
-      entities.push(room());
+      entities.push(room({ addRandomStuff: true }));
       entities.push(player({ x: 150, y: 150 }));
 
       var enemy1 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
