@@ -1,4 +1,4 @@
-define(['../entities/shot'], function (shot) {
+define(['../entities/shot', '../utils/geometry'], function (shot, geometry) {
   function shootRight(params) {
     shootWithVelocity.apply(this, [this.shotVelocity, 0]);
   }
@@ -21,7 +21,9 @@ define(['../entities/shot'], function (shot) {
     this.timeSinceLastShot = 0;
   }
 
-  function shootAt(x, y, params) {
+  function shootAt(target, params) {
+    var vector = geometry.createVector2dFromPointAndModule(target.x, target.y, this.shotVelocity);
+    shootWithVelocity.apply(this, [vector.x, vector.y]);
   }
 
   function update(params) {

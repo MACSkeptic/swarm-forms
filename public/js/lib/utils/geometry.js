@@ -11,5 +11,5 @@ define(function () {
     return { x: rotatedSpeed.elements[0], y: rotatedSpeed.elements[1] };
   }
 
-  return { createVector2dFromPointAndModule: createVector2dFromPointAndModule; }
-}
+  return { createVector2dFromPointAndModule: createVector2dFromPointAndModule };
+});

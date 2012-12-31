@@ -73,6 +73,7 @@ define(function (require) {
       "handleInput": handleInput,
       "width": 640,
       "height": 360,
+      "player": function () { return entities[2]; },
       "next": function (game) {
         var next = currentRoom.create();
         next.init(function () { game.addScene(next, true); });

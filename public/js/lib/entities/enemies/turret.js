@@ -1,13 +1,21 @@
 define(function(require) {
-  var circle = require('../../behaviours/circle'),
-      shoots = require('../../behaviours/shoots');
+  var behaviours = require('../../behaviours'),
+      circle = behaviours.circle,
+      shoots = behaviours.shoots;
+
+
+  function update(params) {
+    if (params.currentScene.player) {
+      this.shootAt(params.currentScene.player(), params);
+    }
+  }
 
 
   function create(specs) {
     return _.extend(
-      shoots(),
+      shoots({ update: update, shotVelocity: 1, timeRequiredBetweenShots: 500 }),
       circle({ radius: 10 }),
-      { type: 'turret' },
+      { type: 'turret', enemy: true },
       specs || {}
     );
   }
