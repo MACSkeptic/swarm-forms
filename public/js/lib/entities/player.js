@@ -33,11 +33,7 @@ define(function (require) {
     return Math.min(1, this.timeSinceLastShot / this.timeRequiredBetweenShots);
   }
 
-  function undoLastMovement() {
-    if (this.previousX === undefined || this.previousY === undefined) { return; }
-    this.x = this.previousX;
-    this.y = this.previousY;
-  }
+  function undoLastMovement() { this.undoLastMovement(); }
 
   function create(specs) {
     return _.extend(

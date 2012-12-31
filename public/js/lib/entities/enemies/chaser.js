@@ -30,9 +30,9 @@ define(function(require) {
 
   function create(specs) {
     return _.extend(
-      moves(),
+      moves({ chaseVelocity: 1 }),
       rectangle({ width: 10, height: 10 }),
-      { type: 'chaser', enemy: true, chaseVelocity: 1, update: update },
+      { type: 'chaser', enemy: true, update: update },
       specs || {}
     );
   }
