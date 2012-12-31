@@ -7,7 +7,8 @@ define([
         foregroundContext,
         dummyCanvas,
         dummyContext,
-        renderers = {};
+        renderers = {},
+        textures = {};
 
     function createCanvas(id) {
       return $('<canvas>', { "id": id } )[0];
@@ -225,11 +226,16 @@ define([
       renderers.boundaries = function (context, entity) { return; };
 
       renderers.room = function (context, entity, scene) {
-        var gradient = context.createRadialGradient(
-            scene.width/2, scene.height/2, 0, scene.width/2, scene.height/2, 500);
-        gradient.addColorStop(0, '#888');
-        gradient.addColorStop(1, '#222');
-        context.fillStyle = gradient;
+        if (entity.backgroundImage) { 
+          context.fillStyle = context.createPattern(entity.backgroundImage, 'repeat');
+        } else {
+          var gradient = context.createRadialGradient(
+              scene.width/2, scene.height/2, 0, scene.width/2, scene.height/2, 500);
+          gradient.addColorStop(0, '#888');
+          gradient.addColorStop(1, '#222');
+          context.fillStyle = gradient;
+        }
+
         context.fillRect(0, 0, scene.width, scene.height);
       };
 
@@ -244,26 +250,8 @@ define([
       };
 
       renderers.rock = function (context, entity, scene) {
-        context.save();
-
-        context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
-        context.fillStyle = '#4A2429';
-        context.fillRect(0, 0, entity.width, entity.height);
-
-        context.strokeStyle = '#5C3E42';
-        context.beginPath();
-        context.moveTo(entity.width/5, entity.height/5);
-        context.lineTo(entity.width * 0.8, entity.height * 0.8);
-        context.closePath();
-        context.stroke();
-
-        context.beginPath();
-        context.moveTo(entity.width * 0.8, entity.height/5);
-        context.lineTo(entity.width/5, entity.height * 0.8);
-        context.closePath();
-        context.stroke();
-
-        context.restore();
+        context.fillStyle = context.createPattern(textures.rockTexture, 'repeat');
+        context.fillRect(entity.minX(), entity.minY(), entity.width, entity.height);
       };
 
       renderers.chaser = function (context, entity, scene) {
@@ -362,8 +350,8 @@ define([
     }
 
     function init(callback) {
-
       console.log('init renderer');
+
       backgroundCanvas = createCanvas('background');
       foregroundCanvas = createCanvas('foreground');
       dummyCanvas = createCanvas('dummy');
@@ -375,7 +363,9 @@ define([
 
       setupRenderers();
 
-      callback();
+      textures.rockTexture = new Image();
+      textures.rockTexture.onload = callback;
+      textures.rockTexture.src = '/media/images/rock.jpg';
     }
 
     return {
