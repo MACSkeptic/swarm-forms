@@ -12,16 +12,17 @@ define(function(require) {
         this,
         this.chaseVelocity
       );
-      this.x += vector.x;
-      this.y += vector.y;
+      this.velocityX = vector.x;
+      this.velocityY = vector.y;
     }
   }
 
 
   function create(specs) {
     return _.extend(
+      moves(),
       rectangle({ width: 10, height: 10 }),
-      { type: 'chaser', enemy: true, chaseVelocity: 0.5, update: update },
+      { type: 'chaser', enemy: true, chaseVelocity: 1, update: update },
       specs || {}
     );
   }
