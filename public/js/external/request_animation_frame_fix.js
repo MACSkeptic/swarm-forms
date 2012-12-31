@@ -1,3 +1,5 @@
+// this polyfill has been taken from: http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+
 (function () {
   var lastTime = 0;
   var vendors = ['ms', 'moz', 'webkit', 'o'];
