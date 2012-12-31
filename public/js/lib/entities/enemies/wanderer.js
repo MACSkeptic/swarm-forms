@@ -9,7 +9,7 @@ var behaviours = require('../../behaviours'),
     this.timeUntilNextMovementChange -= params.elapsed;
     if(this.timeUntilNextMovementChange <= 0){
       this.changeMovementDirection();
-      this.timeUntilNextMovementChange = 500 * Math.floor(Math.random()*4)+1 ;
+      this.timeUntilNextMovementChange = 500 * Math.floor(Math.random()*2)+1 ;
     }    
   }
 
