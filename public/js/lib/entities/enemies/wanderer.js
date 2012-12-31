@@ -11,6 +11,9 @@ var behaviours = require('../../behaviours'),
       this.changeMovementDirection();
       this.timeUntilNextMovementChange = 500 * Math.floor(Math.random()*2)+1 ;
     }
+
+    this.rotation = this.rotation + (params.elapsed)*Math.PI/150;
+    if (this.rotation >= 2*Math.PI) { this.rotation = 0; }
   }
 
   function percentageToShootAgain() {
@@ -40,6 +43,7 @@ var behaviours = require('../../behaviours'),
       moves(),
       {
         type: 'wanderer',
+        rotation: 0,
         collidesWith: {
           rock: undoLastMovement,
           hole: undoLastMovement,

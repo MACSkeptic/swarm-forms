@@ -9,6 +9,7 @@ define(function (require) {
     entities.push(boundaries({ maxX: 1152, maxY: 720 }));
     entities.push(room({ width: 1152, height: 720 }));
     entities.push(player({ x: 1152/2, y: 720/2 }));
+    entities.push({ type: 'helpText', text: 'just a lonely player in empty space for now :(' });
 
     callback();
   }
