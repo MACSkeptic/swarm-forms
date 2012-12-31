@@ -21,8 +21,8 @@ define(function () {
     if (!aCanCollideWithB && !bCanCollideWithA) { return; }
 
     if (collided(entityA, entityB)) {
-      if (aCanCollideWithB) { entityA.collidesWith[entityB.type].apply(entityA, [entityB]); }
-      if (bCanCollideWithA) { entityB.collidesWith[entityA.type].apply(entityB, [entityA]); }
+      if (aCanCollideWithB) { entityA.collidesWith[entityB.type].apply(entityA, [entityB, detector(entityA, entityB)]); }
+      if (bCanCollideWithA) { entityB.collidesWith[entityA.type].apply(entityB, [entityA, detector(entityA, entityB)]); }
     }
   }
 

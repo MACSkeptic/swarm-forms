@@ -33,7 +33,7 @@ define(function (require) {
     return Math.min(1, this.timeSinceLastShot / this.timeRequiredBetweenShots);
   }
 
-  function undoLastMovement() { this.undoLastMovement(); }
+  function undoLastMovement(other, algorithm) { this.undoLastMovement(other, algorithm); }
 
   function create(specs) {
     return _.extend(
