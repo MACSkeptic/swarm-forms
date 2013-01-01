@@ -1,3 +1,8 @@
+@-webkit-keyframes pulsate {
+  from { opacity: 1; }
+  to { opacity: 0.1; }
+}
+
 body, * {
   margin: 0;
   padding: 0;
@@ -6,6 +11,7 @@ body, * {
   color: #222;
   background: transparent;
   font: 20px Monaco, Consolas, Monospace;
+  text-transform: lowercase;
 }
 
 body { background: black; }
@@ -25,4 +31,12 @@ canvas {
   display: block;
   color: magenta;
   margin-top: 200px;
+  &:after { content: ' ...';  }
+  -webkit-animation: pulsate 2s linear 2s infinite alternate;
+}
+#forkme {
+  img {
+    position: absolute; top: 0; right: 0; border: 0; z-index: 9001; opacity: 0.3;
+    &:hover { opacity: 1 }
+  }
 }

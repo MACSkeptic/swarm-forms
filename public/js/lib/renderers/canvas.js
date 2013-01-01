@@ -124,7 +124,7 @@ define(function (require) {
         if (entity.enemy) {
           context.fillStyle = 'red';
           context.strokeStyle = 'red';
-        } else { 
+        } else {
           context.fillStyle = 'cyan';
           context.strokeStyle = 'cyan';
         }
