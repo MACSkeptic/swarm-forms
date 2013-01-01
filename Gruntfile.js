@@ -9,7 +9,7 @@ module.exports = function (grunt) {
         'Gruntfile.js'
       ],
       options: {
-        indent: 2,
+        //indent: 2,
         expr: true,
         bitwise: true,
         camelcase: true,
