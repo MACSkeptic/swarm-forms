@@ -1,10 +1,9 @@
-
 /**
  * Module dependencies.
  */
-
 var express = require('express')
   , home = require('./routes/home')
+  , optimised = require('./routes/optimised')
   , http = require('http')
   , path = require('path')
   , io = require('socket.io');
@@ -30,6 +29,7 @@ app.configure('development', function () {
 });
 
 app.get('/', home.index);
+app.get('/optimised.js', optimised.index);
 
 server.listen(app.get('port'), function () {
   console.log("Express server listening on port " + app.get('port'));

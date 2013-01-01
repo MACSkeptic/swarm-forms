@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app",
+    "local": "node app --debugjs",
     "test": "grunt --verbose"
   },
   "engines": {
@@ -14,7 +15,8 @@
     "express": "3.0.3",
     "ejs": "*",
     "socket.io": "*",
-    "less-middleware": "*"
+    "less-middleware": "*",
+    "requirejs": "*"
   },
   "devDependencies": {
     "grunt": "~0.4",
