@@ -2,7 +2,7 @@ define(function () {
   var detectors = {};
 
   function canCollide(entityA, entityB) {
-    return !(entityA === entityB) &&
+    return (entityA !== entityB) &&
       !entityA.disposed && !entityB.disposed &&
       (entityA.collidesWith || {})[entityB.type];
   }

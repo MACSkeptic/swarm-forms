@@ -1,7 +1,7 @@
 define([
     './demo',
     './first_room',
-    './challenge_room',
+    './challenge_room'
   ], function (demo, firstRoom, challengeRoom) {
   var entities = [
     { type: 'menuBackground' },

@@ -5,9 +5,7 @@ define([
   './trapped_room'
 
 ], function (room, boundaries, currentRoom, trappedRoom) {
-  var entities = [],
-      currentRoom = currentRoom,
-      trappedRoom = trappedRoom;
+  var entities = [];
 
   function init(callback) {
     entities.push(boundaries({ maxX: 640, maxY: 360 }));

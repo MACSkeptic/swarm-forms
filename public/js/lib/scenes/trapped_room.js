@@ -9,7 +9,7 @@ define([
 
 ], function (room, boundaries, tower, player, areaTrigger, wanderer,turret) {
 
-  var trappedRoom = {}
+  var trappedRoom = {};
 
   trappedRoom.create = function (specs) {
     var entities = [];
