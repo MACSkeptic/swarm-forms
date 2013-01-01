@@ -6,6 +6,7 @@ module.exports = function (grunt) {
     jshint: {
       all: [
         'public/js/lib/**/*.js',
+        'public/js/tests/**/*.js',
         'Gruntfile.js'
       ],
       options: {
@@ -28,7 +29,12 @@ module.exports = function (grunt) {
         globals: {
           '$': true,
           'console': true,
+          'equal': true,
+          'ok': true,
+          'sinon': true,
           'module': true,
+          'QUnit': true,
+          'test': true,
           'require': true,
           'define': true,
           'Line': true,
