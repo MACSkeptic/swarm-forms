@@ -35,14 +35,33 @@ define(function () {
   }
 
   function detector(entityA, entityB) {
-    var detectorA = detectors[entityA.type],
-        detectorB = detectors[entityB.type];
-
-    return (detectorA && detectorA[entityB.type]) ||
-      (detectorB && detectorB[entityA.type]) ||
+    return typeSpecificDetector(entityA, entityB) ||
+      mixedDetector(entityA, entityB) ||
+      genericShapeDetector(entityA, entityB) ||
       function () {
         return console.error('could not find a detector for: ' + entityA.type + ', ' + entityB.type) && false;
       };
+  }
+
+  function typeSpecificDetector(entityA, entityB) {
+    var detectorA = detectors[entityA.type],
+        detectorB = detectors[entityB.type];
+
+    return (detectorA && detectorA[entityB.type]) || (detectorB && detectorB[entityA.type]);
+  }
+
+  function mixedDetector(entityA, entityB) {
+    var detectorA = detectors[entityA.type],
+        detectorB = detectors[entityB.type];
+
+    return (detectorA && detectorA[entityB.collidesLike]) || (detectorB && detectorB[entityA.collidesLike]);
+  }
+
+  function genericShapeDetector(entityA, entityB) {
+    var detectorA = detectors[entityA.collidesLike],
+        detectorB = detectors[entityB.collidesLike];
+
+    return (detectorA && detectorA[entityB.collidesLike]) || (detectorB && detectorB[entityA.collidesLike]);
   }
 
   function rectangleAndRectangle(entityA, entityB) {
