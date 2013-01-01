@@ -1,7 +1,4 @@
-define([
- './rock',
- './hole'
-], function (rock, hole) {
+define(['./rock', './hole'], function (rock, hole) {
 
   function pickRandomHoleLayout() {
     var random = Math.random();

@@ -10,7 +10,7 @@ define(function () {
       params.currentScene.next(params.game);
     }
 
-    this.animationStep += this.stepping * (params.elapsed/100);
+    this.animationStep += this.stepping * (params.elapsed / 100);
 
     if (this.animationStep > 20) {
       this.stepping = -1;

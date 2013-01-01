@@ -15,7 +15,7 @@ define(function (require) {
   }
 
   function update(elapsed) {
-    console.log('update game, fps: ' + 1000/elapsed);
+    console.log('update game, fps: ' + 1000 / elapsed);
 
     var neatPackage = { input: input, elapsed: elapsed, game: this, currentScene: currentScene };
 
