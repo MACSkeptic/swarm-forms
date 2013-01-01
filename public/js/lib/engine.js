@@ -1,6 +1,4 @@
-define([
-    './game',
-  ], 
+define([ './game' ], 
   function (game) {
 
   var lastLoop,

@@ -10,6 +10,12 @@ module.exports = function(grunt) {
         'public/js/lib/modifiers/**/*.js',
         'public/js/lib/renderers/**/*.js',
         'public/js/lib/scenes/**/*.js',
+        'public/js/lib/utils/**/*.js',
+        'public/js/lib/behaviours.js',
+        'public/js/lib/entities.js',
+        'public/js/lib/engine.js',
+        'public/js/lib/game.js',
+        'public/js/lib/input.js',
         'Gruntfile.js'
       ],
       options: {
