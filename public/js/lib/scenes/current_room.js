@@ -28,17 +28,17 @@ define(function (require) {
     function handleInput(params) { entities[2].handleInput(params); }
 
     return _.extend({
-      "init": init,
-      "update": update,
-      "entities": entities,
-      "handleInput": handleInput,
-      "width": 640,
-      "height": 360,
-      "next": function (game) {
+      'init': init,
+      'update': update,
+      'entities': entities,
+      'handleInput': handleInput,
+      'width': 640,
+      'height': 360,
+      'next': function (game) {
         var next = currentRoom.create();
         next.init(function () { game.addScene(next, true); });
       },
-      "name": 'current-room'
+      'name': 'current-room'
     }, specs || {});
   };
 

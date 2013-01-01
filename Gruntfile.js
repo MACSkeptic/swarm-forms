@@ -16,7 +16,8 @@ module.exports = function(grunt) {
         immed: true,
         noarg: true,
         nonew: true,
-        plusplus: true
+        plusplus: true,
+        quotmark: 'single'
       }
     }
   });

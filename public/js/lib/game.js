@@ -93,13 +93,13 @@ define([
     }
 
     return {
-      "init": init,
-      "draw": draw,
-      "update": update,
-      "handleInput": handleInput,
-      "changeCurrentSceneTo": changeCurrentSceneTo,
-      "changeCurrentSceneByName": changeCurrentSceneByName,
-      "addScene": addScene
+      'init': init,
+      'draw': draw,
+      'update': update,
+      'handleInput': handleInput,
+      'changeCurrentSceneTo': changeCurrentSceneTo,
+      'changeCurrentSceneByName': changeCurrentSceneByName,
+      'addScene': addScene
     };
   }
 );

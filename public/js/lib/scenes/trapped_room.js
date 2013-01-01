@@ -35,7 +35,7 @@ define([
       var areaTrigger3 = areaTrigger({ x: 320, y: 320, whenTriggered: _.bind(towerTrap.shootDown, towerTrap) });
       var areaTrigger4 = areaTrigger({ x: 500, y: 180, whenTriggered: _.bind(towerTrap.shootRight, towerTrap) });
       
-      entities.push({ type: 'helpText', text: "It's a trap!" });
+      entities.push({ type: 'helpText', text: 'It\'s a trap!' });
       entities.push(turret({ x: 320, y: 140 }));
       entities.push(towerTrap);
       entities.push(areaTrigger1);
@@ -59,17 +59,17 @@ define([
     function handleInput(params) { entities[2].handleInput(params); }
 
     return _.extend({
-      "init": init,
-      "update": update,
-      "entities": entities,
-      "handleInput": handleInput,
-      "width": 640,
-      "height": 360,
-      "next": function (game) { 
+      'init': init,
+      'update': update,
+      'entities': entities,
+      'handleInput': handleInput,
+      'width': 640,
+      'height': 360,
+      'next': function (game) { 
         var next = trappedRoom.create();
         next.init(function () { game.addScene(next, true); });
       },
-      "name": 'current-room'
+      'name': 'current-room'
     }, specs || {});
   };
 

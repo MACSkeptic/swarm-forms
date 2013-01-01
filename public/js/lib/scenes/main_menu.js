@@ -50,12 +50,12 @@ define([
   }
 
   return {
-    "name": 'main-menu',
-    "init": init,
-    "update": update,
-    "entities": entities,
-    "handleInput": handleInput,
-      "width":1280,
-      "height":720
+    'name': 'main-menu',
+    'init': init,
+    'update': update,
+    'entities': entities,
+    'handleInput': handleInput,
+      'width':1280,
+      'height':720
   };
 });

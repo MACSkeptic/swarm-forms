@@ -48,12 +48,12 @@ define(function (require) {
   function handleInput(params) { currentPlayer.handleInput(params); }
 
   return {
-    "init": init,
-    "update": update,
-    "entities": entities,
-    "handleInput": handleInput,
-    "width": 1152,
-    "height": 720,
-    "name": 'first-room'
+    'init': init,
+    'update': update,
+    'entities': entities,
+    'handleInput': handleInput,
+    'width': 1152,
+    'height': 720,
+    'name': 'first-room'
   };
 });

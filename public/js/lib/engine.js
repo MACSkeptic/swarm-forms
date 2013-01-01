@@ -42,6 +42,6 @@ define([ './game' ],
   }
 
   return {
-    "start": start
+    'start': start
   };
 });

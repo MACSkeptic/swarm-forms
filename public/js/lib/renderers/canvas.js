@@ -9,12 +9,12 @@ define(function (require) {
         textures = require('../assets/textures');
 
     function createCanvas(id) {
-      return $('<canvas>', { "id": id } )[0];
+      return $('<canvas>', { 'id': id } )[0];
     }
 
     function contextOf(canvas) {
       var context = canvas.getContext('2d');
-      $(canvas).attr({ "width": window.innerWidth, "height": window.innerHeight });
+      $(canvas).attr({ 'width': window.innerWidth, 'height': window.innerHeight });
       return context;
     }
 
@@ -337,7 +337,7 @@ define(function (require) {
       foregroundContext = contextOf(foregroundCanvas);
       dummyContext = contextOf(dummyCanvas);
 
-      backgroundContext.fillStyle = "black";
+      backgroundContext.fillStyle = 'black';
       backgroundContext.fillRect(0, 0,  window.innerWidth, window.innerHeight);
     }
 
@@ -362,8 +362,8 @@ define(function (require) {
     }
 
     return {
-      "render": render,
-      "init": init
+      'render': render,
+      'init': init
     };
   }
 );

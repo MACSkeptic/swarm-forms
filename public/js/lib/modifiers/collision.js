@@ -196,7 +196,7 @@ define(function () {
   }
 
   return {
-    "applyTo": applyTo,
-    "init": init
+    'applyTo': applyTo,
+    'init': init
   };
 });

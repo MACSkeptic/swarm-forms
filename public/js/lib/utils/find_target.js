@@ -19,7 +19,7 @@ define(function () {
   }
 
   function sexyFind(type) {
-    return { "amongst": findTargetOfType, "type": type };
+    return { 'amongst': findTargetOfType, 'type': type };
   }
 
   return {

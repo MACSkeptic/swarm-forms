@@ -85,13 +85,13 @@ define([
     }
 
     return {
-      "init": init,
-      "update": update,
-      "entities": entities,
-      "handleInput": handleInput,
-      "width":1280,
-      "height":720,
-      "name": 'demo'
+      'init': init,
+      'update': update,
+      'entities': entities,
+      'handleInput': handleInput,
+      'width':1280,
+      'height':720,
+      'name': 'demo'
     };
   }
 );

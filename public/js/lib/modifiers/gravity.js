@@ -9,7 +9,7 @@ define([
     }
 
     return {
-      "applyTo": applyTo
+      'applyTo': applyTo
     };
   }
 );
