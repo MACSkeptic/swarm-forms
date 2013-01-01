@@ -11,6 +11,7 @@ define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves)
 
   function outOfBounds() { this.disposed = true; }
   function vanish() { this.disposed = true; }
+  function killAndVanish(other) { other.disposed = true; this.disposed = true; }
 
   function create(specs) {
     return _.extend(
@@ -22,6 +23,8 @@ define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves)
           boundaries: outOfBounds,
           shot: createSuperShot,
           rock: vanish,
+          turret: killAndVanish,
+          wanderer: killAndVanish,
           tower: vanish
         }
       }, specs || {}
