@@ -43,7 +43,7 @@ define(function () {
           'could not find a detector for: ' +
           entityA.type + ', ' +
           entityB.type
-        );
+);
         return false;
       };
   }
@@ -69,15 +69,15 @@ define(function () {
     var cdx = Math.abs(circle.x - rectangle.x),
         cdy = Math.abs(circle.y - rectangle.y);
 
-    if (cdx > (rectangle.width/2 + circle.radius)) { return false; }
-    if (cdy > (rectangle.height/2 + circle.radius)) { return false; }
+    if (cdx > (rectangle.width / 2 + circle.radius)) { return false; }
+    if (cdy > (rectangle.height / 2 + circle.radius)) { return false; }
 
-    if (cdx <= (rectangle.width/2)) { return true; }
-    if (cdy <= (rectangle.height/2)) { return true; }
+    if (cdx <= (rectangle.width / 2)) { return true; }
+    if (cdy <= (rectangle.height / 2)) { return true; }
 
     return (
-      Math.pow(cdx - rectangle.width/2, 2) +
-      Math.pow(cdy - rectangle.height/2, 2)
+      Math.pow(cdx - rectangle.width / 2, 2) +
+      Math.pow(cdy - rectangle.height / 2, 2)
     ) <= Math.pow(circle.radius, 2);
   }
 
@@ -119,15 +119,15 @@ define(function () {
     return Math.abs(entities.player.x - 320) < 30 && Math.abs(entities.player.y - 200) < 30;
   }
 
-  function areaTriggerAndPlayer(entities){
+  function areaTriggerAndPlayer(entities) {
     return rectangleAndRectangle(entities.areaTrigger, entities.player);
   }
 
-  function shotAndTower(entities){
+  function shotAndTower(entities) {
     return circleAndRectangle(entities.shot, entities.tower);
   }
 
-  function shotAndTurret(entities){
+  function shotAndTurret(entities) {
     return shotAndShot(undefined, entities.shot, entities.turret);
   }
 
@@ -162,24 +162,24 @@ define(function () {
   }
 
   function setupDetectors() {
-    addDetector('tower'      , 'shot'              , shotAndTower               );
-    addDetector('turret'     , 'shot'              , shotAndTurret              );
-    addDetector('shot'       , 'shot'              , shotAndShot                );
-    addDetector('shot'       , 'rock'              , shotAndRock                );
-    addDetector('boundaries' , 'shot'              , shotOutOfBounds            );
-    addDetector('player'     , 'shot'              , playerAndShot              );
-    addDetector('player'     , 'areaTrigger'       , areaTriggerAndPlayer       );
-    addDetector('player'     , 'triggerToNextRoom' , playerAndTriggerToNextRoom );
-    addDetector('player'     , 'rock'              , playerAndRock              );
-    addDetector('player'     , 'hole'              , playerAndHole              );
-    addDetector('player'     , 'boundaries'        , playerAndBoundaries        );
-    addDetector('chaser'     , 'shot'              , chaserAndShot              );
-    addDetector('chaser'     , 'player'            , playerAndChaser            );
-    addDetector('wanderer'   , 'player'            , wandererAndPlayer          );
-    addDetector('wanderer'   , 'shot'              , wandererAndShot            );
-    addDetector('wanderer'   , 'rock'              , wandererAndRock            );
-    addDetector('wanderer'   , 'hole'              , wandererAndHole            );
-    addDetector('wanderer'   , 'boundaries'        , wandererAndBoundaries      );
+    addDetector('tower', 'shot', shotAndTower);
+    addDetector('turret', 'shot', shotAndTurret);
+    addDetector('shot', 'shot', shotAndShot);
+    addDetector('shot', 'rock', shotAndRock);
+    addDetector('boundaries', 'shot', shotOutOfBounds);
+    addDetector('player', 'shot', playerAndShot);
+    addDetector('player', 'areaTrigger', areaTriggerAndPlayer);
+    addDetector('player', 'triggerToNextRoom', playerAndTriggerToNextRoom);
+    addDetector('player', 'rock', playerAndRock);
+    addDetector('player', 'hole', playerAndHole);
+    addDetector('player', 'boundaries', playerAndBoundaries);
+    addDetector('chaser', 'shot', chaserAndShot);
+    addDetector('chaser', 'player', playerAndChaser);
+    addDetector('wanderer', 'player', wandererAndPlayer);
+    addDetector('wanderer', 'shot', wandererAndShot);
+    addDetector('wanderer', 'rock', wandererAndRock);
+    addDetector('wanderer', 'hole', wandererAndHole);
+    addDetector('wanderer', 'boundaries', wandererAndBoundaries);
   }
 
   function addDetector(entityA, entityB, algorithm) {
