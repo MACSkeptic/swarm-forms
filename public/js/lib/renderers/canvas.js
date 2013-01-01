@@ -229,13 +229,12 @@ define(function (require) {
       };
 
       renderers.hole = function (context, entity, scene) {
-        context.save();
-        context.translate(entity.x - entity.width/2, entity.y - entity.height/2);
-        context.fillStyle = '#111';
-        context.fillRect(0, 0, entity.width, entity.height);
-        context.fillStyle = '#222';
-        context.fillRect(entity.width * 0.1, entity.height * 0.1, entity.width * 0.9, entity.height * 0.9);
-        context.restore();
+        context.fillStyle = context.createPattern(textures.lava, 'repeat');
+        context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+        context.lineWidth = 5;
+        context.fillRect(entity.minX(), entity.minY(), entity.width, entity.height);
+        context.strokeRect(entity.minX(), entity.minY(), entity.width, entity.height);
+        context.lineWidth = 3;
       };
 
       renderers.rock = function (context, entity, scene) {

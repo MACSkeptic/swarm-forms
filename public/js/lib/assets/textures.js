@@ -4,6 +4,7 @@ define(function (require) {
   function loadEverything(callback) {
     addTexture(this, 'rock', 'rock.jpg');
     addTexture(this, 'woodenFloor', 'wooden_floor.png');
+    addTexture(this, 'lava', 'lava.png');
 
     waitForEverythingToLoadThen(callback);
   }
