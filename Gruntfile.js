@@ -20,7 +20,11 @@ module.exports = function(grunt) {
         quotmark: 'single',
         trailing: true,
         maxparams: 3,
-        maxlen: 150
+        maxlen: 150,
+        browser: true,
+        nomen: true,
+        jquery: true
+
       }
     }
   });

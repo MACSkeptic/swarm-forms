@@ -54,14 +54,14 @@ define(function () {
   var keysPressed = {};
 
   function handleKeyUp(e) {
-    event = (e) ? e : window.event;
-    var keyName = keys[event.keyCode];
+    ev = (e) ? e : window.event;
+    var keyName = keys[ev.keyCode];
     keysPressed[keyName] = false;
   }
 
   function handleKeyDown(e) {
-    event = (e) ? e : window.event ;
-    var keyName = keys[event.keyCode];
+    ev = (e) ? e : window.event ;
+    var keyName = keys[ev.keyCode];
     keysPressed[keyName] = true;
   }
 
