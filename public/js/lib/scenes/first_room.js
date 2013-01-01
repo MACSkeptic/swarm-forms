@@ -19,12 +19,12 @@ define(function (require) {
   function handleInput(params) {
     var input = params.input, elapsed = params.elapsed, game = params.game;
 
-    if(input.keyPressed('space')) {
+    if (input.keyPressed('space')) {
       currentRoom.init(function () { game.addScene(currentRoom, true); });
       return;
     }
 
-    if(input.keyPressed('t')) {
+    if (input.keyPressed('t')) {
       trappedRoom.init(function () { game.addScene(trappedRoom, true); });
       return;
     }

@@ -24,44 +24,44 @@ define([
     function handleInput(params) {
       var input = params.input, elapsed = params.elapsed, game = params.game;
 
-      if(input.keyPressed('a')){
+      if (input.keyPressed('a')) {
         entities[0].velocityX = -1;
         entities[0].velocityY = 0;
       }
-      if(input.keyPressed('s')){
+      if (input.keyPressed('s')) {
         entities[0].velocityX = 0;
         entities[0].velocityY = 1;
       }
-      if(input.keyPressed('d')){
+      if (input.keyPressed('d')) {
         entities[0].velocityX = 1;
         entities[0].velocityY = 0;
       }
-      if(input.keyPressed('w')){
+      if (input.keyPressed('w')) {
         entities[0].velocityX = 0;
         entities[0].velocityY = -1;
       }
-      if(input.keyPressed('q')){
+      if (input.keyPressed('q')) {
         entities[0].velocityX = 0;
         entities[0].velocityY = 0;
       }
 
-      if(input.keyPressed('left')){
+      if (input.keyPressed('left')) {
         entities[1].velocityX = -1;
         entities[1].velocityY = 0;
       }
-      if(input.keyPressed('down')){
+      if (input.keyPressed('down')) {
         entities[1].velocityX = 0;
         entities[1].velocityY = 1;
       }
-      if(input.keyPressed('right')){
+      if (input.keyPressed('right')) {
         entities[1].velocityX = 1;
         entities[1].velocityY = 0;
       }
-      if(input.keyPressed('up')){
+      if (input.keyPressed('up')) {
         entities[1].velocityX = 0;
         entities[1].velocityY = -1;
       }
-      if(input.keyPressed('forwardslash')){
+      if (input.keyPressed('forwardslash')) {
         entities[1].velocityX = 0;
         entities[1].velocityY = 0;
       }
@@ -89,8 +89,8 @@ define([
       'update': update,
       'entities': entities,
       'handleInput': handleInput,
-      'width':1280,
-      'height':720,
+      'width': 1280,
+      'height': 720,
       'name': 'demo'
     };
   }
