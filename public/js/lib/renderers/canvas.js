@@ -9,7 +9,7 @@ define(function (require) {
         textures = require('../assets/textures');
 
     function createCanvas(id) {
-      return $('<canvas>', { 'id': id } )[0];
+      return $('<canvas>', { 'id': id })[0];
     }
 
     function contextOf(canvas) {
@@ -38,8 +38,8 @@ define(function (require) {
       var widthRatio = 0;
       var heightRatio = 0;
 
-      heightRatio = currentCanvas.height/scene.height;
-      widthRatio = currentCanvas.width/scene.width;
+      heightRatio = currentCanvas.height / scene.height;
+      widthRatio = currentCanvas.width / scene.width;
       dummyContext.scale(widthRatio, heightRatio);
 
       _.each(scene.entities, function (currentEntity) {
@@ -61,7 +61,7 @@ define(function (require) {
 
     function setupRenderers() {
       renderers.player = function (context, entity) {
-        var halfWidth = entity.width/2, halfHeight = entity.height/2;
+        var halfWidth = entity.width / 2, halfHeight = entity.height / 2;
 
         context.save();
 
@@ -71,12 +71,12 @@ define(function (require) {
 
         context.save();
         context.rotate(entity.rotation);
-        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
 
         context.save();
         context.rotate(-entity.rotation);
-        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
 
         context.fillStyle = 'cyan';
@@ -85,12 +85,12 @@ define(function (require) {
         context.beginPath();
         context.save();
         context.scale(entity.percentageToShootAgain(), entity.percentageToShootAgain());
-        context.arc(0, 0, halfWidth/2, 0 , 2 * Math.PI, true);
+        context.arc(0, 0, halfWidth / 2, 0, 2 * Math.PI, true);
         context.restore();
         context.closePath();
         context.fill();
         context.beginPath();
-        context.arc(0, 0, halfWidth/2, 0 , 2 * Math.PI, true);
+        context.arc(0, 0, halfWidth / 2, 0, 2 * Math.PI, true);
         context.closePath();
         context.stroke();
 
@@ -103,13 +103,13 @@ define(function (require) {
         var gradient = context.createRadialGradient(
           entity.x,
           entity.y,
-          entity.radius/2,
+          entity.radius / 2,
           entity.x,
           entity.y,
           Math.max(
-            entity.radius/2,
-            entity.radius - (entity.radius * entity.animationStep/100)
-          ) || entity.radius/2
+            entity.radius / 2,
+            entity.radius - (entity.radius * entity.animationStep / 100)
+          ) || entity.radius / 2
         );
         gradient.addColorStop(0, '#ff0');
         gradient.addColorStop(1, 'transparent');
@@ -129,7 +129,7 @@ define(function (require) {
           context.strokeStyle = 'cyan';
         }
         context.beginPath();
-        context.arc(entity.x, entity.y, entity.radius, 0 , 2 * Math.PI, true);
+        context.arc(entity.x, entity.y, entity.radius, 0, 2 * Math.PI, true);
         context.closePath();
         context.fill();
       };
@@ -154,10 +154,10 @@ define(function (require) {
 
         context.save();
         context.fillStyle = 'red';
-        context.translate(entity.x + entity.width/2, entity.y + entity.height/2);
-        context.scale(1/entity.step, 1/entity.step);
-        context.rotate(Math.PI/2/entity.step);
-        context.fillRect(-entity.width/2, -entity.height/2, entity.width, entity.height);
+        context.translate(entity.x + entity.width / 2, entity.y + entity.height / 2);
+        context.scale(1 / entity.step, 1 / entity.step);
+        context.rotate(Math.PI / 2 / entity.step);
+        context.fillRect(-entity.width / 2, -entity.height / 2, entity.width, entity.height);
         context.restore();
       };
 
@@ -171,11 +171,11 @@ define(function (require) {
         context.textAlign = 'center';
         context.textBaseline = 'middle';
         context.fillStyle = 'yellow';
-        context.fillText(entity.text, scene.width/2, 50);
+        context.fillText(entity.text, scene.width / 2, 50);
       };
 
       renderers.menuItem = function (context, entity, scene) {
-        var x = scene.width/2, y = 150 + 50 * entity.index;
+        var x = scene.width / 2, y = 150 + 50 * entity.index;
 
         if (entity.selected) {
           context.fillStyle = 'black';
@@ -191,7 +191,7 @@ define(function (require) {
       };
 
       renderers.helpText = function (context, entity, scene) {
-        var x = scene.width/2, y = scene.height - 35;
+        var x = scene.width / 2, y = scene.height - 35;
 
         context.font = '25pt Monaco, Consolas, Monospaced';
         context.textAlign = 'center';
@@ -204,7 +204,7 @@ define(function (require) {
       renderers.circle = function (context, entity) {
         context.fillStyle = 'blue';
         context.beginPath();
-        context.arc(entity.x, entity.y, entity.radius, 0 , 2 * Math.PI, true);
+        context.arc(entity.x, entity.y, entity.radius, 0, 2 * Math.PI, true);
         context.closePath();
         context.fill();
       };
@@ -247,7 +247,7 @@ define(function (require) {
         context.translate(entity.x, entity.y);
         context.rotate(entity.rotation);
         context.fillStyle = 'magenta';
-        context.fillRect(-entity.width/2, -entity.height/2, entity.width, entity.height);
+        context.fillRect(-entity.width / 2, -entity.height / 2, entity.width, entity.height);
         context.restore();
       };
 
@@ -260,12 +260,12 @@ define(function (require) {
         context.beginPath();
         context.save();
         context.scale(entity.percentageToShootAgain(), entity.percentageToShootAgain());
-        context.arc(0, 0, entity.radius, 0 , 2 * Math.PI, true);
+        context.arc(0, 0, entity.radius, 0, 2 * Math.PI, true);
         context.restore();
         context.closePath();
         context.fill();
         context.beginPath();
-        context.arc(0, 0, entity.radius, 0 , 2 * Math.PI, true);
+        context.arc(0, 0, entity.radius, 0, 2 * Math.PI, true);
         context.closePath();
         context.stroke();
         context.restore();
@@ -282,12 +282,12 @@ define(function (require) {
         context.beginPath();
         context.save();
         context.scale(entity.percentageToShootAgain(), entity.percentageToShootAgain());
-        context.arc(0, 0, entity.radius, 0 , 2 * Math.PI, true);
+        context.arc(0, 0, entity.radius, 0, 2 * Math.PI, true);
         context.restore();
         context.closePath();
         context.fill();
         context.beginPath();
-        context.arc(0, 0, entity.radius, 0 , 2 * Math.PI, true);
+        context.arc(0, 0, entity.radius, 0, 2 * Math.PI, true);
         context.closePath();
         context.stroke();
         context.restore();
@@ -296,7 +296,7 @@ define(function (require) {
       };
 
       renderers.areaTrigger = function (context, entity, scene) {
-        var halfWidth = entity.width/2, halfHeight = entity.height/2;
+        var halfWidth = entity.width / 2, halfHeight = entity.height / 2;
 
         context.save();
 
@@ -306,24 +306,24 @@ define(function (require) {
 
         context.save();
 
-        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
 
         context.save();
         context.rotate(-entity.rotation);
-        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
         context.restore();
       };
 
-      renderers.wanderer = function (context, entity, scene){
-        var halfWidth = entity.width/2, halfHeight = entity.height/2;
+      renderers.wanderer = function (context, entity, scene) {
+        var halfWidth = entity.width / 2, halfHeight = entity.height / 2;
 
         context.save();
         context.translate(entity.x, entity.y);
         context.rotate(entity.rotation);
         context.strokeStyle = 'rgba(150, 150, 255, 1)';
-        context.strokeRect(-halfWidth, -halfHeight, halfWidth*2, halfHeight*2);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
       };
     }
