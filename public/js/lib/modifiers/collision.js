@@ -29,6 +29,8 @@ define(function () {
         entityB.collidesWith[entityA.type].apply(
           entityB, [entityA, detector(entityA, entityB)]);
       }
+
+      return true;
     }
   }
 
@@ -135,10 +137,10 @@ define(function () {
   }
 
   function playerAndBoundaries(entities) {
-    return entities.player.minX() < entities.boundaries.minX ||
-      entities.player.maxX() > entities.boundaries.maxX ||
-      entities.player.minY() < entities.boundaries.minY ||
-      entities.player.maxY() > entities.boundaries.maxY;
+    return entities.player.minX() <= entities.boundaries.minX ||
+      entities.player.maxX() >= entities.boundaries.maxX ||
+      entities.player.minY() <= entities.boundaries.minY ||
+      entities.player.maxY() >= entities.boundaries.maxY;
   }
 
   function wandererAndRock(entities) {

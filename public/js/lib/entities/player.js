@@ -2,7 +2,8 @@ define(function (require) {
   var behaviours = require('../behaviours'),
       shoots     = behaviours.shoots,
       moves      = behaviours.moves,
-      rectangle  = behaviours.rectangle;
+      rectangle  = behaviours.rectangle,
+      circle     = behaviours.circle;
 
   function update(params) {
     this.rotation += params.elapsed / 200;
@@ -60,10 +61,10 @@ define(function (require) {
   function create(specs) {
     return _.extend(
       rectangle({ width: 30, height: 30 }),
+      circle({ radius: 7.5 }),
       moves({ velocity: 2 }),
       {
         type: 'player',
-        radius: 7.5,
         rotation: 0,
         handleInput: handleInput,
         collidesWith: {
