@@ -46,10 +46,10 @@ define(function () {
   keys[221] = 'closebracket';
   keys[222] = 'singlequote';
 
-  var numpadKeys = ['numpad1','numpad2','numpad3','numpad4','numpad5','numpad6','numpad7','numpad8','numpad9'];
-  var functionKeys = ['f1','f2','f3','f4','f5','f6','f7','f8','f9'];
-  var numberKeys = ['0','1','2','3','4','5','6','7','8','9'];
-  var letterKeys = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+  var numpadKeys = ['numpad1', 'numpad2', 'numpad3', 'numpad4', 'numpad5', 'numpad6', 'numpad7', 'numpad8', 'numpad9'];
+  var functionKeys = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9'];
+  var numberKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  var letterKeys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
   var keysPressed = {};
 
@@ -64,10 +64,10 @@ define(function () {
   function defineSpecialKeyNames() {
     var i;
 
-    for (i = 0; numberKeys[i]; i = i + 1) { keys[48+i] = numberKeys[i]; }
-    for (i = 0; letterKeys[i]; i = i + 1) { keys[65+i] = letterKeys[i]; }
-    for (i = 0; numpadKeys[i]; i = i + 1) { keys[96+i] = numpadKeys[i]; }
-    for (i = 0; functionKeys[i]; i = i + 1) { keys[112+i] = functionKeys[i]; }
+    for (i = 0; numberKeys[i]; i = i + 1) { keys[48 + i] = numberKeys[i]; }
+    for (i = 0; letterKeys[i]; i = i + 1) { keys[65 + i] = letterKeys[i]; }
+    for (i = 0; numpadKeys[i]; i = i + 1) { keys[96 + i] = numpadKeys[i]; }
+    for (i = 0; functionKeys[i]; i = i + 1) { keys[112 + i] = functionKeys[i]; }
   }
 
   function initialize() {
