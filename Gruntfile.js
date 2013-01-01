@@ -23,8 +23,18 @@ module.exports = function(grunt) {
         maxlen: 150,
         browser: true,
         nomen: true,
-        jquery: true
-
+        jquery: true,
+        globals: {
+          '$': true,
+          'console': true,
+          'module': true,
+          'require': true,
+          'define': true,
+          'Line': true,
+          '$V': true,
+          '_': true
+        },
+        undef: true
       }
     }
   });

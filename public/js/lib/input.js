@@ -53,17 +53,8 @@ define(function () {
 
   var keysPressed = {};
 
-  function handleKeyUp(e) {
-    ev = (e) ? e : window.event;
-    var keyName = keys[ev.keyCode];
-    keysPressed[keyName] = false;
-  }
-
-  function handleKeyDown(e) {
-    ev = (e) ? e : window.event ;
-    var keyName = keys[ev.keyCode];
-    keysPressed[keyName] = true;
-  }
+  function handleKeyUp(e) { keysPressed[keys[(e || window.event).keyCode]] = false; }
+  function handleKeyDown(e) { keysPressed[keys[(e || window.event).keyCode]] = true; }
 
   function registerEvents() {
     window.addEventListener('keydown', handleKeyDown);
