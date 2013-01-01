@@ -7,7 +7,7 @@ define([
   '../entities/enemies/wanderer',
   '../entities/enemies/turret'
 
-], function (room, boundaries, tower, player, areaTrigger, wanderer,turret) {
+], function (room, boundaries, tower, player, areaTrigger, wanderer, turret) {
 
   var trappedRoom = {};
 
