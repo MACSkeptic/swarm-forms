@@ -2,7 +2,9 @@
 
 swarm forms is a project we created to experiment with game mechanics and canvas.
 
-a live version (may not be the latest) of this can be found [here](http://swarm-forms.herokuapp.com/)
+a live version (may not be the latest) of this can be found [here](http://swarm-forms.herokuapp.com/).
+
+_note: sometimes some modules fail to load due to a timeout since the current version is running on non-optimized requirejs modules_
 
 ## running
 
