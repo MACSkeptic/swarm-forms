@@ -27,6 +27,10 @@ overhead, unnecessary and obsolete) language constructs like 'should'.
 
 a live version (may not be the latest) of this can be found [here](http://swarm-forms.herokuapp.com/js/tests/all.html)
 
+this is automatically built using the amazing [travis ci](https://travis-ci.org/MACSkeptic/swarm-forms/builds)
+
+[![Build Status](https://travis-ci.org/MACSkeptic/swarm-forms.png?branch=master)](https://travis-ci.org/MACSkeptic/swarm-forms)
+
 ### with grunt
 
 requirements:
