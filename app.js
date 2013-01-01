@@ -30,6 +30,7 @@ app.configure('development', function () {
 
 app.get('/', home.index);
 app.get('/optimised.js', optimised.index);
+app.get('/external.js', optimised.external);
 
 server.listen(app.get('port'), function () {
   console.log("Express server listening on port " + app.get('port'));
