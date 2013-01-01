@@ -6,12 +6,12 @@ define(function () {
 
     revertX(this);
 
-    if (!algorithm(paramsForCollision(this, other))) { return; }
+    if (!algorithm(paramsForCollision(this, other), this, other)) { return; }
 
     redoX(this);
     revertY(this);
 
-    if (!algorithm(paramsForCollision(this, other))) { return; }
+    if (!algorithm(paramsForCollision(this, other), this, other)) { return; }
 
     revertX(this);
   }
