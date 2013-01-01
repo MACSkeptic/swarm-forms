@@ -332,7 +332,7 @@ define(function (require) {
         context.restore();
       };
 
-      renderers.sprite = function (context, entity, scene){
+      renderers.sprite = function (context, entity, scene) {
         var texture = textures[sprites[entity.sprite].texture];
         var sprite = sprites[entity.sprite];
         context.drawImage(
@@ -340,7 +340,7 @@ define(function (require) {
           sprite.x, sprite.y, sprite.width, sprite.height,
           entity.x, entity.y, sprite.width, sprite.height
         );
-      }    
+      };
     }
 
     function resize() {
