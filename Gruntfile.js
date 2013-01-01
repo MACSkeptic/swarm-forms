@@ -9,7 +9,14 @@ module.exports = function(grunt) {
         'Gruntfile.js'
       ],
       options: {
-        expr: true
+        expr: true,
+        bitwise: true,
+        camelcase: true,
+        curly: true,
+        immed: true,
+        noarg: true,
+        nonew: true,
+        plusplus: true
       }
     }
   });
@@ -19,5 +26,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.registerTask('test', ['connect', 'qunit']);
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('default', ['jshint', 'test']);
 };

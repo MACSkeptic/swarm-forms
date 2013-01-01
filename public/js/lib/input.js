@@ -73,10 +73,10 @@ define(function () {
   function defineSpecialKeyNames() {
     var i;
 
-    for (i = 0; numberKeys[i]; i++) { keys[48+i] = numberKeys[i]; }
-    for (i = 0; letterKeys[i]; i++) { keys[65+i] = letterKeys[i]; }
-    for (i = 0; numpadKeys[i]; i++) { keys[96+i] = numpadKeys[i]; }
-    for (i = 0; functionKeys[i]; i++) { keys[112+i] = functionKeys[i]; }
+    for (i = 0; numberKeys[i]; i = i + 1) { keys[48+i] = numberKeys[i]; }
+    for (i = 0; letterKeys[i]; i = i + 1) { keys[65+i] = letterKeys[i]; }
+    for (i = 0; numpadKeys[i]; i = i + 1) { keys[96+i] = numpadKeys[i]; }
+    for (i = 0; functionKeys[i]; i = i + 1) { keys[112+i] = functionKeys[i]; }
   }
 
   function initialize() {
