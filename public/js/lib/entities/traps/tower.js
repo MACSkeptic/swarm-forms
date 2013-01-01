@@ -15,6 +15,7 @@ define(['../../behaviours/shoots'], function (shoots) {
     tower.isMovable = false;
     tower.type = 'tower';
     tower.enemy = true;
+    tower.sprite = 'zeroStanding1';
 
     return shoots(_.extend(tower, specs || {}));
   }

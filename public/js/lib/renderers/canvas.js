@@ -6,7 +6,8 @@ define(function (require) {
         dummyCanvas,
         dummyContext,
         renderers = {},
-        textures = require('../assets/textures');
+        textures = require('../assets/textures'),
+        sprites = require('../assets/sprites');
 
     function createCanvas(id) {
       return $('<canvas>', { 'id': id })[0];
@@ -274,6 +275,10 @@ define(function (require) {
       };
 
       renderers.tower = function (context, entity, scene) {
+        if (entity.sprite) {
+          return renderers.sprite(context, entity, scene);
+        }
+
         context.save();
         context.translate(entity.x, entity.y);
         context.strokeStyle = 'purple';
@@ -326,6 +331,16 @@ define(function (require) {
         context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
       };
+
+      renderers.sprite = function (context, entity, scene){
+        var texture = textures[sprites[entity.sprite].texture];
+        var sprite = sprites[entity.sprite];
+        context.drawImage(
+          texture,
+          sprite.x, sprite.y, sprite.width, sprite.height,
+          entity.x, entity.y, sprite.width, sprite.height
+        );
+      }    
     }
 
     function resize() {

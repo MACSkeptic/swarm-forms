@@ -5,6 +5,7 @@ define(function (require) {
     addTexture(this, 'rock', 'rock.jpg');
     addTexture(this, 'woodenFloor', 'wooden_floor.png');
     addTexture(this, 'lava', 'lava.png');
+    addTexture(this, 'zeroSpriteSheet', 'zero_sprite_sheet.gif');
 
     waitForEverythingToLoadThen(callback);
   }
@@ -25,7 +26,6 @@ define(function (require) {
 
     window.setTimeout(function () { waitForEverythingToLoadThen(callback); }, 100);
   }
-
 
   return { load: loadEverything };
 });
