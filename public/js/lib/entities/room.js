@@ -4,7 +4,7 @@ define([
 ], function (rock, hole) {
 
   function pickRandomHoleLayout() {
-    var random = Math.random()
+    var random = Math.random();
 
     if (random < 0.5) {
       return [
@@ -22,7 +22,7 @@ define([
   }
 
   function pickRandomRockLayout() {
-    var random = Math.random()
+    var random = Math.random();
 
     if (random < 0.5) {
       return [
