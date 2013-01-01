@@ -16,7 +16,7 @@ define(function () {
   }
 
   function create(specs) {
-    return _.extend({ x: 0, y: 0, width: 100, height: 100,
+    return _.extend({ x: 0, y: 0, width: 100, height: 100, collidesLike: 'rectangle',
       maxX: maxX, minX: minX, maxY: maxY, minY: minY
     }, specs || {});
   }

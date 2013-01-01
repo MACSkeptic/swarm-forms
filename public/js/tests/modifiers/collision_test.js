@@ -4,6 +4,7 @@ define(function (require) {
   var collision = require('../../../js/lib/modifiers/collision'),
       boundaries = require('../../../js/lib/entities/boundaries'),
       player = require('../../../js/lib/entities/player'),
+      rock = require('../../../js/lib/entities/rock'),
       shot = require('../../../js/lib/entities/shot');
 
   collision.init(function () {
@@ -53,6 +54,22 @@ define(function (require) {
       var b = boundaries();
 
       ok(!collision.applyTo(p, b));
+    });
+
+    module('collision between player and rock');
+
+    test('barely collide', function () {
+      var p = player({ x: 6, y: 10, radius: 5 });
+      var r = rock({ x: 0, y: 0, height: 10 });
+
+      ok(collision.applyTo(p, r));
+    });
+
+    test('no collision', function () {
+      var p = player({ x: 6, y: 10.1, radius: 5 });
+      var r = rock({ x: 0, y: 0, height: 10 });
+
+      ok(!collision.applyTo(p, r));
     });
   });
 });

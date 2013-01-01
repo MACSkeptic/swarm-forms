@@ -151,7 +151,7 @@ define(function () {
   }
 
   function playerAndRock(entities) {
-    return rectangleAndRectangle(entities.player, entities.rock);
+    return circleAndRectangle(entities.player, entities.rock);
   }
 
   function playerAndHole(entities) {
@@ -187,22 +187,24 @@ define(function () {
     ) <= Math.pow(circleA.radius + circleB.radius, 2);
   }
 
+  function specialCircleAndRectangle(params) {
+    return circleAndRectangle(params.circle, params.rectangle);
+  }
+
   function setupDetectors() {
-    addDetector('shot', 'rock', shotAndRock);
     addDetector('boundaries', 'shot', shotOutOfBounds);
+    addDetector('player', 'boundaries', playerAndBoundaries);
+    addDetector('wanderer', 'boundaries', wandererAndBoundaries);
+
     addDetector('circle', 'circle', circleAndCircle);
+    addDetector('circle', 'rectangle', specialCircleAndRectangle);
+
     addDetector('player', 'areaTrigger', areaTriggerAndPlayer);
     addDetector('player', 'triggerToNextRoom', playerAndTriggerToNextRoom);
-    addDetector('player', 'rock', playerAndRock);
-    addDetector('player', 'hole', playerAndHole);
-    addDetector('player', 'boundaries', playerAndBoundaries);
-    addDetector('chaser', 'shot', chaserAndShot);
+
     addDetector('chaser', 'player', playerAndChaser);
-    addDetector('wanderer', 'player', wandererAndPlayer);
-    addDetector('wanderer', 'shot', wandererAndShot);
     addDetector('wanderer', 'rock', wandererAndRock);
     addDetector('wanderer', 'hole', wandererAndHole);
-    addDetector('wanderer', 'boundaries', wandererAndBoundaries);
   }
 
   function addDetector(entityA, entityB, algorithm) {
