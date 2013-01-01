@@ -63,6 +63,7 @@ define(function (require) {
       moves({ velocity: 2 }),
       {
         type: 'player',
+        radius: 7.5,
         rotation: 0,
         handleInput: handleInput,
         collidesWith: {

@@ -16,11 +16,8 @@ var behaviours = require('../../behaviours'),
     if (this.rotation >= 2*Math.PI) { this.rotation = 0; }
   }
 
-  function percentageToShootAgain() {
-    return Math.min(1, this.timeSinceLastShot / this.timeRequiredBetweenShots);
-  }
-
   function vanish() { this.disposed = true; }
+  function killAndVanish(other) { this.disposed = true; other.disposed = true; }
 
   function changeMovementDirection() {
     var directions = [
@@ -45,6 +42,7 @@ var behaviours = require('../../behaviours'),
         type: 'wanderer',
         rotation: 0,
         collidesWith: {
+          player: killAndVanish,
           rock: undoLastMovement,
           hole: undoLastMovement,
           boundaries: undoLastMovement,

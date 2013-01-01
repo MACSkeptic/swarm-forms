@@ -25,6 +25,8 @@ define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves)
           rock: vanish,
           turret: killAndVanish,
           wanderer: killAndVanish,
+          chaser: killAndVanish,
+          player: killAndVanish,
           tower: vanish
         }
       }, specs || {}

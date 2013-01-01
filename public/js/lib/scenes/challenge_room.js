@@ -5,6 +5,7 @@ define(function (require) {
       player = entitiesModule.player,
       rock = entitiesModule.rock,
       hole = entitiesModule.hole,
+      chaser = entitiesModule.enemies.chaser,
       turret = entitiesModule.enemies.turret,
       wanderer = entitiesModule.enemies.wanderer,
       boundaries = entitiesModule.boundaries,
@@ -33,6 +34,11 @@ define(function (require) {
     entities.push(wanderer({ x: 1152*0.1, y: 720*0.9 }));
     entities.push(wanderer({ x: 1152*0.9, y: 720*0.1 }));
     entities.push(wanderer({ x: 1152*0.9, y: 720*0.9 }));
+
+    entities.push(chaser({ x: 1152*0.2, y: 720*0.1 }));
+    entities.push(chaser({ x: 1152*0.3, y: 720*0.8 }));
+    entities.push(chaser({ x: 1152*0.9, y: 720*0.2 }));
+    entities.push(chaser({ x: 1152*0.8, y: 720*0.7 }));
 
     callback();
   }

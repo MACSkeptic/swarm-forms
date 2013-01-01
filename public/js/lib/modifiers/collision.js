@@ -88,8 +88,20 @@ define(function () {
       (entities.shot.y + entities.shot.radius) > entities.boundaries.maxY;
   }
 
+  function wandererAndPlayer(entities) {
+    return circleAndRectangle(entities.player, entities.wanderer);
+  }
+
   function playerAndShot(entities) {
-    return false;
+    return shotAndShot(undefined, entities.player, entities.shot);
+  }
+
+  function playerAndChaser(entities) {
+    return circleAndRectangle(entities.player, entities.chaser);
+  }
+
+  function chaserAndShot(entities) {
+    return circleAndRectangle(entities.shot, entities.chaser);
   }
 
   function wandererAndShot(entities) {
@@ -161,6 +173,9 @@ define(function () {
     addDetector('player'     , 'rock'              , playerAndRock              );
     addDetector('player'     , 'hole'              , playerAndHole              );
     addDetector('player'     , 'boundaries'        , playerAndBoundaries        );
+    addDetector('chaser'     , 'shot'              , chaserAndShot              );
+    addDetector('chaser'     , 'player'            , playerAndChaser            );
+    addDetector('wanderer'   , 'player'            , wandererAndPlayer          );
     addDetector('wanderer'   , 'shot'              , wandererAndShot            );
     addDetector('wanderer'   , 'rock'              , wandererAndRock            );
     addDetector('wanderer'   , 'hole'              , wandererAndHole            );

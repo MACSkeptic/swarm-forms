@@ -7,10 +7,10 @@ define([
     { type: 'menuBackground' },
     { type: 'menuTitle', text: 'swarm cubes' },
     { type: 'menuItem', text: 'demo', selected: false, index: 0 },
-    { type: 'menuItem', text: 'concept rooms', selected: true, index: 1 },
-    { type: 'menuItem', text: 'challenge', selected: false, index: 2 },
+    { type: 'menuItem', text: 'concept rooms', selected: false, index: 1 },
+    { type: 'menuItem', text: 'challenge', selected: true, index: 2 },
     { type: 'helpText', text: 'up/down, then enter' }
-  ], selectedItem = 3, timeToSelect = 200;
+  ], selectedItem = 4, timeToSelect = 200;
 
   function init(callback) {
     callback();

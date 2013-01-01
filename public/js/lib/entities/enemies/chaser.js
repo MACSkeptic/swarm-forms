@@ -13,6 +13,9 @@ define(function(require) {
         params.currentScene.entities
       ])
     ]);
+
+    this.rotation = this.rotation + (params.elapsed)*Math.PI/150;
+    if (this.rotation >= 2*Math.PI) { this.rotation = 0; }
   }
 
   function chase(target) {
@@ -23,6 +26,8 @@ define(function(require) {
     ]);
   }
 
+  function killAndVanish(other) { this.disposed = true; other.disposed = true; }
+
   function alterVelocityByVector(vector) {
     this.velocityX = vector.x;
     this.velocityY = vector.y;
@@ -32,7 +37,10 @@ define(function(require) {
     return _.extend(
       moves({ chaseVelocity: 1 }),
       rectangle({ width: 10, height: 10 }),
-      { type: 'chaser', enemy: true, update: update },
+      {
+        type: 'chaser', enemy: true, update: update, rotation: 0,
+        collidesWith: { player: killAndVanish }
+      },
       specs || {}
     );
   }

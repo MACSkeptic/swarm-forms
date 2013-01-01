@@ -243,8 +243,12 @@ define(function (require) {
       };
 
       renderers.chaser = function (context, entity, scene) {
+        context.save();
+        context.translate(entity.x, entity.y);
+        context.rotate(entity.rotation);
         context.fillStyle = 'magenta';
-        context.fillRect(entity.minX(), entity.minY(), entity.width, entity.height);
+        context.fillRect(-entity.width/2, -entity.height/2, entity.width, entity.height);
+        context.restore();
       };
 
       renderers.turret = function (context, entity, scene) {
