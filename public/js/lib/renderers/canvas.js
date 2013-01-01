@@ -352,7 +352,10 @@ define(function (require) {
 
       setupRenderers();
 
-      textures.load(callback);
+      textures.load(function () {
+        $('#loading').remove();
+        callback();
+      });
     }
 
     return {
