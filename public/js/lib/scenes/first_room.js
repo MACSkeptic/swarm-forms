@@ -1,11 +1,9 @@
-define([
-  '../entities/room',
-  '../entities/boundaries',
-  './current_room',
-  './trapped_room'
-
-], function (room, boundaries, currentRoom, trappedRoom) {
-  var entities = [];
+define(function (require) {
+  var room = require('../entities/room'),
+      boundaries = require('../entities/boundaries'),
+      currentRoom = require('./current_room'),
+      trappedRoom = require('./trapped_room'),
+      entities = [];
 
   function init(callback) {
     entities.push(boundaries({ maxX: 640, maxY: 360 }));

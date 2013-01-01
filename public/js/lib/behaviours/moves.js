@@ -28,7 +28,7 @@ define(function () {
     return true;
   }
 
-  function redoX(entity) { 
+  function redoX(entity) {
     entity.x = entity.temporaryX;
     return true;
   }

@@ -1,4 +1,4 @@
-define(function () {    
+define(function () {
 
   function createVector2dFromPointAndModule(target, origin, module) {
     var speedVector = $V([module, 0, 0]);
@@ -7,7 +7,7 @@ define(function () {
     var angle = speedVector.angleFrom(destinationVector);
     var turnDirection = speedVector.cross(destinationVector);
     if (turnDirection.elements[2] < 0) { angle = Math.PI*2 - angle; }
-    var rotatedSpeed = speedVector.rotate(angle, normalLine);  
+    var rotatedSpeed = speedVector.rotate(angle, normalLine);
     return { x: rotatedSpeed.elements[0], y: rotatedSpeed.elements[1] };
   }
 

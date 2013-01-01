@@ -1,15 +1,13 @@
-define([
-  '../entities/room',
-  '../entities/boundaries',
-  '../entities/traps/tower',
-  '../entities/player',
-  '../entities/area_trigger',
-  '../entities/enemies/wanderer',
-  '../entities/enemies/turret'
-
-], function (room, boundaries, tower, player, areaTrigger, wanderer, turret) {
-
-  var trappedRoom = {};
+define(function (require) {
+  var room = require('../entities/room'),
+      boundaries = require('../entities/boundaries'),
+      tower = require('../entities/traps/tower'),
+      player = require('../entities/player'),
+      areaTrigger = require('../entities/area_trigger'),
+      wanderer = require('../entities/enemies/wanderer'),
+      turret = require('../entities/enemies/turret'),
+      entities = [],
+      trappedRoom = {};
 
   trappedRoom.create = function (specs) {
     var entities = [];
@@ -26,7 +24,7 @@ define([
       var enemy5 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
       var enemy6 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
       var enemy7 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
-      var enemy8 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });      
+      var enemy8 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
 
       var towerTrap = tower({ x: 640/2, y: 360/2});
 
@@ -34,7 +32,7 @@ define([
       var areaTrigger2 = areaTrigger({ x: 320, y: 20, whenTriggered: _.bind(towerTrap.shootUp, towerTrap) });
       var areaTrigger3 = areaTrigger({ x: 320, y: 320, whenTriggered: _.bind(towerTrap.shootDown, towerTrap) });
       var areaTrigger4 = areaTrigger({ x: 500, y: 180, whenTriggered: _.bind(towerTrap.shootRight, towerTrap) });
-      
+
       entities.push({ type: 'helpText', text: 'It\'s a trap!' });
       entities.push(turret({ x: 320, y: 140 }));
       entities.push(towerTrap);
@@ -49,7 +47,7 @@ define([
       entities.push(enemy5);
       entities.push(enemy6);
       entities.push(enemy7);
-      entities.push(enemy8);      
+      entities.push(enemy8);
 
       callback();
     }
@@ -65,7 +63,7 @@ define([
       'handleInput': handleInput,
       'width': 640,
       'height': 360,
-      'next': function (game) { 
+      'next': function (game) {
         var next = trappedRoom.create();
         next.init(function () { game.addScene(next, true); });
       },

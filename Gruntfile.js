@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     qunit: { all: ['http://localhost:19999/js/tests/all.html'] },
     connect: { server: { options: { port: 19999, base: './public' } } },
-    jshint: { 
+    jshint: {
       all: [
         'public/js/lib/**/*.js',
         'Gruntfile.js'
@@ -17,7 +17,9 @@ module.exports = function(grunt) {
         noarg: true,
         nonew: true,
         plusplus: true,
-        quotmark: 'single'
+        quotmark: 'single',
+        trailing: true,
+        maxparams: 3
       }
     }
   });
