@@ -39,12 +39,7 @@ define(function () {
     return (detectorA && detectorA[entityB.type]) ||
       (detectorB && detectorB[entityA.type]) ||
       function () {
-        console.error(
-          'could not find a detector for: ' +
-          entityA.type + ', ' +
-          entityB.type
-);
-        return false;
+        return console.error('could not find a detector for: ' + entityA.type + ', ' + entityB.type) && false;
       };
   }
 
@@ -195,8 +190,5 @@ define(function () {
     callback();
   }
 
-  return {
-    'applyTo': applyTo,
-    'init': init
-  };
+  return { 'applyTo': applyTo, 'init': init };
 });
