@@ -1,5 +1,5 @@
 define(function (require) {
-  var room = require('.. /entities/room'),
+  var room = require('../entities/room'),
       boundaries = require('../entities/boundaries'),
       tower = require('../entities/traps/tower'),
       player = require('../entities/player'),

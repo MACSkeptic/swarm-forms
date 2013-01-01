@@ -1,4 +1,4 @@
-define(function(require) {
+define(function (require) {
   var behaviours = require('../../behaviours'),
       circle = behaviours.circle,
       shoots = behaviours.shoots,

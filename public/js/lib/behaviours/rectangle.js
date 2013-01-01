@@ -1,18 +1,18 @@
 define(function () {
   function minX() {
-    return this.x - this.width/2;
+    return this.x - this.width / 2;
   }
 
   function maxX() {
-    return this.x + this.width/2;
+    return this.x + this.width / 2;
   }
 
   function minY() {
-    return this.y - this.height/2;
+    return this.y - this.height / 2;
   }
 
   function maxY() {
-    return this.y + this.height/2;
+    return this.y + this.height / 2;
   }
 
   function create(specs) {

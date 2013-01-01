@@ -48,7 +48,8 @@ define(function () {
   function create(specs) {
     return _.extend({
       movable: true,
-      velocityX: 0, velocityY: 0,
+      velocityX: 0,
+      velocityY: 0,
       undoLastMovement: undoLastMovement
     }, specs || {});
   }

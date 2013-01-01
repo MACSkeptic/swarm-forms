@@ -5,7 +5,7 @@ define(function (require) {
       rectangle  = behaviours.rectangle;
 
   function update(params) {
-    this.rotation += params.elapsed/200;
+    this.rotation += params.elapsed / 200;
 
     if (this.rotation > Math.PI * 2) { this.rotation = 0; }
 
@@ -34,20 +34,20 @@ define(function (require) {
   }
 
   function handleMovement(params) {
-    if(!params.input.keyPressed('a') && !params.input.keyPressed('d')) { this.velocityX = 0; }
-    if(!params.input.keyPressed('w') && !params.input.keyPressed('s')) { this.velocityY = 0; }
+    if (!params.input.keyPressed('a') && !params.input.keyPressed('d')) { this.velocityX = 0; }
+    if (!params.input.keyPressed('w') && !params.input.keyPressed('s')) { this.velocityY = 0; }
 
-    if(params.input.keyPressed('a')) { this.velocityX = -this.velocity; }
-    if(params.input.keyPressed('s')) { this.velocityY = this.velocity;  }
-    if(params.input.keyPressed('d')) { this.velocityX = this.velocity;  }
-    if(params.input.keyPressed('w')) { this.velocityY = -this.velocity; }
+    if (params.input.keyPressed('a')) { this.velocityX = -this.velocity; }
+    if (params.input.keyPressed('s')) { this.velocityY = this.velocity;  }
+    if (params.input.keyPressed('d')) { this.velocityX = this.velocity;  }
+    if (params.input.keyPressed('w')) { this.velocityY = -this.velocity; }
   }
 
   function handleShooting(params) {
-    if(params.input.keyPressed('left'))  { this.shootLeft(params);  }
-    if(params.input.keyPressed('right')) { this.shootRight(params); }
-    if(params.input.keyPressed('up'))    { this.shootUp(params);    }
-    if(params.input.keyPressed('down'))  { this.shootDown(params);  }
+    if (params.input.keyPressed('left'))  { this.shootLeft(params);  }
+    if (params.input.keyPressed('right')) { this.shootRight(params); }
+    if (params.input.keyPressed('up'))    { this.shootUp(params);    }
+    if (params.input.keyPressed('down'))  { this.shootDown(params);  }
   }
 
   function handleInput(params) {

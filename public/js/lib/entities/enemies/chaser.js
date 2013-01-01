@@ -1,4 +1,4 @@
-define(function(require) {
+define(function (require) {
   var behaviours = require('../../behaviours'),
       rectangle = behaviours.rectangle,
       moves = behaviours.moves,
@@ -14,8 +14,8 @@ define(function(require) {
       ])
     ]);
 
-    this.rotation = this.rotation + (params.elapsed)*Math.PI/150;
-    if (this.rotation >= 2*Math.PI) { this.rotation = 0; }
+    this.rotation = this.rotation + (params.elapsed) * Math.PI / 150;
+    if (this.rotation >= 2 * Math.PI) { this.rotation = 0; }
   }
 
   function chase(target) {
@@ -37,10 +37,7 @@ define(function(require) {
     return _.extend(
       moves({ chaseVelocity: 1 }),
       rectangle({ width: 10, height: 10 }),
-      {
-        type: 'chaser', enemy: true, update: update, rotation: 0,
-        collidesWith: { player: killAndVanish }
-      },
+      { type: 'chaser', enemy: true, update: update, rotation: 0, collidesWith: { player: killAndVanish } },
       specs || {}
     );
   }

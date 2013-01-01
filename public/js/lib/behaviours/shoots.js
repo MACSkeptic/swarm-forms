@@ -17,7 +17,7 @@ define(['../entities/shot', '../utils/geometry'], function (shot, geometry) {
 
   function shootWithVelocity(velocityX, velocityY) {
     if (!canShoot.apply(this)) { return; }
-    this.children.push( shotWithInertia.apply(this, arguments) );
+    this.children.push(shotWithInertia.apply(this, arguments));
     this.timeSinceLastShot = 0;
   }
 
@@ -41,8 +41,7 @@ define(['../entities/shot', '../utils/geometry'], function (shot, geometry) {
   }
 
   function shotWithInertia(velocityX, velocityY) {
-    return shot({
-      x: (this.x || 0), y: (this.y || 0),
+    return shot({ x: (this.x || 0), y: (this.y || 0),
       velocityX: velocityX + (this.velocityX || 0),
       velocityY: velocityY + (this.velocityY || 0),
       enemy: this.enemy
