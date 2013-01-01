@@ -1,6 +1,4 @@
-define([
-  ],
-  function () {
+define(function (require) {
     var backgroundCanvas,
         foregroundCanvas,
         backgroundContext,
@@ -8,7 +6,7 @@ define([
         dummyCanvas,
         dummyContext,
         renderers = {},
-        textures = {};
+        textures = require('../assets/textures');
 
     function createCanvas(id) {
       return $('<canvas>', { "id": id } )[0];
@@ -226,16 +224,7 @@ define([
       renderers.boundaries = function (context, entity) { return; };
 
       renderers.room = function (context, entity, scene) {
-        if (entity.backgroundImage) { 
-          context.fillStyle = context.createPattern(entity.backgroundImage, 'repeat');
-        } else {
-          var gradient = context.createRadialGradient(
-              scene.width/2, scene.height/2, 0, scene.width/2, scene.height/2, 500);
-          gradient.addColorStop(0, '#888');
-          gradient.addColorStop(1, '#222');
-          context.fillStyle = gradient;
-        }
-
+        context.fillStyle = context.createPattern(textures.woodenFloor, 'repeat');
         context.fillRect(0, 0, scene.width, scene.height);
       };
 
@@ -250,7 +239,7 @@ define([
       };
 
       renderers.rock = function (context, entity, scene) {
-        context.fillStyle = context.createPattern(textures.rockTexture, 'repeat');
+        context.fillStyle = context.createPattern(textures.rock, 'repeat');
         context.fillRect(entity.minX(), entity.minY(), entity.width, entity.height);
       };
 
@@ -363,9 +352,7 @@ define([
 
       setupRenderers();
 
-      textures.rockTexture = new Image();
-      textures.rockTexture.onload = callback;
-      textures.rockTexture.src = '/media/images/rock.jpg';
+      textures.load(callback);
     }
 
     return {

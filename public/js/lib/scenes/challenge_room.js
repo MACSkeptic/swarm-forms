@@ -10,10 +10,7 @@ define(function (require) {
     entities.push(room({ width: 1152, height: 720 }));
     entities.push(player({ x: 1152/2, y: 720/2 }));
     entities.push({ type: 'helpText', text: 'just a lonely player in empty space for now :(' });
-
-    entities[1].backgroundImage = new Image();
-    entities[1].backgroundImage.onload = callback;
-    entities[1].backgroundImage.src = '/media/images/wooden_floor.png';
+    callback();
   }
 
   function update(params) {}
