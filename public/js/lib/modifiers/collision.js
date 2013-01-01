@@ -67,7 +67,7 @@ define(function () {
     return (detectorA && detectorA[entityB.collidesLike]) || (detectorB && detectorB[entityA.collidesLike]);
   }
 
-  function rectangleAndRectangle(entityA, entityB) {
+  function rectangleAndRectangle(ignore, entityA, entityB) {
     var bottomA = entityA.maxY(),
         bottomB = entityB.maxY(),
         leftA   = entityA.minX(),
@@ -96,42 +96,15 @@ define(function () {
     ) <= Math.pow(entities.circle.radius, 2);
   }
 
-  function shotOutOfBounds(entities) {
-    return (entities.shot.x - entities.shot.radius) < entities.boundaries.minX ||
-      (entities.shot.x + entities.shot.radius) > entities.boundaries.maxX ||
-      (entities.shot.y - entities.shot.radius) < entities.boundaries.minY ||
-      (entities.shot.y + entities.shot.radius) > entities.boundaries.maxY;
-  }
-
-  function playerAndShot(entities) {
-    return shotAndShot(undefined, entities.player, entities.shot);
-  }
-
-  function shotAndShot(ignore, shotA, shotB) {
-    return (
-      Math.pow(shotA.x - shotB.x, 2) +
-      Math.pow(shotA.y - shotB.y, 2)
-    ) <= Math.pow(shotA.radius + shotB.radius, 2);
+  function circleAndBoundaries(entities) {
+    return entities.circle.minX() <= entities.boundaries.minX ||
+      entities.circle.maxX() >= entities.boundaries.maxX ||
+      entities.circle.minY() <= entities.boundaries.minY ||
+      entities.circle.maxY() >= entities.boundaries.maxY;
   }
 
   function playerAndTriggerToNextRoom(entities) {
     return Math.abs(entities.player.x - 320) < 30 && Math.abs(entities.player.y - 200) < 30;
-  }
-
-  function areaTriggerAndPlayer(entities) {
-    return rectangleAndRectangle(entities.areaTrigger, entities.player);
-  }
-
-  function shotAndTower(entities) {
-    return circleAndRectangle(entities.shot, entities.tower);
-  }
-
-  function shotAndTurret(entities) {
-    return shotAndShot(undefined, entities.shot, entities.turret);
-  }
-
-  function playerAndHole(entities) {
-    return rectangleAndRectangle(entities.player, entities.hole);
   }
 
   function playerAndBoundaries(entities) {
@@ -141,19 +114,11 @@ define(function () {
       entities.player.maxY() >= entities.boundaries.maxY;
   }
 
-  function wandererAndRock(entities) {
-    return rectangleAndRectangle(entities.wanderer, entities.rock);
-  }
-
-  function wandererAndHole(entities) {
-    return rectangleAndRectangle(entities.wanderer, entities.hole);
-  }
-
-  function wandererAndBoundaries(entities) {
-    return entities.wanderer.minX() <= entities.boundaries.minX ||
-      entities.wanderer.maxX() >= entities.boundaries.maxX ||
-      entities.wanderer.minY() <= entities.boundaries.minY ||
-      entities.wanderer.maxY() >= entities.boundaries.maxY;
+  function rectangleAndBoundaries(entities) {
+    return entities.rectangle.minX() <= entities.boundaries.minX ||
+      entities.rectangle.maxX() >= entities.boundaries.maxX ||
+      entities.rectangle.minY() <= entities.boundaries.minY ||
+      entities.rectangle.maxY() >= entities.boundaries.maxY;
   }
 
   function circleAndCircle(ignore, circleA, circleB) {
@@ -164,18 +129,14 @@ define(function () {
   }
 
   function setupDetectors() {
-    addDetector('boundaries', 'shot', shotOutOfBounds);
-    addDetector('player', 'boundaries', playerAndBoundaries);
-    addDetector('wanderer', 'boundaries', wandererAndBoundaries);
+    addDetector('boundaries', 'circle', circleAndBoundaries);
+    addDetector('boundaries', 'rectangle', rectangleAndBoundaries);
 
     addDetector('circle', 'circle', circleAndCircle);
+    addDetector('rectangle', 'rectangle', rectangleAndRectangle);
     addDetector('circle', 'rectangle', circleAndRectangle);
 
-    addDetector('player', 'areaTrigger', areaTriggerAndPlayer);
     addDetector('player', 'triggerToNextRoom', playerAndTriggerToNextRoom);
-
-    addDetector('wanderer', 'rock', wandererAndRock);
-    addDetector('wanderer', 'hole', wandererAndHole);
   }
 
   function addDetector(entityA, entityB, algorithm) {

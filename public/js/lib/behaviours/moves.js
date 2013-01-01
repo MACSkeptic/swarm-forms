@@ -42,6 +42,8 @@ define(function () {
     var params = {};
     params[entityA.type] = entityA;
     params[entityB.type] = entityB;
+    params[entityA.collidesLike] = entityA;
+    params[entityB.collidesLike] = entityB;
     return params;
   }
 
