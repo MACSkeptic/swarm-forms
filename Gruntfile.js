@@ -19,7 +19,8 @@ module.exports = function(grunt) {
         plusplus: true,
         quotmark: 'single',
         trailing: true,
-        maxparams: 3
+        maxparams: 3,
+        maxlen: 150
       }
     }
   });
