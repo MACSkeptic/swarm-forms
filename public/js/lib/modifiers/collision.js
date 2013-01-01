@@ -80,24 +80,20 @@ define(function () {
     return !(leftA > rightB || leftB > rightA || topA > bottomB || topB > bottomA);
   }
 
-  function shotAndRock(entities) {
-    return circleAndRectangle(entities.shot, entities.rock);
-  }
+  function circleAndRectangle(entities) {
+    var cdx = Math.abs(entities.circle.x - entities.rectangle.x),
+        cdy = Math.abs(entities.circle.y - entities.rectangle.y);
 
-  function circleAndRectangle(circle, rectangle) {
-    var cdx = Math.abs(circle.x - rectangle.x),
-        cdy = Math.abs(circle.y - rectangle.y);
+    if (cdx > (entities.rectangle.width / 2 + entities.circle.radius)) { return false; }
+    if (cdy > (entities.rectangle.height / 2 + entities.circle.radius)) { return false; }
 
-    if (cdx > (rectangle.width / 2 + circle.radius)) { return false; }
-    if (cdy > (rectangle.height / 2 + circle.radius)) { return false; }
-
-    if (cdx <= (rectangle.width / 2)) { return true; }
-    if (cdy <= (rectangle.height / 2)) { return true; }
+    if (cdx <= (entities.rectangle.width / 2)) { return true; }
+    if (cdy <= (entities.rectangle.height / 2)) { return true; }
 
     return (
-      Math.pow(cdx - rectangle.width / 2, 2) +
-      Math.pow(cdy - rectangle.height / 2, 2)
-    ) <= Math.pow(circle.radius, 2);
+      Math.pow(cdx - entities.rectangle.width / 2, 2) +
+      Math.pow(cdy - entities.rectangle.height / 2, 2)
+    ) <= Math.pow(entities.circle.radius, 2);
   }
 
   function shotOutOfBounds(entities) {
@@ -107,24 +103,8 @@ define(function () {
       (entities.shot.y + entities.shot.radius) > entities.boundaries.maxY;
   }
 
-  function wandererAndPlayer(entities) {
-    return circleAndRectangle(entities.player, entities.wanderer);
-  }
-
   function playerAndShot(entities) {
     return shotAndShot(undefined, entities.player, entities.shot);
-  }
-
-  function playerAndChaser(entities) {
-    return circleAndRectangle(entities.player, entities.chaser);
-  }
-
-  function chaserAndShot(entities) {
-    return circleAndRectangle(entities.shot, entities.chaser);
-  }
-
-  function wandererAndShot(entities) {
-    return circleAndRectangle(entities.shot, entities.wanderer);
   }
 
   function shotAndShot(ignore, shotA, shotB) {
@@ -150,10 +130,6 @@ define(function () {
     return shotAndShot(undefined, entities.shot, entities.turret);
   }
 
-  function playerAndRock(entities) {
-    return circleAndRectangle(entities.player, entities.rock);
-  }
-
   function playerAndHole(entities) {
     return rectangleAndRectangle(entities.player, entities.hole);
   }
@@ -174,10 +150,10 @@ define(function () {
   }
 
   function wandererAndBoundaries(entities) {
-    return entities.wanderer.minX() < entities.boundaries.minX ||
-      entities.wanderer.maxX() > entities.boundaries.maxX ||
-      entities.wanderer.minY() < entities.boundaries.minY ||
-      entities.wanderer.maxY() > entities.boundaries.maxY;
+    return entities.wanderer.minX() <= entities.boundaries.minX ||
+      entities.wanderer.maxX() >= entities.boundaries.maxX ||
+      entities.wanderer.minY() <= entities.boundaries.minY ||
+      entities.wanderer.maxY() >= entities.boundaries.maxY;
   }
 
   function circleAndCircle(ignore, circleA, circleB) {
@@ -187,22 +163,17 @@ define(function () {
     ) <= Math.pow(circleA.radius + circleB.radius, 2);
   }
 
-  function specialCircleAndRectangle(params) {
-    return circleAndRectangle(params.circle, params.rectangle);
-  }
-
   function setupDetectors() {
     addDetector('boundaries', 'shot', shotOutOfBounds);
     addDetector('player', 'boundaries', playerAndBoundaries);
     addDetector('wanderer', 'boundaries', wandererAndBoundaries);
 
     addDetector('circle', 'circle', circleAndCircle);
-    addDetector('circle', 'rectangle', specialCircleAndRectangle);
+    addDetector('circle', 'rectangle', circleAndRectangle);
 
     addDetector('player', 'areaTrigger', areaTriggerAndPlayer);
     addDetector('player', 'triggerToNextRoom', playerAndTriggerToNextRoom);
 
-    addDetector('chaser', 'player', playerAndChaser);
     addDetector('wanderer', 'rock', wandererAndRock);
     addDetector('wanderer', 'hole', wandererAndHole);
   }
