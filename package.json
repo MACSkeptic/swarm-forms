@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "node app",
+    "test": "grunt --verbose"
   },
   "engines": {
     "node": "0.8.x",
