@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     qunit: { all: ['http://localhost:19999/js/tests/all.html'] },
@@ -9,6 +9,7 @@ module.exports = function(grunt) {
         'Gruntfile.js'
       ],
       options: {
+        indent: 2,
         expr: true,
         bitwise: true,
         camelcase: true,

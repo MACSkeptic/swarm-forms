@@ -1,5 +1,5 @@
 define(function (require) {
-  var room = require('../entities/room'),
+  var room = require('.. /entities/room'),
       boundaries = require('../entities/boundaries'),
       tower = require('../entities/traps/tower'),
       player = require('../entities/player'),
@@ -17,16 +17,16 @@ define(function (require) {
       entities.push(room({ addRandomStuff: true }));
       entities.push(player({ x: 150, y: 150 }));
 
-      var enemy1 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
-      var enemy2 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
-      var enemy3 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
-      var enemy4 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
-      var enemy5 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
-      var enemy6 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
-      var enemy7 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
-      var enemy8 = wanderer({ x: 640/2, y: 340/2, speed : Math.floor(Math.random() * 4) +1 });
+      var enemy1 = wanderer({ x: 640 / 2, y: 340 / 2, speed : Math.floor(Math.random() * 4) + 1 });
+      var enemy2 = wanderer({ x: 640 / 2, y: 340 / 2, speed : Math.floor(Math.random() * 4) + 1 });
+      var enemy3 = wanderer({ x: 640 / 2, y: 340 / 2, speed : Math.floor(Math.random() * 4) + 1 });
+      var enemy4 = wanderer({ x: 640 / 2, y: 340 / 2, speed : Math.floor(Math.random() * 4) + 1 });
+      var enemy5 = wanderer({ x: 640 / 2, y: 340 / 2, speed : Math.floor(Math.random() * 4) + 1 });
+      var enemy6 = wanderer({ x: 640 / 2, y: 340 / 2, speed : Math.floor(Math.random() * 4) + 1 });
+      var enemy7 = wanderer({ x: 640 / 2, y: 340 / 2, speed : Math.floor(Math.random() * 4) + 1 });
+      var enemy8 = wanderer({ x: 640 / 2, y: 340 / 2, speed : Math.floor(Math.random() * 4) + 1 });
 
-      var towerTrap = tower({ x: 640/2, y: 360/2});
+      var towerTrap = tower({ x: 640 / 2, y: 360 / 2 });
 
       var areaTrigger1 = areaTrigger({ x: 100, y: 180, whenTriggered: _.bind(towerTrap.shootLeft, towerTrap) });
       var areaTrigger2 = areaTrigger({ x: 320, y: 20, whenTriggered: _.bind(towerTrap.shootUp, towerTrap) });

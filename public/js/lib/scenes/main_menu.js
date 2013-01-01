@@ -1,18 +1,18 @@
-define([
-    './demo',
-    './first_room',
-    './challenge_room'
-  ], function (demo, firstRoom, challengeRoom) {
-  var entities = [
-    { type: 'menuBackground' },
-    { type: 'menuTitle', text: 'swarm cubes' },
-    { type: 'menuItem', text: 'demo', selected: false, index: 0 },
-    { type: 'menuItem', text: 'concept rooms', selected: false, index: 1 },
-    { type: 'menuItem', text: 'challenge', selected: true, index: 2 },
-    { type: 'helpText', text: 'up/down, then enter' }
-  ], selectedItem = 4, timeToSelect = 200;
+define(function (require) {
+  var demo = require('./demo'),
+      firstRoom = require('./first_room'),
+      challengeRoom = require('./challenge_room'),
+      entities = [],
+      selectedItem = 4,
+      timeToSelect = 200;
 
   function init(callback) {
+    entities.push({ type: 'menuBackground' });
+    entities.push({ type: 'menuTitle', text: 'swarm cubes' });
+    entities.push({ type: 'menuItem', text: 'demo', selected: false, index: 0 });
+    entities.push({ type: 'menuItem', text: 'concept rooms', selected: false, index: 1 });
+    entities.push({ type: 'menuItem', text: 'challenge', selected: true, index: 2 });
+    entities.push({ type: 'helpText', text: 'up/down, then enter' });
     callback();
   }
 
@@ -55,7 +55,7 @@ define([
     'update': update,
     'entities': entities,
     'handleInput': handleInput,
-      'width':1280,
-      'height':720
+    'width': 1280,
+    'height': 720
   };
 });
