@@ -1,4 +1,4 @@
-define(['../../behaviours/shoots'], function (shoots) {
+define(['../../behaviours/shoots', '../../behaviours/circle'], function (shoots, circle) {
   function update(params) {
   }
 
@@ -17,7 +17,7 @@ define(['../../behaviours/shoots'], function (shoots) {
     tower.enemy = true;
     tower.sprite = 'zeroStanding1';
 
-    return shoots(_.extend(tower, specs || {}));
+    return shoots(circle(_.extend(tower, specs || {})));
   }
 
   return create;

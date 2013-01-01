@@ -11,6 +11,8 @@ define(function () {
     var params = {};
     params[entityA.type] = entityA;
     params[entityB.type] = entityB;
+    params[entityA.collidesLike] = entityA;
+    params[entityB.collidesLike] = entityB;
     return detector(entityA, entityB)(params, entityA, entityB);
   }
 
@@ -39,7 +41,8 @@ define(function () {
       mixedDetector(entityA, entityB) ||
       genericShapeDetector(entityA, entityB) ||
       function () {
-        return console.error('could not find a detector for: ' + entityA.type + ', ' + entityB.type) && false;
+        return console.error('could not find a detector for: ' + entityA.type + ', ' + entityB.type,
+          'could not find a detector for: ' + entityA.collidesLike + ', ' + entityB.collidesLike) && false;
       };
   }
 
@@ -177,13 +180,17 @@ define(function () {
       entities.wanderer.maxY() > entities.boundaries.maxY;
   }
 
+  function circleAndCircle(ignore, circleA, circleB) {
+    return (
+      Math.pow(circleA.x - circleB.x, 2) +
+      Math.pow(circleA.y - circleB.y, 2)
+    ) <= Math.pow(circleA.radius + circleB.radius, 2);
+  }
+
   function setupDetectors() {
-    addDetector('tower', 'shot', shotAndTower);
-    addDetector('turret', 'shot', shotAndTurret);
-    addDetector('shot', 'shot', shotAndShot);
     addDetector('shot', 'rock', shotAndRock);
     addDetector('boundaries', 'shot', shotOutOfBounds);
-    addDetector('player', 'shot', playerAndShot);
+    addDetector('circle', 'circle', circleAndCircle);
     addDetector('player', 'areaTrigger', areaTriggerAndPlayer);
     addDetector('player', 'triggerToNextRoom', playerAndTriggerToNextRoom);
     addDetector('player', 'rock', playerAndRock);
