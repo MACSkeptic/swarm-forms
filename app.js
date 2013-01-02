@@ -36,6 +36,15 @@ server.listen(app.get('port'), function () {
   console.log("Express server listening on port " + app.get('port'));
 });
 
-io.listen(server).sockets.on('connection', function (socket) {
+var iox = io.listen(server);
+
+if (process.argv.indexOf('--debugjs') < 0) {
+  iox.enable('browser client minification');
+  iox.enable('browser client etag');
+  iox.enable('browser client gzip');
+  iox.set('log level', 1);
+}
+
+iox.sockets.on('connection', function (socket) {
   console.log('connected');
 });
