@@ -7,5 +7,7 @@ define(function (require) {
 
   require('./modifiers/collision_test');
 
+  require('./behaviours/moves_test');
+
   QUnit.start();
 });

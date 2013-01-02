@@ -31,6 +31,7 @@ module.exports = function (grunt) {
           'console': true,
           'equal': true,
           'ok': true,
+          'expect': true,
           'sinon': true,
           'module': true,
           'QUnit': true,
