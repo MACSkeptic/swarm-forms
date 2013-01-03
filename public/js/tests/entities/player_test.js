@@ -39,6 +39,7 @@ define(function (require) {
 
   test('shoots right when right is pressed', function () {
     var p = keyPressed.apply(player(), ['right']);
+    console.log(p)
     equal(p.children[0].velocityX, player().shotVelocity);
     equal(p.children[0].velocityY, 0);
   });
