@@ -3,6 +3,7 @@ define(function (require) {
       boundaries = require('../entities/boundaries'),
       currentRoom = require('./current_room'),
       trappedRoom = require('./trapped_room'),
+      spritesRoom = require('./sprites_room'),
       entities = [];
 
   function init(callback) {
@@ -26,6 +27,11 @@ define(function (require) {
 
     if (input.keyPressed('t')) {
       trappedRoom.init(function () { game.addScene(trappedRoom, true); });
+      return;
+    }
+
+    if (input.keyPressed('s')) {
+      spritesRoom.init(function () { game.addScene(spritesRoom, true); });
       return;
     }
   }

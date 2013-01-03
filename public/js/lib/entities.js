@@ -6,6 +6,7 @@ define(function (require) {
     hole:              require('./entities/hole'),
     triggerToNextRoom: require('./entities/trigger_to_next_room'),
     player:            require('./entities/player'),
-    enemies:           require('./entities/enemies')
+    enemies:           require('./entities/enemies'),
+    spriteBasedEntity: require('./entities/sprite_based_entity')
   };
 });

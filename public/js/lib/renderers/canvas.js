@@ -275,10 +275,6 @@ define(function (require) {
       };
 
       renderers.tower = function (context, entity, scene) {
-        if (entity.sprite) {
-          return renderers.sprite(context, entity, scene);
-        }
-
         context.save();
         context.translate(entity.x, entity.y);
         context.strokeStyle = 'purple';
