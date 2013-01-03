@@ -19,22 +19,28 @@ define(function () {
   function revertX(entity) {
     entity.temporaryX = entity.x;
     entity.x = entity.previousX;
+    entity.temporaryVelocityX = entity.velocityX;
+    entity.velocityX = 0;
     return true;
   }
 
   function revertY(entity) {
     entity.temporaryY = entity.y;
     entity.y = entity.previousY;
+    entity.temporaryVelocityY = entity.velocityY;
+    entity.velocityY = 0;
     return true;
   }
 
   function redoX(entity) {
     entity.x = entity.temporaryX;
+    entity.velocityX = entity.temporaryVelocityX;
     return true;
   }
 
   function redoY(entity) {
     entity.y = entity.temporaryY;
+    entity.velocityY = entity.temporaryVelocityY;
     return true;
   }
 
