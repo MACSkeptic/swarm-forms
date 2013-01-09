@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    qunit: { all: ['http://localhost:19999/js/tests/all.html'] },
+    qunit: { all: { options: { urls: ['http://localhost:19999/js/tests/all.html'] } } },
     connect: { server: { options: { port: 19999, base: './public' } } },
     jshint: {
       all: [
@@ -52,7 +52,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.registerTask('test', ['connect', 'qunit']);
-  // qunit + grunt 0.4 are not playing well together
-  // grunt.registerTask('default', ['jshint', 'test']);
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'test']);
 };
