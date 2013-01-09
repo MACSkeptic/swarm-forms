@@ -5,7 +5,8 @@ define(function (require) {
     addTexture(this, 'rock', 'rock.jpg');
     addTexture(this, 'woodenFloor', 'wooden_floor.png');
     addTexture(this, 'lava', 'lava.png');
-    addTexture(this, 'zeroSpriteSheet', 'zero_sprite_sheet.gif');
+    addTexture(this, 'zeroSpriteSheet', 'zero_sprite_sheet.png');
+    addTexture(this, 'linkSpriteSheet', 'link_sprite_sheet.png');
 
     waitForEverythingToLoadThen(callback);
   }
