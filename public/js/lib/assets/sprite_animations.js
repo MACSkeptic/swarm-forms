@@ -7,17 +7,18 @@ define(
       'zeroStanding3': 250,
       'zeroStanding4': 250
     },
-    flow: 'reverse-loop'
+    flow: 'loop'
   },
 
   linkRunningRight: {
     frames: {
-      'linkRunningRight0': 60,
-      'linkRunningRight1': 60,
-      'linkRunningRight2': 60,
-      'linkRunningRight3': 60,
-      'linkRunningRight4': 60,
-      'linkRunningRight5': 60
+      'linkRunningRight1': 50,
+      'linkRunningRight2': 50,
+      'linkRunningRight3': 50,
+      'linkRunningRight4': 50,
+      'linkRunningRight5': 50,
+      'linkRunningRight6': 50,
+      'linkRunningRight7': 50
     },
     flow: 'reverse-loop'
   }
