@@ -52,7 +52,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.registerTask('test', ['connect', 'qunit']);
-  // jshint + grunt 0.4 are not playing well together
+  // qunit + grunt 0.4 are not playing well together
   // grunt.registerTask('default', ['jshint', 'test']);
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('default', ['jshint']);
 };
