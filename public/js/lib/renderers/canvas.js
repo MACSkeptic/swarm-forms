@@ -98,7 +98,14 @@ define(function (require) {
         context.lineWidth = 3;
       };
 
-      renderers.score = function (context, entity) {
+      renderers.score = function (context, entity, scene) {
+        var x = scene.width / 2, y = scene.height - 35;
+
+        context.font = '25pt Monaco, Consolas, Monospaced';
+        context.textAlign = 'right';
+        context.textBaseline = 'middle';
+        context.fillStyle = 'green';
+        context.fillText(entity.score, x, y);
       };
 
       renderers.triggerToNextRoom = function (context, entity) {

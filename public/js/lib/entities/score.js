@@ -12,7 +12,9 @@ define(function (require) {
     return _.extend({
       type: 'score',
       score: 0,
-      delta: 1
+      delta: 1,
+      increment: increment,
+      decrement: decrement
     }, specs || {});
   }
   

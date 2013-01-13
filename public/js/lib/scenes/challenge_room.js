@@ -9,7 +9,7 @@ define(function (require) {
       turret = entitiesModule.enemies.turret,
       wanderer = entitiesModule.enemies.wanderer,
       boundaries = entitiesModule.boundaries,
-      score = entitiesModule.score,
+      score = entitiesModule.score(),
       currentPlayer = player({ x: 1152 / 2, y: 720 / 2 });
 
   function init(callback) {
@@ -41,12 +41,14 @@ define(function (require) {
     entities.push(chaser({ x: 1152 * 0.9, y: 720 * 0.2 }));
     entities.push(chaser({ x: 1152 * 0.8, y: 720 * 0.7 }));
 
-    entities.push(score());
+    entities.push(score);
 
     callback();
   }
 
   function update(params) {}
+
+  function increaseScore() { score.increment(); }
 
   function handleInput(params) { currentPlayer.handleInput(params); }
 
@@ -55,6 +57,7 @@ define(function (require) {
     'update': update,
     'entities': entities,
     'handleInput': handleInput,
+    'increaseScore': increaseScore,
     'width': 1152,
     'height': 720,
     'name': 'first-room'

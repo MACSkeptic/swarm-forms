@@ -11,7 +11,15 @@ define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves)
 
   function outOfBounds() { this.disposed = true; }
   function vanish() { this.disposed = true; }
-  function killAndVanish(other) { other.disposed = true; this.disposed = true; }
+  function killAndVanish(other) {
+    other.disposed = true;
+    this.disposed = true;
+  }
+
+  function killCountScoreAndVanish(other, algorithm, currentScene) {
+    killAndVanish.apply(this, [other, algorithm]);
+    (currentScene.increaseScore || function () {})();
+  }
 
   function create(specs) {
     return _.extend(
@@ -23,9 +31,9 @@ define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves)
           boundaries: outOfBounds,
           shot: createSuperShot,
           rock: vanish,
-          turret: killAndVanish,
-          wanderer: killAndVanish,
-          chaser: killAndVanish,
+          turret: killCountScoreAndVanish,
+          wanderer: killCountScoreAndVanish,
+          chaser: killCountScoreAndVanish,
           player: killAndVanish,
           tower: vanish
         }
