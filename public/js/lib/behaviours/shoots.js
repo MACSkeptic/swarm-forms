@@ -17,8 +17,12 @@ define(['../entities/shot', '../utils/geometry'], function (shot, geometry) {
 
   function shootWithVelocity(velocityX, velocityY) {
     if (!canShoot.apply(this)) { return; }
-    this.children.push(shotWithInertia.apply(this, arguments));
+    this.children.push(this.createShot.apply(this, arguments));
     this.timeSinceLastShot = 0;
+  }
+
+  function shoot(params) {
+    shootWithVelocity.apply(this, [0, 0]);
   }
 
   function shootAt(target, params) {
@@ -63,7 +67,9 @@ define(['../entities/shot', '../utils/geometry'], function (shot, geometry) {
     shoots.shootDown = shootDown;
     shoots.shootUp = shootUp;
     shoots.shootAt = shootAt;
+    shoots.shoot = shoot;
     shoots.canShoot = canShoot;
+    shoots.createShot = shotWithInertia;
     shoots.percentageToShootAgain = percentageToShootAgain;
 
     _.extend(shoots, specs || {});
