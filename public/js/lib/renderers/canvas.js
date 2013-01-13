@@ -26,8 +26,6 @@ define(function (require) {
     }
 
     function render(scene) {
-      console.log('render: ' + scene);
-
       var currentCanvas = dummyCanvas,
           currentContext = dummyContext;
 
@@ -98,6 +96,9 @@ define(function (require) {
         context.restore();
 
         context.lineWidth = 3;
+      };
+
+      renderers.score = function (context, entity) {
       };
 
       renderers.triggerToNextRoom = function (context, entity) {
@@ -353,8 +354,6 @@ define(function (require) {
     }
 
     function init(callback) {
-      console.log('init renderer');
-
       backgroundCanvas = createCanvas('background');
       foregroundCanvas = createCanvas('foreground');
       dummyCanvas = createCanvas('dummy');

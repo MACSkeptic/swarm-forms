@@ -9,14 +9,10 @@ define(function (require) {
       currentScene;
 
   function draw() {
-    console.log('draw game');
-
     renderer.render(currentScene);
   }
 
   function update(elapsed) {
-    console.log('update game, fps: ' + 1000 / elapsed);
-
     var neatPackage = { input: input, elapsed: elapsed, game: this, currentScene: currentScene };
 
     handleInput(neatPackage);
@@ -40,16 +36,16 @@ define(function (require) {
         _.each(currentScene.entities || [], function (targetEntity) {
           if (targetEntity === currentEntity) { return; }
 
-          collision.applyTo(currentChild, targetEntity);
+          collision.applyTo(currentChild, targetEntity, currentScene);
 
           _.each(targetEntity.children || [], function (targetChild) {
-            collision.applyTo(currentChild, targetChild);
+            collision.applyTo(currentChild, targetChild, currentScene);
           });
         });
       });
 
       _.each(currentScene.entities, function (targetEntity) {
-        collision.applyTo(currentEntity, targetEntity);
+        collision.applyTo(currentEntity, targetEntity, currentScene);
       });
 
       currentEntity.children = _.filter(currentEntity.children || [], function (child) {
@@ -63,8 +59,6 @@ define(function (require) {
   }
 
   function handleInput(params) {
-    console.log('handle input game');
-
     if (params.input.keyPressed('esc')) { return params.game.changeCurrentSceneByName('main-menu'); }
 
     currentScene.handleInput && currentScene.handleInput(params);
@@ -80,8 +74,6 @@ define(function (require) {
   function changeCurrentSceneByName(name) { currentScene = scenes[name]; }
 
   function init(callback) {
-    console.log('init game');
-    
     collision.init(function () {
       renderer.init(function () {
         addScene(mainMenu, true);

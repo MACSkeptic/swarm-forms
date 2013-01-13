@@ -16,7 +16,7 @@ define(function () {
     return detector(entityA, entityB)(params, entityA, entityB);
   }
 
-  function applyTo(entityA, entityB) {
+  function applyTo(entityA, entityB, currentScene) {
     var aCanCollideWithB = canCollide(entityA, entityB),
         bCanCollideWithA = canCollide(entityB, entityA);
 
@@ -25,11 +25,11 @@ define(function () {
     if (collided(entityA, entityB)) {
       if (aCanCollideWithB) {
         entityA.collidesWith[entityB.type].apply(
-          entityA, [entityB, detector(entityA, entityB)]);
+          entityA, [entityB, detector(entityA, entityB), currentScene]);
       }
       if (bCanCollideWithA) {
         entityB.collidesWith[entityA.type].apply(
-          entityB, [entityA, detector(entityA, entityB)]);
+          entityB, [entityA, detector(entityA, entityB), currentScene]);
       }
 
       return true;

@@ -16,8 +16,6 @@ define([
     ];
 
     function init(callback) {
-      console.log('init demo');
-
       callback();
     }
 
@@ -69,8 +67,6 @@ define([
     }
 
     function update(params) {
-      console.log('update scene');
-
       if (Math.random() > 0.9) {
         entities[0].shootRight(params);
       }
