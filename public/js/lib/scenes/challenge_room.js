@@ -7,6 +7,7 @@ define(function (require) {
       hole = entitiesModule.hole,
       chaser = entitiesModule.enemies.chaser,
       turret = entitiesModule.enemies.turret,
+      superTurret = entitiesModule.enemies.superTurret,
       wanderer = entitiesModule.enemies.wanderer,
       boundaries = entitiesModule.boundaries,
       score = entitiesModule.score(),
@@ -26,6 +27,14 @@ define(function (require) {
 
     entities.push(currentPlayer);
 
+    spawnLevel1();
+
+    entities.push(score);
+
+    callback();
+  }
+
+  function spawnLevel1() {
     entities.push(turret({ x: 1152 * 0.2, y: 720 * 0.2 }));
     entities.push(turret({ x: 1152 * 0.2, y: 720 * 0.8 }));
     entities.push(turret({ x: 1152 * 0.8, y: 720 * 0.2 }));
@@ -40,13 +49,24 @@ define(function (require) {
     entities.push(chaser({ x: 1152 * 0.3, y: 720 * 0.8 }));
     entities.push(chaser({ x: 1152 * 0.9, y: 720 * 0.2 }));
     entities.push(chaser({ x: 1152 * 0.8, y: 720 * 0.7 }));
-
-    entities.push(score);
-
-    callback();
   }
 
-  function update(params) {}
+  function spawnLevel2() {
+    if (this.level2) { return; }
+    this.level2 = true;
+
+    this.entities.push(superTurret({ x: 1152 * 0.2, y: 720 * 0.2 }));
+    this.entities.push(superTurret({ x: 1152 * 0.2, y: 720 * 0.8 }));
+    this.entities.push(superTurret({ x: 1152 * 0.8, y: 720 * 0.2 }));
+    this.entities.push(superTurret({ x: 1152 * 0.8, y: 720 * 0.8 }));
+
+    this.entities.push(superTurret({ x: 1152 * 0.5, y: 720 * 0.2 }));
+    this.entities.push(superTurret({ x: 1152 * 0.5, y: 720 * 0.8 }));
+  }
+
+  function update(params) {
+    if (score.score == 12) { spawnLevel2.apply(this); }
+  }
 
   function increaseScore() { score.increment(); }
 
