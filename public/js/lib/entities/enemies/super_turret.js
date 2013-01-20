@@ -1,5 +1,6 @@
 define(function (require) {
-  var behaviours = require('../../behaviours'),
+  var behaviours = require('../../mechanics/behaviours'),
+      guns = require('../../components/guns'),
       circle = behaviours.circle,
       shoots = behaviours.shoots,
       chaser = require('./chaser');
@@ -8,17 +9,16 @@ define(function (require) {
     this.shoot(params);
   }
 
-  function createShot(params) {
-    return chaser({ x: this.x, y: this.y });
-  }
-
   function create(specs) {
-    return _.extend(
-      shoots({ update: update, timeRequiredBetweenShots: 1000 }),
+    var superTurret = _.extend(
+      shoots({ update: update }),
       circle({ radius: 30 }),
-      { type: 'turret', enemy: true, createShot: createShot },
+      { type: 'turret', enemy: true},
       specs || {}
     );
+    superTurret.gun = guns.chaserCreator(superTurret);
+    superTurret.gun.timeRequiredBetweenShots = 700;
+    return superTurret;
   }
 
   return create;

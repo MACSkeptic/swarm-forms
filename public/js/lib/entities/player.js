@@ -1,5 +1,6 @@
 define(function (require) {
-  var behaviours = require('../behaviours'),
+  var guns = require('components/guns'),
+      behaviours = require('../mechanics/behaviours'),
       shoots     = behaviours.shoots,
       moves      = behaviours.moves,
       rectangle  = behaviours.rectangle,
@@ -30,10 +31,6 @@ define(function (require) {
     }, this);
   }
 
-  function percentageToShootAgain() {
-    return Math.min(1, this.timeSinceLastShot / this.timeRequiredBetweenShots);
-  }
-
   function handleMovement(params) {
     if (!params.input.keyPressed('a') && !params.input.keyPressed('d')) { this.velocityX = 0; }
     if (!params.input.keyPressed('w') && !params.input.keyPressed('s')) { this.velocityY = 0; }
@@ -59,7 +56,7 @@ define(function (require) {
   function undoLastMovement(other, algorithm) { this.undoLastMovement(other, algorithm); }
 
   function create(specs) {
-    return _.extend(
+    var player = _.extend(
       rectangle({ width: 30, height: 30 }),
       circle({ radius: 7.5 }),
       moves({ velocity: 2 }),
@@ -76,6 +73,9 @@ define(function (require) {
       shoots({ update: update }),
       specs || {}
     );
+    player.gun = guns.basic(player);
+
+    return player;
   }
 
   return create;

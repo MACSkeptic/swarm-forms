@@ -1,8 +1,8 @@
 define(function (require) {
-  var spriteBasedEntity  = require('../entities/sprite_based_entity'),
+  var spriteBasedEntity  = require('../mechanics/sprite_based_entity'),
       spriteAnimation = require('../assets/animated_sprite'),
       spriteAnimations = require('../assets/sprite_animations'),
-      spriteActor = require('../assets/sprite_actor'),
+      spriteActor = require('../mechanics/sprite_actor'),
       entities = [];
 
   var zero = spriteBasedEntity({ sprite: 'zeroStanding1' });

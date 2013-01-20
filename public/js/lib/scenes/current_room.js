@@ -1,5 +1,5 @@
 define(function (require) {
-  var entities          = require('../entities'),
+  var entities          = require('../mechanics/entities'),
       room              = entities.room,
       boundaries        = entities.boundaries,
       triggerToNextRoom = entities.triggerToNextRoom,

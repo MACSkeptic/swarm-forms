@@ -1,5 +1,6 @@
 define(function (require) {
-  var behaviours = require('../../behaviours'),
+  var guns = require('../../components/guns'),
+      behaviours = require('../../mechanics/behaviours'),
       circle = behaviours.circle,
       shoots = behaviours.shoots,
       findTarget = require('../../utils/find_target');
@@ -18,12 +19,16 @@ define(function (require) {
   }
 
   function create(specs) {
-    return _.extend(
+    var turret = _.extend(
       shoots({ update: update, shotVelocity: 1, timeRequiredBetweenShots: 500 }),
       circle({ radius: 10 }),
       { type: 'turret', enemy: true },
       specs || {}
     );
+    
+    turret.gun = guns.basic(turret);
+    turret.gun.timeRequiredBetweenShots = 1000;
+    return turret;
   }
 
   return create;

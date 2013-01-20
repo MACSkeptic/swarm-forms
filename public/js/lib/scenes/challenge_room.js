@@ -1,6 +1,6 @@
 define(function (require) {
   var entities = [],
-      entitiesModule = require('../entities'),
+      entitiesModule = require('../mechanics/entities'),
       room = entitiesModule.room,
       player = entitiesModule.player,
       rock = entitiesModule.rock,
