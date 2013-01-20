@@ -28,8 +28,8 @@ define(function (require) {
 
     turret.gun = guns.basic(turret);
     turret.gun.timeRequiredBetweenShots = 500;
+    turret.gun.timeSinceLastShot = turret.gun.timeRequiredBetweenShots;
     turret.gun.shotVelocity = 1;
-    turret.gun.lastShoot = new Date() - turret.gun.timeRequiredBetweenShots;
     turret.gun.enemy = true;
     return turret;
   }

@@ -1,7 +1,11 @@
 define(['../../utils/geometry', '../../entities/shot'], function (geometry, shot) {
-  
-  function canShoot(now) {
-    return now - this.lastShoot >= this.timeRequiredBetweenShots;
+
+  function update(params) {
+    this.timeSinceLastShot = this.timeSinceLastShot += params.elapsed;
+  }
+
+  function canShoot(elapsed) {
+    return this.timeSinceLastShot >= this.timeRequiredBetweenShots;
   }
 
   function createShot() {
@@ -16,21 +20,22 @@ define(['../../utils/geometry', '../../entities/shot'], function (geometry, shot
     this.owner.children.push(shot(shotSpecs));
   }
 
-  function shoot() {
-    var now = new Date();
-    var newShot = null;
-    
-    if (this.canShoot(now)) {
-      this.lastShoot = now;
-      createShot.apply(this);
+  function shoot(elapsed) {
+    if (this.canShoot()) {
+      this.timeSinceLastShot = 0;
+      this.createShot();
     }
   }
-  
+
   function shootAt(x, y) {
     var vector = geometry.createVector2dFromPointAndModule({x: x, y: y}, this.owner, this.shotVelocity);
     this.shotVelocityX = vector.x;
     this.shotVelocityY = vector.y;
     shoot();
+  }
+
+  function percentageToShootAgain() {
+    return Math.min(1, this.timeSinceLastShot / this.timeRequiredBetweenShots);
   }
 
   function setDirection() {
@@ -68,7 +73,8 @@ define(['../../utils/geometry', '../../entities/shot'], function (geometry, shot
   function create(owner, specs) {
     var basicGun = {};
     basicGun.timeRequiredBetweenShots = 100;
-    basicGun.lastShoot = new Date() - basicGun.timeRequiredBetweenShots;
+    basicGun.timeSinceLastShot = basicGun.timeRequiredBetweenShots;
+
     basicGun.shotVelocity = 5;
     basicGun.shotVelocityX = 0;
     basicGun.shotVelocityY = 0;
@@ -79,12 +85,11 @@ define(['../../utils/geometry', '../../entities/shot'], function (geometry, shot
     basicGun.shoot = shoot;
     basicGun.shootAt = shootAt;
     basicGun.setDirection = setDirection;
-
+    basicGun.update = update;
+    basicGun.createShot = createShot;
+    basicGun.percentageToShootAgain = percentageToShootAgain;
     _.extend(basicGun, specs);
 
-    if (!basicGun.owner) {
-      throw ('You can\'t create a gun without an owner.');
-    }
     setDirection('right');
     return basicGun;
   }

@@ -6,7 +6,7 @@ define(function (require) {
       chaser = require('./chaser');
 
   function update(params) {
-    this.shoot(params);
+    this.shoot();
   }
 
   function create(specs) {

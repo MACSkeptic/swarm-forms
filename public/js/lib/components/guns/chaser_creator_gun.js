@@ -1,9 +1,5 @@
-define(['../../utils/geometry', '../../entities/enemies/chaser'], function (geometry, chaser) {
+define(['../../utils/geometry', '../../entities/enemies/chaser', './basic_gun'], function (geometry, chaser, basicGun) {
   
-  function canShoot(now) {
-    return now - this.lastShoot >= this.timeRequiredBetweenShots;
-  }
-
   function createShot() {
     var shotSpecs = {
       x: (this.owner.x || 0),
@@ -16,76 +12,15 @@ define(['../../utils/geometry', '../../entities/enemies/chaser'], function (geom
     this.owner.children.push(chaser(shotSpecs));
   }
 
-  function shoot() {
-    var now = new Date();
-    var newShot = null;
-    
-    if (this.canShoot(now)) {
-      this.lastShoot = now;
-      createShot.apply(this);
-    }
-  }
-  
-  function shootAt(x, y) {
-    var vector = geometry.createVector2dFromPointAndModule({x: x, y: y}, this.owner, this.shotVelocity);
-    this.shotVelocityX = vector.x;
-    this.shotVelocityY = vector.y;
-    shoot();
-  }
-
-  function setDirection() {
-    var argument1 = arguments[0];
-    var argument2 = arguments[1];
-
-    if (arguments.length == 1) {
-      switch (argument1) {
-      case 'up':
-        this.shotVelocityX = 0;
-        this.shotVelocityY = -1 * this.shotVelocity;
-        break;
-      case 'down':
-        this.shotVelocityX = 0;
-        this.shotVelocityY = this.shotVelocity;
-        break;
-      case 'right':
-        this.shotVelocityX = this.shotVelocity;
-        this.shotVelocityY = 0;
-        break;
-      case 'left':
-        this.shotVelocityX = -1 * this.shotVelocity;
-        this.shotVelocityY = 0;
-        break;
-      }
-    }
-
-    else if (arguments.length == 2) {
-      var vector = geometry.createVector2dFromPointAndModule({x: argument1, y: argument2}, this.owner, this.shotVelocity);
-      this.shotVelocityX = vector.x;
-      this.shotVelocityY = vector.y;
-    }
-  }
-
   function create(owner) {
-    var basicGun = {};
-    basicGun.lastShoot = new Date();
-    basicGun.timeRequiredBetweenShots = 100;
-    
-    basicGun.shotVelocity = 10;
-    basicGun.shotVelocityX = 0;
-    basicGun.shotVelocityY = 0;
-    
-    basicGun.owner = owner;
-    
-    basicGun.canShoot = canShoot;
-    basicGun.shoot = shoot;
-    basicGun.shootAt = shootAt;
-    basicGun.setDirection = setDirection;
-
-    if (!basicGun.owner) {
-      throw ('You can\'t create a gun without an owner.');
-    }
-    setDirection('right');
-    return basicGun;
+    var gun = basicGun(owner);
+    gun.timeRequiredBetweenShots = 100;
+    gun.shotVelocity = 10;
+    gun.shotVelocityX = 0;
+    gun.shotVelocityY = 0;
+    gun.setDirection('right');
+    gun.createShot = createShot;
+    return gun;
   }
 
   return create;

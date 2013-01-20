@@ -70,7 +70,12 @@ define(function (require) {
 
   function increaseScore() { score.increment(); }
 
-  function handleInput(params) { currentPlayer.handleInput(params); }
+  function handleInput(params) {
+    if (params.input.keyPressed('g')) {
+      score.score = 12;
+    }
+    currentPlayer.handleInput(params);
+  }
 
   return {
     'init': init,

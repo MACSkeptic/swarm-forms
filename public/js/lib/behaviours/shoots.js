@@ -24,21 +24,20 @@ define(['../entities/shot', '../utils/geometry'], function (shot, geometry) {
     this.gun.shoot();
   }
 
-  function shootAt(target) {
+  function shootAt(target, params) {
     this.gun.setDirection(target.x, target.y);
     this.gun.shoot();
   }
 
   function update(params) {
     this.timeSinceLastShot += params.elapsed;
+    this.gun.update(params);
     if (this.timeSinceLastShot > 1000000) { this.timeSinceLastShot = 1000000; }
     this.childUpdate && this.childUpdate.apply(this, [params]);
   }
 
   function percentageToShootAgain() {
-    var now = new Date();
-    var timeSinceLastShot = now - this.gun.lastShoot;
-    return Math.min(1, timeSinceLastShot / this.gun.timeRequiredBetweenShots);
+    return this.gun.percentageToShootAgain();
   }
 
   function create(specs) {

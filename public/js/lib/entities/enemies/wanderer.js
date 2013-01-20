@@ -1,7 +1,6 @@
 define(function (require) {
 
   var behaviours = require('../../behaviours'),
-      shoots     = behaviours.shoots,
       moves      = behaviours.moves,
       rectangle  = behaviours.rectangle;
 
@@ -37,6 +36,7 @@ define(function (require) {
   function create(specs) {
     return _.extend(
       rectangle({ width: 15, height: 15 }),
+      { update: update },
       moves(),
       {
         type: 'wanderer',
@@ -49,13 +49,7 @@ define(function (require) {
           shoot: vanish
         }
       },
-      shoots({
-        update: update,
-        changeMovementDirection: changeMovementDirection,
-        timeUntilNextMovementChange: 0,
-        speed: 1
-      }),
-      specs || {}
+     specs || {}
     );
   }
   return create;

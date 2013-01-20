@@ -8,7 +8,6 @@ define(function (require) {
 
   function update(params) {
     this.rotation += params.elapsed / 200;
-
     if (this.rotation > Math.PI * 2) { this.rotation = 0; }
 
     _.find(this.children, function (shotA) {
@@ -74,8 +73,6 @@ define(function (require) {
       specs || {}
     );
     player.gun = guns.basic(player);
-    player.gun.timeRequiredBetweenShots = 200;
-    player.gun.lastShoot = new Date() - player.gun.timeRequiredBetweenShots;
 
     return player;
   }
