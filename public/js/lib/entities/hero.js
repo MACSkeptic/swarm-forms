@@ -3,9 +3,9 @@ define(function (require) {
       behaviours = require('../behaviours'),
       moves      = behaviours.moves,
       rectangle  = behaviours.rectangle,
-      spriteAnimation = require('../mechanics/animated_sprite'),
+      spriteAnimation = require('../components/animated_sprite'),
       spriteAnimations = require('../assets/sprite_animations'),
-      spriteActor = require('../mechanics/sprite_actor');
+      spriteActor = require('../components/sprite_actor');
 
   function update(params) {
     this.actor.update(params.elapsed);
