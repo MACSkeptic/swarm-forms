@@ -1,5 +1,5 @@
 define(function (require) {
-  var guns = require('components/guns'),
+  var guns = require('./../components/guns'),
       behaviours = require('../mechanics/behaviours'),
       shoots     = behaviours.shoots,
       moves      = behaviours.moves,
@@ -74,6 +74,8 @@ define(function (require) {
       specs || {}
     );
     player.gun = guns.basic(player);
+    player.gun.timeRequiredBetweenShots = 200;
+    player.gun.lastShoot = new Date() - player.gun.timeRequiredBetweenShots;
 
     return player;
   }

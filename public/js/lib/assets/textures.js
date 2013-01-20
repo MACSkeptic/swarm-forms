@@ -3,7 +3,7 @@ define(function (require) {
 
   function loadEverything(callback) {
     addTexture(this, 'rock', 'rock.jpg');
-    addTexture(this, 'woodenFloor', 'wooden_floor.png');
+    addTexture(this, 'woodenFloor', 'space.jpg');
     addTexture(this, 'lava', 'lava.png');
     addTexture(this, 'zeroSpriteSheet', 'zero_sprite_sheet.png');
     addTexture(this, 'linkSpriteSheet', 'link_sprite_sheet.png');

@@ -65,12 +65,11 @@ define(['../../utils/geometry', '../../entities/shot'], function (geometry, shot
     }
   }
 
-  function create(owner) {
+  function create(owner, specs) {
     var basicGun = {};
-    basicGun.lastShoot = new Date();
     basicGun.timeRequiredBetweenShots = 100;
-    
-    basicGun.shotVelocity = 10;
+    basicGun.lastShoot = new Date() - basicGun.timeRequiredBetweenShots;
+    basicGun.shotVelocity = 5;
     basicGun.shotVelocityX = 0;
     basicGun.shotVelocityY = 0;
     
@@ -80,6 +79,8 @@ define(['../../utils/geometry', '../../entities/shot'], function (geometry, shot
     basicGun.shoot = shoot;
     basicGun.shootAt = shootAt;
     basicGun.setDirection = setDirection;
+
+    _.extend(basicGun, specs);
 
     if (!basicGun.owner) {
       throw ('You can\'t create a gun without an owner.');

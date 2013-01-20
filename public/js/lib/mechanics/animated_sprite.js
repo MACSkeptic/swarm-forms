@@ -65,6 +65,7 @@ define(function () {
     spriteAnimation.goingForward = true;
     spriteAnimation.currentSprite = currentSprite;
     spriteAnimation.update = update;
+    spriteAnimation.reset = reset;
 
     _.extend(spriteAnimation, specs || {});
     spriteAnimation.sprites = _.keys(spriteAnimation.frames || {});

@@ -20,14 +20,17 @@ define(function (require) {
 
   function create(specs) {
     var turret = _.extend(
-      shoots({ update: update, shotVelocity: 1, timeRequiredBetweenShots: 500 }),
+      shoots({ update: update }),
       circle({ radius: 10 }),
       { type: 'turret', enemy: true },
       specs || {}
     );
-    
+
     turret.gun = guns.basic(turret);
-    turret.gun.timeRequiredBetweenShots = 1000;
+    turret.gun.timeRequiredBetweenShots = 500;
+    turret.gun.shotVelocity = 1;
+    turret.gun.lastShoot = new Date() - turret.gun.timeRequiredBetweenShots;
+    turret.gun.enemy = true;
     return turret;
   }
 

@@ -339,6 +339,18 @@ define(function (require) {
       renderers.sprite = function (context, entity, scene) {
         var texture = textures[sprites[entity.sprite].texture];
         var sprite = sprites[entity.sprite];
+
+        context.drawImage(
+          texture,
+          sprite.x, sprite.y, sprite.width, sprite.height,
+          entity.x, entity.y, sprite.width, sprite.height
+        );
+      };
+
+      renderers.spriteActor = function (context, entity, scene) {
+        var texture = textures[sprites[entity.currentSprite()].texture];
+        var sprite = sprites[entity.currentSprite()];
+
         context.drawImage(
           texture,
           sprite.x, sprite.y, sprite.width, sprite.height,

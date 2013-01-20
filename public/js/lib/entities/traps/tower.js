@@ -1,4 +1,4 @@
-define(['../../behaviours/shoots', '../../behaviours/circle'], '../../../components/guns.js', function (shoots, circle, guns) {
+define(['../../behaviours/shoots', '../../behaviours/circle', '../../components/guns'], function (shoots, circle, guns) {
 
   function update(params) {
     
@@ -12,15 +12,15 @@ define(['../../behaviours/shoots', '../../behaviours/circle'], '../../../compone
     tower.radius = 15;
     tower.velocityX = 0;
     tower.velocityY = 0;
-    tower.shotVelocity = 2;
     tower.isMovable = false;
     tower.type = 'tower';
     tower.enemy = true;
-    tower.sprite = 'zeroStanding1';
     
     tower = shoots(circle(_.extend(tower, specs || {})));
-    tower.gun = guns.simple(tower);
-    tower.gun.timeRequiredBetweenShots = 2000;
+    tower.gun = guns.basic(tower);
+    tower.gun.shotVelocity = 7;
+    tower.gun.timeRequiredBetweenShots = 50;
+
     return tower;
   }
 

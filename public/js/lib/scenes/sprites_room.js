@@ -1,45 +1,25 @@
 define(function (require) {
-  var spriteBasedEntity  = require('../mechanics/sprite_based_entity'),
-      spriteAnimation = require('../assets/animated_sprite'),
-      spriteAnimations = require('../assets/sprite_animations'),
-      spriteActor = require('../mechanics/sprite_actor'),
-      entities = [];
+  var heroEntity = require('../entities/hero'),
+  entities = [];
 
-  var zero = spriteBasedEntity({ sprite: 'zeroStanding1' });
-  var link = spriteBasedEntity({ sprite: 'linkWalkingRight' });
-  
-  var zeroStandingAnimation = spriteAnimation(spriteAnimations.zeroStanding);
-  var linkWalkingUpAnimation = spriteAnimation(spriteAnimations.linkWalkingUp);
-  var linkWalkingDownAnimation = spriteAnimation(spriteAnimations.linkWalkingDown);
-  var linkWalkingLeftAnimation = spriteAnimation(spriteAnimations.linkWalkingLeft);
-  var linkWalkingRightAnimation = spriteAnimation(spriteAnimations.linkWalkingRight);
-
-  var linkActor = spriteActor({states: {
-    up: linkWalkingUpAnimation,
-    down: linkWalkingDownAnimation,
-    left: linkWalkingLeftAnimation,
-    right: linkWalkingRightAnimation
-  }
-  });
+  var hero = heroEntity({ x: 100, y: 100 });
 
   function init(callback) {
-    entities.push(zero);
-    entities.push(link);
-    link.x = 50;
-    link.y = 50;
+    entities.push(hero);
     callback();
   }
 
   function update(params) {
-    zeroStandingAnimation.update(params.elapsed);
-    linkWalkingUpAnimation.update(params.elapsed);
-    
-    link.sprite = linkWalkingUpAnimation.currentSprite();
-    zero.sprite = zeroStandingAnimation.currentSprite();
+
+  }
+
+  function handleInput(params) {
+    hero.handleInput(params);
   }
 
   return {
     'name': 'sprites-room',
+    'handleInput': handleInput,
     'init': init,
     'update': update,
     'entities': entities,

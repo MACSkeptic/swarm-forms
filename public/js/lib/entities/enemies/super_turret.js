@@ -17,7 +17,7 @@ define(function (require) {
       specs || {}
     );
     superTurret.gun = guns.chaserCreator(superTurret);
-    superTurret.gun.timeRequiredBetweenShots = 700;
+    superTurret.gun.timeRequiredBetweenShots = 500;
     return superTurret;
   }
 

@@ -38,14 +38,12 @@ define(['../entities/shot', '../utils/geometry'], function (shot, geometry) {
   function percentageToShootAgain() {
     var now = new Date();
     var timeSinceLastShot = now - this.gun.lastShoot;
-    return Math.min(1, timeSinceLastShot / this.gun.timeBetweenShoots);
+    return Math.min(1, timeSinceLastShot / this.gun.timeRequiredBetweenShots);
   }
 
   function create(specs) {
     var shoots = {};
     
-    shoots.timeSinceLastShot = 1000000;
-    shoots.timeRequiredBetweenShots = 250;
     shoots.shotVelocity = 5;
     shoots.children = [];
 
