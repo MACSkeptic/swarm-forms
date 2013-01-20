@@ -1,6 +1,6 @@
 define(function (require) {
   var guns = require('./../components/guns'),
-      behaviours = require('../mechanics/behaviours'),
+      behaviours = require('../behaviours'),
       shoots     = behaviours.shoots,
       moves      = behaviours.moves,
       rectangle  = behaviours.rectangle,

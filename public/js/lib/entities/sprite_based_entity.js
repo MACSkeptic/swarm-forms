@@ -1,6 +1,6 @@
 define(function (require) {
 
-  var behaviours = require('../mechanics/behaviours'),
+  var behaviours = require('../behaviours'),
       moves      = behaviours.moves,
       rectangle  = behaviours.rectangle;
 

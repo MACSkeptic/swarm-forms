@@ -1,5 +1,5 @@
 define(function (require) {
-  var behaviours = require('../../mechanics/behaviours'),
+  var behaviours = require('../../behaviours'),
       rectangle = behaviours.rectangle,
       moves = behaviours.moves,
       geometry = require('../../utils/geometry'),
