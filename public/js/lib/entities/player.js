@@ -46,10 +46,17 @@ define(function (require) {
     if (params.input.keyPressed('up'))    { this.shootUp(params);    }
     if (params.input.keyPressed('down'))  { this.shootDown(params);  }
   }
+  
+  function handleChangeGun(params) {
+    if (params.input.keyPressed('1')) { this.gun = this.guns[0]; }
+    if (params.input.keyPressed('2')) { this.gun = this.guns[1]; }
+    if (params.input.keyPressed('3')) { this.gun = this.guns[2]; }
+  }
 
   function handleInput(params) {
     handleMovement.apply(this, [params]);
     handleShooting.apply(this, [params]);
+    handleChangeGun.apply(this, [params]);
   }
 
   function undoLastMovement(other, algorithm) { this.undoLastMovement(other, algorithm); }
@@ -72,7 +79,12 @@ define(function (require) {
       shoots({ update: update }),
       specs || {}
     );
-    player.gun = guns.basic(player);
+
+    player.guns = [];
+    player.guns.push(guns.basic(player));
+    player.guns.push(guns.doubleBarrel(player));
+    player.guns.push(guns.spread(player));
+    player.gun = player.guns[0];
 
     return player;
   }

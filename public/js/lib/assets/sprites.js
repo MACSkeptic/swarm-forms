@@ -49,6 +49,11 @@ define(
   linkWalkingUp6: { texture: 'linkSpriteSheet', x: 102, y: 98, width: 18, height: 22 },
   linkWalkingUp7: { texture: 'linkSpriteSheet', x: 127, y: 0, width: 18, height: 24 },
   linkWalkingUp8: { texture: 'linkSpriteSheet', x: 0, y: 48, width: 18, height: 25 },
-  linkWalkingUp9: { texture: 'linkSpriteSheet', x: 20, y: 50, width: 18, height: 24 }
+  linkWalkingUp9: { texture: 'linkSpriteSheet', x: 20, y: 50, width: 18, height: 24 },
+
+  weapon1: { texture: 'weaponsSpriteSheet', x: 0, y: 183, width: 81, height: 48 },
+  weapon2: { texture: 'weaponsSpriteSheet', x: 0, y: 134, width: 101, height: 47 },
+  weapon3: { texture: 'weaponsSpriteSheet', x: 0, y: 68, width: 98, height: 64 },
+  weaponSelected: { texture: 'weaponsSpriteSheet', x: 0, y: 0, width: 148, height: 66 }
 
 });

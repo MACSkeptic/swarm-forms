@@ -7,6 +7,7 @@ define(function (require) {
     addTexture(this, 'lava', 'lava.png');
     addTexture(this, 'zeroSpriteSheet', 'zero_sprite_sheet.png');
     addTexture(this, 'linkSpriteSheet', 'link_sprite_sheet.png');
+    addTexture(this, 'weaponsSpriteSheet', 'weapons_sprite_sheet.png');
 
     waitForEverythingToLoadThen(callback);
   }

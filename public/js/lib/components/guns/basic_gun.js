@@ -72,7 +72,7 @@ define(['../../utils/geometry', '../../entities/shot'], function (geometry, shot
 
   function create(owner, specs) {
     var basicGun = {};
-    basicGun.timeRequiredBetweenShots = 100;
+    basicGun.timeRequiredBetweenShots = 400;
     basicGun.timeSinceLastShot = basicGun.timeRequiredBetweenShots;
 
     basicGun.shotVelocity = 5;
