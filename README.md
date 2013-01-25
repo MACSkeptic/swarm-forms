@@ -20,8 +20,7 @@ node app
 
 ## tests
 
-the test suite uses qunit since it suffers way less from passive (which can be read:
-overhead, unnecessary and obsolete) language constructs like 'should'.
+the test suite uses qunit since it is way more straightforward than jasmine.
 
 a live version (may not be the latest) of this can be found [here](http://swarm-forms.herokuapp.com/js/tests/all.html)
 
