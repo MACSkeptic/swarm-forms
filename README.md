@@ -45,6 +45,12 @@ grunt
 
 `node app` then visit `localhost:3000/js/tests/all.html`
 
+## wanna help?
+
+* leave a comment telling why our code is bad (or good)
+* check our open issues (https://github.com/MACSkeptic/swarm-forms/issues?state=open)
+* submit a pull request (https://github.com/MACSkeptic/swarm-forms/pulls)
+
 ## premises
 
 most of it is focused on creating things from scratch instead of relying on engines
