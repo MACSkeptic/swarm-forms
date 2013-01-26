@@ -4,20 +4,24 @@ define(function (require) {
       challengeRoom = require('./challenge_room'),
       entities = [],
       selectedItem = 4,
+      menuBackground = { type: 'menuBackground', rotation: 0, scale: 0 },
       timeToSelect = 200;
 
   function init(callback) {
-    entities.push({ type: 'menuBackground' });
-    entities.push({ type: 'menuTitle', text: 'swarm cubes' });
-    entities.push({ type: 'menuItem', text: 'demo', selected: false, index: 0 });
-    entities.push({ type: 'menuItem', text: 'concept rooms', selected: false, index: 1 });
-    entities.push({ type: 'menuItem', text: 'challenge', selected: true, index: 2 });
-    entities.push({ type: 'helpText', text: 'up/down, then enter' });
+    entities.push(menuBackground);
+    entities.push({ type: 'menuTitle', text: 'swarm forms' });
+    entities.push({ type: 'helpText', text: 'press enter to start' });
     callback();
   }
 
   function update(params) {
     timeToSelect = timeToSelect - params.elapsed;
+
+    menuBackground.rotation = menuBackground.rotation + ((params.elapsed * 2 * Math.PI) / 3000);
+    menuBackground.scale = menuBackground.scale + (params.elapsed / 1000);
+
+    if (menuBackground.rotation > 2 * Math.PI) { menuBackground.rotation = 0; }
+    if (menuBackground.scale > 1) { menuBackground.scale = 0; }
 
     if (timeToSelect <= 0) { timeToSelect = 0; }
   }
@@ -35,17 +39,24 @@ define(function (require) {
   function handleInput(params) {
     var input = params.input, elapsed = params.elapsed, game = params.game;
 
-    if (input.keyPressed('down', 's')) { selectNewMenuItem(selectedItem + 1); }
-    if (input.keyPressed('up', 'w')) { selectNewMenuItem(selectedItem - 1); }
-
     if (input.keyPressed('enter')) {
-      if (entities[2].selected) {
-        demo.init(function () { game.addScene(demo, true); });
-      } else if (entities[3].selected) {
-        firstRoom.init(function () { game.addScene(firstRoom, true); });
-      } else {
-        challengeRoom.init(function () { game.addScene(challengeRoom, true); });
-      }
+      challengeRoom.init(function () { game.addScene(challengeRoom, true); });
+      return;
+    }
+
+    if (input.keyPressed('d')) {
+      demo.init(function () { game.addScene(demo, true); });
+      return;
+    }
+
+    if (input.keyPressed('f')) {
+      firstRoom.init(function () { game.addScene(firstRoom, true); });
+      return;
+    }
+
+    if (input.keyPressed('c')) {
+      challengeRoom.init(function () { game.addScene(challengeRoom, true); });
+      return;
     }
   }
 

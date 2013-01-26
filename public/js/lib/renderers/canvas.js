@@ -171,8 +171,45 @@ define(function (require) {
       };
 
       renderers.menuBackground = function (context, entity, scene) {
-        context.fillStyle = 'rgba(255, 255, 255, 0.2)';
+        context.fillStyle = 'rgba(0, 0, 0, 1)';
         context.fillRect(0, 0, scene.width, scene.height);
+
+        var halfWidth = 150, halfHeight = 150;
+
+        context.save();
+
+        context.translate(300, 350);
+
+        context.strokeStyle = 'orange';
+        context.lineWidth = 7;
+
+        context.save();
+        context.rotate(entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.save();
+        context.rotate(-entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.fillStyle = 'cyan';
+        context.strokeStyle = '#abcdef';
+        context.beginPath();
+        context.save();
+        context.scale(entity.scale, entity.scale);
+        context.arc(0, 0, halfWidth / 2, 0, 2 * Math.PI, true);
+        context.restore();
+        context.closePath();
+        context.fill();
+        context.beginPath();
+        context.arc(0, 0, halfWidth / 2, 0, 2 * Math.PI, true);
+        context.closePath();
+        context.stroke();
+
+        context.restore();
+
+        context.lineWidth = 3;
       };
 
       renderers.menuTitle = function (context, entity, scene) {
@@ -187,8 +224,11 @@ define(function (require) {
         var x = scene.width / 2, y = 150 + 50 * entity.index;
 
         if (entity.selected) {
-          context.fillStyle = 'black';
+          context.save();
+          context.globalCompositeOperation = 'lighter';
+          context.fillStyle = 'rgba(255, 255, 255, 0.2)';
           context.fillRect(0, y - 25, scene.width, 50);
+          context.restore();
         }
 
         context.font = '30pt Monaco, Consolas, Monospaced';
