@@ -1,4 +1,4 @@
-define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves) {
+define(['../behaviours/circle', '../behaviours/moves', '../scenes/game_over'], function (circle, moves, gameOver) {
 
   function createSuperShot(shot) {
     shot.radius += this.radius;
@@ -11,6 +11,7 @@ define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves)
 
   function outOfBounds() { this.disposed = true; }
   function vanish() { this.disposed = true; }
+
   function killAndVanish(other) {
     other.disposed = true;
     this.disposed = true;
@@ -19,6 +20,12 @@ define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves)
   function killCountScoreAndVanish(other, algorithm, currentScene) {
     killAndVanish.apply(this, [other, algorithm]);
     (currentScene.increaseScore || function () {})();
+  }
+
+  function youDied(other, algorithm, currentScene) {
+    gameOver.init(function () {
+      currentScene && currentScene.game.changeCurrentSceneTo(gameOver);
+    });
   }
 
   function create(specs) {
@@ -34,7 +41,7 @@ define(['../behaviours/circle', '../behaviours/moves'], function (circle, moves)
           turret: killCountScoreAndVanish,
           wanderer: killCountScoreAndVanish,
           chaser: killCountScoreAndVanish,
-          player: killAndVanish,
+          player: youDied,
           tower: vanish
         }
       }, specs || {}

@@ -5,6 +5,7 @@ define(function (require) {
     addTexture(this, 'rock', 'rock.jpg');
     addTexture(this, 'woodenFloor', 'space.jpg');
     addTexture(this, 'lava', 'lava.png');
+    addTexture(this, 'gameOver', 'game_over.jpg');
     addTexture(this, 'zeroSpriteSheet', 'zero_sprite_sheet.png');
     addTexture(this, 'linkSpriteSheet', 'link_sprite_sheet.png');
     addTexture(this, 'weaponsSpriteSheet', 'weapons_sprite_sheet.png');

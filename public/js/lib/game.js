@@ -6,6 +6,7 @@ define(function (require) {
       collision = require('./modifiers/collision'),
       input = require('./input'),
       scenes = {},
+      game = {},
       currentScene;
 
   function draw() {
@@ -66,11 +67,12 @@ define(function (require) {
 
   function addScene(scene, current) {
     scenes[scene.name] = scene;
+    scene.game = game;
 
-    if (current) { changeCurrentSceneTo(scene); }
+    if (current) { changeCurrentSceneByName(scene.name); }
   }
 
-  function changeCurrentSceneTo(scene) { currentScene = scene; }
+  function changeCurrentSceneTo(scene) { addScene(scene, true); }
   function changeCurrentSceneByName(name) { currentScene = scenes[name]; }
 
   function init(callback) {
@@ -82,13 +84,13 @@ define(function (require) {
     });
   }
 
-  return {
-    'init': init,
-    'draw': draw,
-    'update': update,
-    'handleInput': handleInput,
-    'changeCurrentSceneTo': changeCurrentSceneTo,
-    'changeCurrentSceneByName': changeCurrentSceneByName,
-    'addScene': addScene
-  };
+  game.init = init;
+  game.draw = draw;
+  game.update = update;
+  game.handleInput = handleInput;
+  game.changeCurrentSceneTo = changeCurrentSceneTo;
+  game.changeCurrentSceneByName = changeCurrentSceneByName;
+  game.addScene = addScene;
+
+  return game;
 });

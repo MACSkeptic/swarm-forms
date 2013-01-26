@@ -277,6 +277,14 @@ define(function (require) {
         context.fillRect(0, 0, scene.width, scene.height);
       };
 
+      renderers.gameOver = function (context, entity, scene) {
+        context.save();
+        context.scale(2.2, 1.5);
+        context.fillStyle = context.createPattern(textures.gameOver, 'no-repeat');
+        context.fillRect(0, 0, scene.width, scene.height);
+        context.restore();
+      };
+
       renderers.hole = function (context, entity, scene) {
         context.fillStyle = context.createPattern(textures.lava, 'repeat');
         context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
