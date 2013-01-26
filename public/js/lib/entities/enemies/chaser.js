@@ -27,8 +27,6 @@ define(function (require) {
     ]);
   }
 
-  function killAndVanish(other) { this.disposed = true; other.disposed = true; }
-
   function youDied(other, algorithm, currentScene) {
     gameOver.init(function () {
       currentScene && currentScene.game.changeCurrentSceneTo(gameOver);
