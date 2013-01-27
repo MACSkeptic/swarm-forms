@@ -221,10 +221,20 @@ define(function (require) {
         context.translate(400, 450);
 
         context.strokeStyle = 'rgba(120, 120, 120, 0.3)';
-        context.lineWidth = 7;
+        context.lineWidth = 20;
 
         context.save();
         context.rotate(entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.save();
+        context.rotate(entity.rotation / 2);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.save();
+        context.rotate(-entity.rotation / 2);
         context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
 
@@ -233,6 +243,7 @@ define(function (require) {
         context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
 
+        context.lineWidth = 7;
         context.fillStyle = 'rgba(120, 120, 120, 0.3)';
         context.strokeStyle = 'rgba(120, 120, 120, 0.3)';
         context.beginPath();
@@ -249,10 +260,21 @@ define(function (require) {
         context.translate(300, 350);
 
         context.strokeStyle = 'orange';
-        context.lineWidth = 7;
+        context.lineWidth = 20;
 
+        context.globalCompositeOperation = 'lighter';
         context.save();
         context.rotate(entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.save();
+        context.rotate(entity.rotation / 2);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.save();
+        context.rotate(-entity.rotation / 2);
         context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
 
@@ -261,6 +283,7 @@ define(function (require) {
         context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
         context.restore();
 
+        context.lineWidth = 7;
         context.fillStyle = 'cyan';
         context.strokeStyle = '#abcdef';
         context.beginPath();
