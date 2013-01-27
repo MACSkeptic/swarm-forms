@@ -40,6 +40,8 @@ define(function (require) {
       heightRatio = currentCanvas.height / scene.height;
       widthRatio = currentCanvas.width / scene.width;
       dummyContext.scale(widthRatio, heightRatio);
+      dummyContext.capStyle = 'round';
+      dummyContext.joinStyle = 'round';
 
       _.each(scene.entities, function (currentEntity) {
         if (currentEntity.disposed) { return; }
@@ -178,6 +180,34 @@ define(function (require) {
 
         context.save();
 
+        context.translate(400, 450);
+
+        context.strokeStyle = 'rgba(120, 120, 120, 0.3)';
+        context.lineWidth = 7;
+
+        context.save();
+        context.rotate(entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.save();
+        context.rotate(-entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.fillStyle = 'rgba(120, 120, 120, 0.3)';
+        context.strokeStyle = 'rgba(120, 120, 120, 0.3)';
+        context.beginPath();
+        context.save();
+        context.arc(0, 0, halfWidth / 2, 0, 2 * Math.PI, true);
+        context.restore();
+        context.closePath();
+        context.fill();
+
+        context.restore();
+
+        context.save();
+
         context.translate(300, 350);
 
         context.strokeStyle = 'orange';
@@ -197,7 +227,6 @@ define(function (require) {
         context.strokeStyle = '#abcdef';
         context.beginPath();
         context.save();
-        context.scale(entity.scale, entity.scale);
         context.arc(0, 0, halfWidth / 2, 0, 2 * Math.PI, true);
         context.restore();
         context.closePath();
@@ -216,6 +245,10 @@ define(function (require) {
         context.font = '40pt Monaco, Consolas, Monospaced';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
+
+        context.fillStyle = 'rgba(120, 120, 120, 0.3)';
+        context.fillText(entity.text, scene.width / 2 + 20, 50 + 20);
+
         context.fillStyle = 'yellow';
         context.fillText(entity.text, scene.width / 2, 50);
       };
