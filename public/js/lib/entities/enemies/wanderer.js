@@ -2,7 +2,8 @@ define(function (require) {
 
   var behaviours = require('../../behaviours'),
       moves      = behaviours.moves,
-      rectangle  = behaviours.rectangle;
+      rectangle  = behaviours.rectangle,
+      gameOver   = require('../../scenes/game_over');
 
   function update(params) {
     this.timeUntilNextMovementChange -= params.elapsed;
@@ -33,6 +34,12 @@ define(function (require) {
 
   function undoLastMovement(other, algorithm) { this.undoLastMovement(other, algorithm); }
 
+  function youDied(other, algorithm, currentScene) {
+    gameOver.init(function () {
+      currentScene && currentScene.game.changeCurrentSceneTo(gameOver);
+    });
+  }
+
   function create(specs) {
     return _.extend(
       rectangle({ width: 15, height: 15 }),
@@ -42,7 +49,7 @@ define(function (require) {
         type: 'wanderer',
         rotation: 0,
         collidesWith: {
-          player: killAndVanish,
+          player: youDied,
           rock: undoLastMovement,
           hole: undoLastMovement,
           boundaries: undoLastMovement,
