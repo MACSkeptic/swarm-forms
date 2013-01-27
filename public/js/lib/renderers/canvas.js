@@ -66,6 +66,38 @@ define(function (require) {
 
         context.save();
 
+        context.translate(entity.x + 7, entity.y + 7);
+
+        context.strokeStyle = 'rgba(120, 120, 120, 0.4)';
+
+        context.save();
+        context.rotate(entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.save();
+        context.rotate(-entity.rotation);
+        context.strokeRect(-halfWidth, -halfHeight, halfWidth * 2, halfHeight * 2);
+        context.restore();
+
+        context.fillStyle = 'rgba(120, 120, 120, 0.4)';
+        context.lineWidth = 1;
+        context.strokeStyle = 'rgba(120, 120, 120, 0.4)';
+        context.beginPath();
+        context.save();
+        context.arc(0, 0, halfWidth / 2, 0, 2 * Math.PI, true);
+        context.restore();
+        context.closePath();
+        context.fill();
+        context.beginPath();
+        context.arc(0, 0, halfWidth / 2, 0, 2 * Math.PI, true);
+        context.closePath();
+        context.stroke();
+
+        context.restore();
+
+        context.save();
+
         context.translate(entity.x, entity.y);
 
         context.strokeStyle = 'orange';
@@ -132,6 +164,12 @@ define(function (require) {
       };
 
       renderers.shot = function (context, entity, parentEntity) {
+        context.fillStyle = 'rgba(120, 120, 120, 0.4)';
+        context.beginPath();
+        context.arc(entity.x + 3, entity.y + 3, entity.radius, 0, 2 * Math.PI, true);
+        context.closePath();
+        context.fill();
+
         if (entity.enemy) {
           context.fillStyle = 'red';
           context.strokeStyle = 'red';
